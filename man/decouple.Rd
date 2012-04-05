@@ -1,11 +1,17 @@
 \name{decouple}
 \alias{decouple}
-\title{decouple a grid...}
-\usage{decouple(x)
+\title{decouple a grid}
+\usage{
+  decouple(x)
 }
-\description{decouple a grid}
+\arguments{
+  \item{x}{repgrid object}
+}
+\description{
+  decouple a grid
+}
+\author{
+  Mark Heckmann
+}
 \keyword{internal}
-\author{Mark Heckmann}
-\arguments{\item{x}{repgrid object}
-}
 

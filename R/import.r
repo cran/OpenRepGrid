@@ -23,6 +23,7 @@
 ###############################################################################
 
 #' convertImportObjectToRepGridObject.
+#'
 #' Convert the returned object from an import function into a \code{repgrid} 
 #' object. Works for all importXInternal functions (except scivesco).
 #'  
@@ -115,6 +116,7 @@ convertImportObjectToRepGridObject <- function(import){
 
 
 #' Parser for Gridstat data files.
+#'
 #' Parse the file format that is used by the latest version of grid program 
 #' gridstat (Bell, 1998).
 #'
@@ -291,6 +293,7 @@ importGridstatInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 
 
 #' Import Gridstat data files.
+#'
 #' Reads the file format that is used by the latest version of the grid 
 #' program gridstat (Bell, 1998).
 #'
@@ -368,7 +371,7 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL){
   if (missing(file)){                                         # open file selection menu if no file argument is supplied
     Filters <- matrix(c("Gridstat files", ".dat"),
                         ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filter = Filters, multi=TRUE)     # returns complete path                    
+    file <- tk_choose.files(filters = Filters, multi=TRUE)     # returns complete path                    
   }
   imps <- lapply(as.list(file), importGridstatInternal,       # make import objects for each .txt file
                  dir=dir, min=min, max=max)
@@ -461,6 +464,7 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL){
 
 
 #' Internal parser for GRIDCOR data files.
+#'
 #' Parse the file format that is used by the grid program GRIDCOR (Feixas & Cornejo).
 #'
 #' @param file	  filename including path if file is not in current working 
@@ -548,6 +552,7 @@ importGridcorInternal <- function(file, dir=NULL){
 
 
 #' Import GRIDCOR data files.
+#'
 #' Reads the file format that is used by the grid program 
 #' GRIDCOR (Feixas & Cornejo, 2002).
 #'
@@ -601,7 +606,7 @@ importGridcor <- function(file, dir=NULL){
   if (missing(file)){                                       # open file selection menu if no file argument is supplied
     Filters <- matrix(c("Gridcor files", ".dat"),
                       ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filter = Filters, multi=TRUE)   # returns complete path                    
+    file <- tk_choose.files(filters = Filters, multi=TRUE)  # returns complete path                    
   }
   imps <- lapply(as.list(file), importGridcorInternal,      # make import objects for each .txt file
                  dir=dir)
@@ -784,15 +789,15 @@ importGridsuite <- function(file, dir=NULL){
   if (missing(file)){                                         # open file selection menu if no file argument is supplied
     Filters <- matrix(c("Gridsuite files", ".xml"),
                       ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filter = Filters, multi=TRUE)     # returns complete path                    
+    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
   }
-  imps <- lapply(as.list(file), importGridsuiteInternal,       # make import objects for each .txt file
+  imps <- lapply(as.list(file), importGridsuiteInternal,      # make import objects for each .txt file
                  dir=dir)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
   if (length(file) == 1) {
-    return(rgs[[1]])                                        # return a single repgrid opbject if a single file is prompted
+    return(rgs[[1]])                                          # return a single repgrid opbject if a single file is prompted
   } else {
-    return(rgs)                                             # return a list of repgrid objects
+    return(rgs)                                               # return a list of repgrid objects
   }
 }
 
@@ -1128,7 +1133,7 @@ importScivesco <- function(file, dir=NULL){
   if (missing(file)){                                         # open file selection menu if no file argument is supplied
     Filters <- matrix(c("Sci:Vesco files", ".scires"),
                         ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filter = Filters, multi=TRUE)     # returns complete path                    
+    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
   }
   imps <- lapply(as.list(file), importScivescoInternal,       # make import objects for each .txt file
                  dir=dir)
@@ -1151,6 +1156,8 @@ importScivesco <- function(file, dir=NULL){
 ### 							                IMPORT .TXT									              ###
 ###############################################################################
 
+#' ImportTxtInternal is the parser for importTxt.
+#'
 #' ImportTxtInternal is the parser for importTxt that constructs an import object.
 #' The \code{.txt} file has to be in a fixed format. There are three mandatory blocks each starting and ending
 #' with a predefined tag in uppercase letters. The first block starts with \code{ELEMENTS} 
@@ -1306,6 +1313,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 
 
 #' Import grid data from a text file.
+#'
 #' If you do not have a grid program at hand you can define a grid using
 #' a standard text editor and by saving it as a \code{.txt} file.
 #' The \code{.txt} file has to be in a fixed format. There are three mandatory blocks each starting and ending
@@ -1405,15 +1413,15 @@ importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
   if (missing(file)){                                         # open file selection menu if no file argument is supplied
     Filters <- matrix(c("text files", ".txt"),
                         ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filter = Filters, multi=TRUE)     # returns complete path                    
+    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
   }
   imps <- lapply(as.list(file), importTxtInternal,            # make import objects for each .txt file
                  dir=dir, min=min, max=max)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
   if (length(file) == 1) {
-    return(rgs[[1]])                                        # return a single repgrid opbject if a single file is prompted
+    return(rgs[[1]])                                          # return a single repgrid opbject if a single file is prompted
   } else {
-    return(rgs)                                             # return a list of repgrid objects
+    return(rgs)                                               # return a list of repgrid objects
   }
 }
 
@@ -1431,7 +1439,7 @@ importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
 ### 							              IMPORTING GUI  								              ###
 ###############################################################################
 
-#' load repertory grid file using a GUI
+#' Load repertory grid file using a GUI
 #'
 #' OpenRepGrid will try to guess what data type you are trying to load
 #' by using the data format. Some formats are unique and are clearly 
@@ -1450,7 +1458,7 @@ loadgrid <- function(){
                       "idiogrid", ".grd"),
                       ncol=2, byrow = TRUE)
   #choose.files(filters = Filters[c("dat", "scires", "All"),])
-  tk_choose.files(filter = Filters)
+  tk_choose.files(filters = Filters)
 }
 
 

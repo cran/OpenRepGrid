@@ -1,4 +1,5 @@
-#' \pkg{OpenRepGrid}: an R package for the analysis of repertory grids.
+#' \pkg{OpenRepGrid}: an R package for the analysis of repertory grids. 
+#'
 #' The \pkg{OpenRepGrid} package provides tools for the analysis of repertory grid data.
 #' The repertory grid is a method devised by George Alexander Kelly
 #' in his seminal work "The Psychology of Personal Constructs" published in 1955.
@@ -46,6 +47,7 @@ NULL
 
 
 #' \pkg{OpenRepGrid}: internal functions overview for developers.
+#'
 #' This page is a help for developers: these functions are usually 
 #' not needed by the casual user. The internal functions have a twofold goal
 #' 1) to provide means for advanced numerical grid analysis and 2) 

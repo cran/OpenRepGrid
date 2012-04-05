@@ -76,14 +76,6 @@ statsElements <- function(x, index=T, trim=20, output=1){
 
 #' Descriptive statistics for constructs and elements of a grid.
 #'
-#' @param x       \code{repgrid} object.
-#' @param index   Whether to print the number of the element. 
-#' @param trim    The number of characters an construct is trimmed to (default is
-#'                \code{20}). If \code{NA} no trimming occurs. Trimming
-#'                simply saves space when displaying correlation of constructs
-#'                with long names.
-#' @param output  See above
-#' @return        See above.
 #' @note          Note that standard deviation and variance are estimated ones, 
 #'                i.e. including Bessel's correction. For more info type \code{?describe}.
 #'
@@ -158,6 +150,7 @@ statsDiscrepancy <- function(x, disc, sort=TRUE){
 
 
 #' Distance measures (between constructs or elements).
+#'
 #' Various distance measures between elements or constructs are calculated.
 #'
 #' @param x           \code{repgrid} object.
@@ -277,6 +270,7 @@ distance <- function(x, along=1, dmethod="euclidean",
 
 
 #' Calculate angles for points in first two columns.
+#'
 #' The angles of the points given by the values in the first and second
 #' column of a matrix seen from the origin are calulated in degrees.
 #'
@@ -305,6 +299,7 @@ calcAngles <- function(x, dim=c(1,2), clockwise=TRUE){
 
 
 #' Make indexes to order grid by angles in given dimensions.
+#'
 #' Reorder indexes for constructs and elements are calculated 
 #' using the coordinates of the given dimensions.
 #'
@@ -339,6 +334,7 @@ angleOrderIndexes2d <- function(x, dim=c(1,2), clockwise=TRUE){
 
 
 #' Order grid by angles between construct and/or elements in 2D.
+#'
 #' The approach is to reorder 
 #' the grid matrix by their polar angles on the first two principal 
 #' components from a data reduction technique 
@@ -403,7 +399,8 @@ reorder2d <- function(x, dim=c(1,2), center=1, normalize=0, g=0, h=1-g,
 ###############################################################################
 
 
-#' Calculate the correlations between elements. 
+#' Calculate the correlations between elements.
+#' 
 #' Note that simple element correlations as a measure of similarity
 #' are flawed as they are not invariant to construct reflection (Mackay, 1992; 
 #' Bell, 2010). A correlation index invariant to construct reflection is 
@@ -509,9 +506,10 @@ elementCor <- function(x, rc=TRUE, method = c("pearson", "kendall", "spearman"),
 
 ###############################################################################
 
-#' Calculate the correlations between constructs. Different 
-#' type of correlations can be requested: PMC, Kendall tau rank correlation, 
-#' Spearman rank correlation.
+#' Calculate the correlations between constructs. 
+#'
+#' Different types of correlations can be requested: 
+#' PMC, Kendall tau rank correlation, Spearman rank correlation.
 #'
 #' @param x         \code{repgrid} object.
 #' @param method    A character string indicating which correlation coefficient 
@@ -596,7 +594,8 @@ constructCor <- function(x, method = c("pearson", "kendall", "spearman"),
 }
 
 
-#' Root mean square (RMS) of inter-construct correlations
+#' Root mean square (RMS) of inter-construct correlations.
+#'
 #' The RMS is also known as 'quadratic mean' of 
 #' the inter-construct correlations. The RMS serves as a simplification of the 
 #' correlation table. It reflects the average relation of one construct to all 
@@ -643,7 +642,7 @@ constructRmsCor <- function(x, method = c("pearson", "kendall", "spearman"),
                             trim=NA, digits=2, output=1){
   method <- match.arg(method)
   res <- constructCor(x, method = method, trim=trim,    # calc correlations
-                      col.index=FALSE, digits=10, out=0)
+                      col.index=FALSE, digits=10, output=0)
   diag(res) <- NA                                       # remove diagonal 
   res <- apply(res^2, 1, mean, na.rm=TRUE)              # mean of squared values
   res <- data.frame(RMS=res^.5)                         # root of mean squares
@@ -663,7 +662,9 @@ constructRmsCor <- function(x, method = c("pearson", "kendall", "spearman"),
 
 
 
-#' Calculate Somers' d for the constructs. d is an 
+#' Calculate Somers' d for the constructs. 
+#'
+#' Somer'ss d is an 
 #' assymetric association measure as it depends on which 
 #' variable is set as dependent and independent.
 #' The direction of dependency needs to be specified.
@@ -768,8 +769,9 @@ constructD <- function(x, dependent = "c",
 
 
 
-#' Performs a principal component analysis (PCA) of inter-construct correlation
-#' matrix. Various methods for rotation and methods for the calculation of the 
+#' Principal component analysis (PCA) of inter-construct correlations.
+#'
+#' Various methods for rotation and methods for the calculation of the 
 #' correlations are available. Note that the number of factors
 #' has to be specified. For more information on the PCA function itself type 
 #' \code{?principal}. 
@@ -827,7 +829,7 @@ constructPca <- function(x, nfactors=3, rotate="varimax",
     stop('only "none", "varimax", "promax" and "cluster" are possible rotations')
   
   res <- constructCor(x, method=method, trim=trim,          # calc inter constructs correations
-                      digits=10, out=0)
+                      digits=10, output=0)
   pc <- principal(res, nfactors = nfactors, rotate=rotate)  # make PCA
 
   # console output
@@ -849,7 +851,8 @@ constructPca <- function(x, nfactors=3, rotate="varimax",
 
 
 
-#' Align constructs by loadings on first pricipal component.
+#' Align constructs by loadings on first pricipal component. 
+#'
 #' In case a construct loads negatively on the first principal
 #' component, the function \code{alignByLoadings} will reverse it 
 #' so that all constructs have positive loadings on the first 
@@ -919,16 +922,16 @@ constructPca <- function(x, nfactors=3, rotate="varimax",
 #' }
 #'
 alignByLoadings <- function(x, trim=20, output=0, digits=1){
-  options(warn=1)                                 # surpress warnings (TODO sometimes error in SVD due to singularities in grid)
+  options(warn=1)                                    # surpress warnings (TODO sometimes error in SVD due to singularities in grid)
   ccor.old <- constructCor(x, trim=trim, 
-                          out=0)                  # construct correlation unreversed
-  pc.old <- principal(ccor.old)                   # calc principal component (psych pkg)
+                          output=0)                  # construct correlation unreversed
+  pc.old <- principal(ccor.old)                      # calc principal component (psych pkg)
   reverseIndex <- 
-    which(pc.old$loadings[ ,1] < 0)               # which constructs to reverse
-  x2 <- swapPoles(x, reverseIndex)                # reverse constructs
-  ccor.new <- constructCor(x2, trim=trim, out=0)  # correlation with reversed constructs
-  pc.new <- principal(constructCor(x2, out=0))    # 2nd principal comps
-  options(warn=0)                                 # reset to do warnings
+    which(pc.old$loadings[ ,1] < 0)                  # which constructs to reverse
+  x2 <- swapPoles(x, reverseIndex)                   # reverse constructs
+  ccor.new <- constructCor(x2, trim=trim, output=0)  # correlation with reversed constructs
+  pc.new <- principal(constructCor(x2, output=0))    # 2nd principal comps
+  options(warn=0)                                    # reset to do warnings
   
   # output to concole
   if (output == 1){
@@ -937,7 +940,8 @@ alignByLoadings <- function(x, trim=20, output=0, digits=1){
     cat("\n###################################\n")
     
     cat("\nConstruct correlations - before alignment\n\n")
-    print(constructCor(x, trim=trim, col.index=F, index=T, out=2, digits=digits))
+    print(constructCor(x, trim=trim, col.index=F, index=T, 
+                       output=2, digits=digits))
     
     cat("\nConstruct factor loadiongs on PC1 - before alignment\n\n")
     print(round(pc.old$loadings[,1, drop=F], digits))
@@ -951,7 +955,8 @@ alignByLoadings <- function(x, trim=20, output=0, digits=1){
     }
     
     cat("\nConstruct correlations - after alignment\n\n")
-    print(constructCor(x2, trim=trim, col.index=F, index=T, out=2, digits=digits))    
+    print(constructCor(x2, trim=trim, col.index=F, index=T, 
+                       output=2, digits=digits))    
     
     cat("\nConstruct factor loadings on PC1 - after alignment\n\n")
     print(round(pc.new$loadings[,1, drop=F], digits))
@@ -973,6 +978,7 @@ alignByLoadings <- function(x, trim=20, output=0, digits=1){
 
 
 #' Align constructs using the ideal element to gain pole preferences.
+#'
 #' The direction of the constructs in a grid is arbitrary and a reflection of 
 #' a scale does not affect the information contained in the grid. 
 #' Nonetheless, the direction of a scale has an effect on inter-element 
@@ -1049,6 +1055,7 @@ alignByIdeal <- function(x, ideal, high=TRUE){
 
 
 #' Cluster analysis (of constructs or elements).
+#'
 #' \code{cluster} is a preliminary implementation of a cluster function. 
 #' It supports
 #' various distance measures as well as cluster methods. More is to come. 
@@ -1289,7 +1296,9 @@ center <- function(x, center=1, ...){
 
 
 #' Calculate SSQ (accuracy) of biplot representation for elements 
-#' and constructs. Each construct and element are vectors in a 
+#' and constructs. 
+#'
+#' Each construct and element are vectors in a 
 #' multidimensional space. When reducing the representation 
 #' to a lower dimensional space, a loss
 #' of information (sum-of-squares) will usually occur. The output of the function

@@ -11,6 +11,7 @@
 # in data frames.
 
 #' Extract parts of the repgrid object.
+#'
 #' Methods for \code{"["}, i.e., subsetting of repgrid objects. 
 #'
 #' @aliases [,repgrid-method
@@ -18,9 +19,8 @@
 #' @author Mark heckmann
 #' @rdname extract-methods
 #' @include repgrid.r
-#' 
-#' @examples \dontrun{
-#'  
+#' @keywords internal
+#' @examples \dontrun{ 
 #'    x <- randomGrid()
 #'    x[1:4, ] 
 #'    x[ , 1:3] 
@@ -67,15 +67,16 @@ setMethod("[", signature(x = "repgrid", i = "ANY", j="ANY"),
 # overloading primitive generic "[<-" setter. 
 #
 #' Method for "<-" assignment of the repgrid ratings. 
+#'
 #' It should be possible to use it for ratings on all layers.
 #'
-#' @aliases [<-,repgrid-method
+#' @aliases [<-,repgrid-method 
+#' @docType methods
 #' @author  Mark Heckmann
 #' @rdname subassign
 #' @include repgrid.r
-#'
+#' @keywords internal 
 #' @examples \dontrun{
-#'  
 #'    x <- randomGrid()
 #'    x[1,1] <- 2
 #'    x[1, ] <- 4
@@ -124,8 +125,6 @@ setMethod("[<-", signature(x = "repgrid", i = "ANY", j="ANY", value="ANY"),
 
 #############################      CHANGE POSITIONS      #################################
 
-#' Swap the position of two elements
-#'
 #' Swap the position of two elements in a grid.
 #'
 #' @param x     \code{repgrid} object.
@@ -162,8 +161,6 @@ swapElements <- function(x, pos1=1, pos2=1){
 # swopElements(rg, 1,3)
 
 
-#' Swap the position of two constructs.
-#'
 #' Swap the position of two constructs in a grid.
 #'
 #' @param x       \code{repgrid} object.
@@ -256,10 +253,9 @@ swapPoles <- function(x, pos){
 
 #' Move construct or element in grid to the left, right, up or down.
 #'
-#' Move construct or element in grid to the left, right, up or down.
-#'
 #' @param x     \code{repgrid} object.
-#' @param pos   Row (column) number of construct (element) to be moved.
+#' @param pos   Row (column) number of construct (element) to be moved 
+#'              leftwards, rightwards, upwards or downwards.
 #'              The default is \code{0}. For indexes outside the range of
 #'              the grid no moving is done.
 #' @return      \code{repgrid} object.
@@ -268,7 +264,6 @@ swapPoles <- function(x, pos){
 #' @author Mark Heckmann
 #' @aliases left right up down
 #' @examples \dontrun{
-#'
 #'    x <- randomGrid()
 #'    left(x, 2)    # 2nd element to the left
 #'    right(x, 1)   # 1st element to the right
@@ -286,13 +281,13 @@ left <- function(x, pos=0){
 	x
 }
 
+# @param x    repgrid object
+# @param pos  column number of element to be moved to the right
 
 #' Move element to the right
 #'
 #' Move element in grid to the right.
 #'
-#' @param x    repgrid object
-#' @param pos  column number of element to be moved to the right
 #' @return \code{repgrid} object
 #' @export
 #' @rdname move
@@ -309,12 +304,11 @@ right <- function(x, pos=0){
 }
 
 
-#' Move construct upwards
-#'
+# @param x    repgrid object
+# @param pos  row number of construct to be moved upwards
+
 #' Move construct in grid upwards.
 #'
-#' @param x    repgrid object
-#' @param pos  row number of construct to be moved upwards
 #' @return \code{repgrid} object
 #' @export
 #' @rdname move
@@ -330,13 +324,11 @@ up <- function(x, pos=0){
 	x	
 }
 
+# @param x    repgrid object
+# @param pos  row number of construct to be moved downwards
 
-#' Move construct downwards.
-#'
 #' Move construct in grid downwards.
 #'
-#' @param x    repgrid object
-#' @param pos  row number of construct to be moved downwards
 #' @return \code{repgrid} object
 #' @export
 #' @rdname move
@@ -353,7 +345,7 @@ down <- function(x, pos=0){
 }
 
 
-#' Shift construct or element to first position
+#' Shift construct or element to first position.
 #'
 #' Shifts the whole grid vertically or horizontally so that the order remains
 #' the same but the prompted element or construct appears in first position.
@@ -418,7 +410,8 @@ r.setRatings <- function(x, scores=NA, rows=NA, cols=NA, layer=1, ...){
 }
 rating <- r.setRatings
 
-#' clearRatings
+
+#' clear ratings
 #'
 #' set certain ratings in grid to NA (unknown)
 #'
@@ -636,7 +629,7 @@ setConstructAttr <- function(x, pos, l.name, r.name, l.preferred, r.preferred,
 # l.name. If you want to reset all properties use replace=TRUE. Default 
 # is NA for all properties.
 
-#' modifyConstruct
+#' modify a construct
 #'
 #' change the attributes of a construct
 #'
@@ -713,7 +706,9 @@ modifyElement <- function(x, pos, name=NA, abbreviation=NA, status=NA,
 #x <- modifyElement(x, pos=2, name="test")
 
 
-#' Set the scale range of a grid. The scale must be known for certain 
+#' Set the scale range of a grid. 
+#'
+#' The scale must be known for certain 
 #' operations, e.g. to swap the construct poles. If the user construes
 #' a grid he should make sure that the scale range is set correctly.
 #'
@@ -760,8 +755,9 @@ setScale <- function(x, min, max, step, ...){         # ... needes for makeRepgr
 # setScale(x, min=1, max=5, step=1)
 
 
-#' Get minimum and maximum scale value used in grid. The values are 
-#' returned either as a vector or a list.
+#' Get minimum and maximum scale value used in grid.
+#'
+#' The values are returned either as a vector or a list.
 #'
 #' @param x         \code{repgrid} object.
 #' @param output    Type of output object. 1= named vector, 2 = list.
@@ -896,7 +892,9 @@ showMeta <- function(x){
 
 
 
-#' Make a new repgrid object. The function creates a \code{repgrid}
+#' Make a new repgrid object. 
+#'
+#' The function creates a \code{repgrid}
 #' object from scratch. A number of paramters have to be defined in order to
 #' make a new grid (see parameters).
 #'
@@ -933,7 +931,7 @@ makeRepgrid <- function(args){
   x <- do.call(c.setConstructs, l)
   x <- initRatingArray(x)								# initialize rating array
   l <- c(list(x=x), args)								# make a new repgrid object	
-  x[ , ] <- matrix(args$scores, ncol=getNoOfElements(x), by=T)  # to fill matrix rowwise
+  x[ , ] <- matrix(args$scores, ncol=getNoOfElements(x), byrow=T)  # to fill matrix rowwise
   #x <- do.call(r.setRatings, l)        # old version
   l <- c(list(x=x), args)								# make a new repgrid object	
   x <- do.call(rg.setCoupled, l)        # if no coupled argument then coupled=TRUE
@@ -953,13 +951,9 @@ makeRepgrid <- function(args){
 
 
 
-
-
-
-
-
-
-#' Concatenate the constructs of two grids. I.e. the
+#' Concatenate the constructs of two grids. 
+#' 
+#' I.e. the
 #' constructs are combined to form one long grid.
 #' This function can be used in order to analyse multiple grids
 #' as one 'big grid' (eg. Slater, 1977, chap. 11).
@@ -1082,15 +1076,17 @@ getNoOfElements <- function(x){
 }
 
 
-#' Return size of a grid. \code{dim} returns a numeric vector of length
+#' Return size of a grid. 
+#'
+#' \code{dim} returns a numeric vector of length
 #' two containing the number of constructs and elements.
 #'
 #' @param x     \code{repgrid} object.
 #' @return      Numeric vector of length two with the number of 
 #'              constructs and elements.
-#'
 #' @export
 #' @keywords    internal
+#' @method      dim repgrid
 #' @author      Mark Heckmann
 #' @seealso     \code{\link{getNoOfConstructs}};   \code{\link{getNoOfElements}}
 #' @examples \dontrun{

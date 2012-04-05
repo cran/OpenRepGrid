@@ -16,5 +16,5 @@
 
 # clean up workspace
 .onUnload <- function(lib){
-    rm(.openrepgrid)
+    #rm(.openrepgrid)
 }

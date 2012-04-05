@@ -1,15 +1,24 @@
 \name{strReverse}
 \alias{strReverse}
-\title{reverse a string...}
-\usage{strReverse(x)
+\title{reverse a string}
+\usage{
+  strReverse(x)
 }
-\description{reverse a string}
-\details{reverses the strings of a vector, i.e. c("ABC", "abc")
-becomes c("CBA", "cba")}
-\value{vector  a string or vector of strings with reversed chars}
-\references{\url{http://www.mail-archive.com/r-help@r-project.org/msg102759.html}}
+\arguments{
+  \item{x}{a string or a vector of strings}
+}
+\value{
+  vector a string or vector of strings with reversed chars
+}
+\description{
+  reverses the strings of a vector, i.e. c("ABC", "abc")
+  becomes c("CBA", "cba")
+}
+\examples{
+strReverse(c("ABC", "abc"))
+}
+\references{
+  \url{http://www.mail-archive.com/r-help@r-project.org/msg102759.html}
+}
 \keyword{internal}
-\arguments{\item{x}{a string or a vector of strings}
-}
-\examples{strReverse(c("ABC", "abc"))}
 

@@ -69,7 +69,8 @@ calcBiplotCoords <- function(x, g=0, h=1-g,
 }
 
 
-#' Map arbitrary numeric vector to a given range of values.
+#' Map arbitrary numeric vector to a given range of values. 
+#'
 #' From a given numeric vector \code{z} the range is determined and 
 #' the values are linearly mapped onto the interval 
 #' given by \code{val.range}. This 
@@ -93,7 +94,8 @@ mapCoordinatesToValue <- function(z, val.range=c(.5, 1)) {
 }
 
 
-#' Determine color values according to a given range of values.
+#' Determine color values according to a given range of values. 
+#'
 #' From a given numeric vector z the range is determined and the values are 
 #' linearly mapped onto the interval given by \code{val.range}. Then 
 #' a color ramp using the colors given by \code{color} is created and 
@@ -115,7 +117,8 @@ mapCoordinatesToColor <- function(z, colors=c("white", "black"), val.range=c(.2,
 }
 
 
-#' Coordinates of a sourrounding rectangle in direction of a given vector.
+#' Coordinates of a sourrounding rectangle in direction of a given vector. 
+#'
 #' An arbitrary numeric vector in 2D is to be extented so it will 
 #' end on the borders of a sourrounding rectangle of a given size.
 #' Currently the vector is supposed to start in the origin \code{c(0,0)}.
@@ -161,10 +164,10 @@ calcCoordsBorders <- function(x, y, xmax=1, ymax=1, cx=0, cy=0)
   b.ul <- ymax * sign(y)
   a.ul <- x/y * b.ul
   
-  a.lr[is.nan(a.lr)] <- 0       # in case one of x or y is zero Inf results ans subsequently NaN
-  b.lr[is.nan(b.lr)] <- 0
-  a.ul[is.nan(a.ul)] <- 0
-  b.ul[is.nan(b.ul)] <- 0  
+  a.lr[is.nan(unlist(a.lr))] <- 0       # in case one of x or y is zero Inf results ans subsequently NaN
+  b.lr[is.nan(unlist(b.lr))] <- 0
+  a.ul[is.nan(unlist(a.ul))] <- 0
+  b.ul[is.nan(unlist(b.ul))] <- 0  
   
   # join both parts
   b <- (b.ul * !is.lr.part) + (b.lr * is.lr.part)
@@ -221,6 +224,7 @@ calcRectanglesCoordsForLabels <- function(xy, labels, cex=.7,
 
 
 #' Detect if two rectangles overlap. 
+#'
 #' The overlap is assessed in x AND y.
 #'
 #' @param  a   vector with four coordinates \code{c(x0,y0,x1,y1)}.
@@ -280,6 +284,7 @@ degreesBetweenVectorAndPlane <- function(a, n){
 
 
 #' A graphically unsophisticated version of a biplot.
+#'
 #' It will draw elements and constructs vectors using similar
 #' arguments as \code{\link{biplot2d}}. It is a version for quick 
 #' exploration used during development.
@@ -407,11 +412,11 @@ biplotSimple <- function(x, dim=1:2, center=1, normalize=0,
   abline(v=0, h=0, col="grey")
   
   # plot constructs and labels
-  arrows(0,0, -Cu[ ,d1], -Cu[ ,d2], len=.05, 
+  arrows(0,0, -Cu[ ,d1], -Cu[ ,d2], length=.05, 
          col=c.point.col, lty=1)              # plot left poles
   text(-Cu[ ,d1], -Cu[ ,d2], cnames[,1], pos=1, 
         cex=c.label.cex, col=c.label.col)
-  arrows(0,0, Cu[ ,d1], Cu[ ,d2], len=.05, 
+  arrows(0,0, Cu[ ,d1], Cu[ ,d2], length=.05, 
          col=c.point.col, lty=3)               # plot right poles
   text(Cu[ ,d1], Cu[ ,d2], cnames[,2], pos=1, 
        cex=c.label.cex, col=c.label.col)
@@ -642,24 +647,24 @@ prepareBiplotData <- function(x, dim=c(1,2), map.dim=3,
   cex.label.e <- mapCoordinatesToValue(z, e.label.cex)
   cex.point.e <- mapCoordinatesToValue(z, e.point.cex)
   #color.e <- mapCoordinatesToColor(z, color=e.color, val.range=e.color.map)
-  color.label.e <- mapCoordinatesToColor(z, color=e.label.col, val.range=e.color.map)
-  color.point.e <- mapCoordinatesToColor(z, color=e.point.col, val.range=e.color.map)
+  color.label.e <- mapCoordinatesToColor(z, colors=e.label.col, val.range=e.color.map)
+  color.point.e <- mapCoordinatesToColor(z, colors=e.point.col, val.range=e.color.map)
   
   z <- subset(df, type=="cl", sel=z)
   #cex.cl <- mapCoordinatesToValue(z, c.cex.map)
   cex.label.cl <- mapCoordinatesToValue(z, c.label.cex)
   cex.point.cl <- mapCoordinatesToValue(z, c.point.cex)  
   #color.cl <- mapCoordinatesToColor(z, color=c.color, val.range=c.color.map)
-  color.label.cl <- mapCoordinatesToColor(z, color=c.label.col, val.range=c.color.map)
-  color.point.cl <- mapCoordinatesToColor(z, color=c.point.col, val.range=c.color.map)
+  color.label.cl <- mapCoordinatesToColor(z, colors=c.label.col, val.range=c.color.map)
+  color.point.cl <- mapCoordinatesToColor(z, colors=c.point.col, val.range=c.color.map)
 
   z <- subset(df, type=="cr", sel=z)
   #cex.cr <- mapCoordinatesToValue(z, c.cex.map)
   cex.label.cr <- mapCoordinatesToValue(z, c.label.cex)
   cex.point.cr <- mapCoordinatesToValue(z, c.point.cex)
   #color.cr <- mapCoordinatesToColor(z, color=c.color, val.range=c.color.map)
-  color.label.cr <- mapCoordinatesToColor(z, color=c.label.col, val.range=c.color.map)
-  color.point.cr <- mapCoordinatesToColor(z, color=c.point.col, val.range=c.color.map)
+  color.label.cr <- mapCoordinatesToColor(z, colors=c.label.col, val.range=c.color.map)
+  color.point.cr <- mapCoordinatesToColor(z, colors=c.point.col, val.range=c.color.map)
 
   #df$cex <- unlist(rbind(cex.e, cex.cl, cex.cr))
   #df$color <- c(color.e, color.cl, color.cr)
@@ -732,7 +737,8 @@ prepareBiplotData <- function(x, dim=c(1,2), map.dim=3,
 }
 
 
-#' biplotDraw is the workhorse doing the drawing of a 2D biplot.
+#' biplotDraw is the workhorse doing the drawing of a 2D biplot. 
+#'
 #' When the number of elements and constructs differs to a large extent, the 
 #' absolute values of the coordinates for either constructs or elements 
 #' will be much smaller or greater. This is an inherent property of the biplot.
@@ -849,8 +855,8 @@ biplotDraw <- function(x,
     
   # initial coords for labels for strokes
   str.3 <- calcCoordsBorders(x["x"], x["y"], 
-                             xm=max.ext * (1 + strokes.x + offset.labels), # + rect.margins[1]/2), 
-                             ym=max.ext * (1 + strokes.y + offset.labels))# + rect.margins[2]/2))
+                             xmax=max.ext * (1 + strokes.x + offset.labels), # + rect.margins[1]/2), 
+                             ymax=max.ext * (1 + strokes.y + offset.labels))# + rect.margins[2]/2))
   colnames(str.3) <- c("str.3.x", "str.3.y")                           
   x <- cbind(x, str.3)
   
@@ -967,12 +973,12 @@ biplotDraw <- function(x,
   # make outer strokes for all labels (elements and constructs) 
   # select which to draw later
   # coordinates for stroke starts
-  str.1 <- calcCoordsBorders(x["x"], x["y"], xm=max.ext, ym=max.ext)
+  str.1 <- calcCoordsBorders(x["x"], x["y"], xmax=max.ext, ymax=max.ext)
   colnames(str.1) <- c("str.1.x", "str.1.y")
   
   # coordinates for stroke ends
-  str.2 <- calcCoordsBorders(x["x"], x["y"], xm=max.ext * (1 + strokes.x), 
-                             ym=max.ext * (1 + strokes.y))
+  str.2 <- calcCoordsBorders(x["x"], x["y"], xmax=max.ext * (1 + strokes.x), 
+                             ymax=max.ext * (1 + strokes.y))
   colnames(str.2) <- c("str.2.x", "str.2.y")
   
   x <- cbind(x, str.1, str.2)
@@ -980,8 +986,8 @@ biplotDraw <- function(x,
   # redo coordinates for stroke ends according to edges of rectangles that have been offsetted
   a <- list()
   for (i in seq_len(nrow(x))){
-    a[[i]] <- calcCoordsBorders(x[i, "x"], x[i, "y"], xm=max.ext * (1 + strokes.x), 
-                               ym=abs(x[i, "str.3.y"]))
+    a[[i]] <- calcCoordsBorders(x[i, "x"], x[i, "y"], xmax=max.ext * (1 + strokes.x), 
+                               ymax=abs(x[i, "str.3.y"]))
   }
   str.4 <- do.call(rbind, a)
   colnames(str.4) <- c("str.4.x", "str.4.y")
@@ -1228,7 +1234,9 @@ addVarianceExplainedToBiplot2d <- function(x, dim=c(1,2,3), var.cex=.7,
 
 
 
-#' Draw a two-dimensional biplot. The biplot is the central
+#' Draw a two-dimensional biplot. 
+#'
+#' The biplot is the central
 #' way to create a joint plot of elements and constructs.
 #' Depending on te parameters chosen it contains information
 #' on the distances between elements and constructs. Also the 
@@ -1548,6 +1556,7 @@ biplot2d <- function(x, dim=c(1,2), map.dim=3,
 #' See \code{\link{biplotPseudo3d}} for its use.
 
 #' Draws a biplot of the grid in 2D with depth impression (pseudo 3D).
+#'
 #' This version is basically a 2D biplot. 
 #' It only modifies color and size of the symbols in order to create a 3D impression
 #' of the data points. 
@@ -1686,7 +1695,9 @@ biplotPseudo3d <- function( x, dim=1:2, map.dim=3,
 }
 
     
-#' Draws Slater's INGRID biplot in 2D. The default is to use row centering 
+#' Draws Slater's INGRID biplot in 2D. 
+#'
+#' The default is to use row centering 
 #' and no normalization. Note that Slater's biplot is just a 
 #' special case of a biplot
 #' that can be produced using the \code{\link{biplot2d}} function with the arguments
@@ -1737,6 +1748,7 @@ biplotSlater2d <- function(x, center=1, g=1, h=1, ...){
 
 
 #' Draws Slater's biplot in 2D with depth impression (pseudo 3D).
+#'
 #' The default is to use row centering 
 #' and no normalization. Note that Slater's biplot is just a special 
 #' case of a biplot that can be produced using the \code{\link{biplotPseudo3d}} 
@@ -1787,7 +1799,8 @@ biplotSlaterPseudo3d <- function(x, center=1, g=1, h=1, ...){
 
 
 
-#' Plot an eigenstructure analysis (ESA) biplot in 2D. 
+#' Plot an eigenstructure analysis (ESA) biplot in 2D.
+#' 
 #' The ESA is a special type of biplot suggested by Raeithel (e.g. 1998).
 #' It uses midpoint centering as a default. Note that the eigenstructure analysis
 #' is just a special case of a biplot that can also be produced using the 
@@ -1847,7 +1860,9 @@ biplotEsa2d <- function(x, center=4, g=1, h=1, ...){
 
 
 #' Plot an eigenstructure analysis (ESA) in 2D grid with 3D 
-#' impression (pseudo 3D). The ESA is 
+#' impression (pseudo 3D). 
+#'
+#' The ESA is 
 #' a special type of biplot suggested by Raeithel (e.g. 1998).
 #' It uses midpoint centering as a default. Note that the eigenstructure analysis
 #' is just a special case of a biplot that can also be produced using the 

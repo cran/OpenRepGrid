@@ -1,16 +1,22 @@
-\name{subassign}
-\alias{[<-,-method}
+\docType{methods}
+\name{[<-}
 \alias{[<-}
-\title{Method for "<-" assignment of the repgrid ratings.}
-\description{Method for "<-" assignment of the repgrid ratings. 
-It should be possible to use it for ratings on all layers.}
 \alias{[<-,repgrid-method}
-\author{Mark Heckmann}
-\examples{\dontrun{
-
-x <- randomGrid()
-x[1,1] <- 2
-x[1, ] <- 4
-x[,2] <- 3
-}}
+\title{Method for "<-" assignment of the repgrid ratings.}
+\description{
+  It should be possible to use it for ratings on all
+  layers.
+}
+\examples{
+\dontrun{
+   x <- randomGrid()
+   x[1,1] <- 2
+   x[1, ] <- 4
+   x[,2] <- 3
+}
+}
+\author{
+  Mark Heckmann
+}
+\keyword{internal}
 

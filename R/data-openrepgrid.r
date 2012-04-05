@@ -6,6 +6,7 @@
 ###############################################################################
 
 #' Grid data from Bell (2010).
+#'
 #' Grid data orginated (but is not shown in the paper) from a study by Haritos, 
 #' Gindinis, Doan and Bell (2004) on element role titles. It was used to 
 #' demonstrate the effects of construct alignment in Bell (2010, p. 46).
@@ -58,6 +59,7 @@ NULL
 ###############################################################################
 
 #' Grid data from Bell and McGorry (1992).
+#'
 #' The grid data set is used in Bell's technical report "Using SPSS to Analyse
 #' Repertory Grid Data" (1997, p. 6). Originally, the data comes from a study
 #' by Bell and McGorry (1992).
@@ -119,6 +121,7 @@ NULL
 ###############################################################################
 
 #' Grid data from Boeker (1996).
+#'
 #' Grid data from a schizophrenic patient undergoing psychoanalytically 
 #' oriented psychotherapy. The data was taken during the last stage of 
 #' therapy (Boeker, 1996, p. 163).
@@ -175,6 +178,7 @@ NULL
 ###############################################################################
 
 #' Grid data from Fransella, Bell and Bannister (2003).
+#'
 #' A dataset used throughout the book "A Manual for Repertory Grid Technique" 
 #' (Fransella, Bell and Bannister, 2003, p. 60). 
 #'
@@ -213,7 +217,9 @@ NULL
 
 ###############################################################################
 
-#' Grid data from Feixas and Saul (2004). A desription by the authors:
+#' Grid data from Feixas and Saul (2004). 
+#'
+#'A desription by the authors:
 #' "When Teresa, 22 years old, was seen by the second author (LAS) at the 
 #' psychological services of the University of Salamanca, she was in the 
 #' final year of her studies in chemical sciences. Although Teresa proves 
@@ -385,7 +391,9 @@ NULL
 
 ###############################################################################
 
-#' Grid data from Mackay (1992). Data set 'Grid C' 
+#' Grid data from Mackay (1992). Data set 'Grid C'-
+#'
+#' 
 #' used in Mackay's paper on inter-element correlation 
 #' (1992, p. 65).
 #'
@@ -424,7 +432,8 @@ NULL
 
 ###############################################################################
 
-#' Grid data from Raeithel (1998). 
+#' Grid data from Raeithel (1998).
+#' 
 #' Grid data to demonstrate the use of Bertin diagrams (Raeithel, 1998, p. 223).
 #' The context of its administration is unknown.
 #' 
@@ -528,7 +537,8 @@ NULL
 
 ###############################################################################
 
-#' Grid data from Slater (1977).
+#' Grid data from Slater (1977). 
+#'
 #' Grid data (ranked) from a seventeen year old female psychiatric patient 
 #' (Slater, 1977, p. 110). She was depressed, anxious and took to cutting 
 #' herself. The data was originally reported by Watson (1970).

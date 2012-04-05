@@ -14,26 +14,26 @@
 # around those limitations.
 
 
-#' Definition of  repgrid class
-#'
-#' @slot meta           A list to store meta data for the repertory grid. 
-#'                      This includes name of interviewer and interviewee,
-#'                      data, miscellaneous notes etc.
-#' @slot scale          The rating scale used (minimum, maximum ec.). 
-#' @slot elements       The elements of the grid including meta information like
-#'                      "ideal" etc.
-#' @slot constructs     The constructs of the grid, containing meta information 
-#'                      like pole preference or different ladders.
-#' @slot elicitation    Information about the elicitation procedure used.
-#' @slot ratings        The ratings.
-#' @slot coupled        If the grid is coupled (standard) or decoupled (sci:vesco)
-#'                      format, allowing bent constructs.
-#' @slot calcs          Results from calculations.
-#' @slot plotdata       Information for plotting the grid.
-#'
-#' @export
-#' @author  Mark Heckmann
-#'
+# Definition of  repgrid class
+#
+# @slot meta           A list to store meta data for the repertory grid. 
+#                      This includes name of interviewer and interviewee,
+#                      data, miscellaneous notes etc.
+# @slot scale          The rating scale used (minimum, maximum ec.). 
+# @slot elements       The elements of the grid including meta information like
+#                      "ideal" etc.
+# @slot constructs     The constructs of the grid, containing meta information 
+#                      like pole preference or different ladders.
+# @slot elicitation    Information about the elicitation procedure used.
+# @slot ratings        The ratings.
+# @slot coupled        If the grid is coupled (standard) or decoupled (sci:vesco)
+#                      format, allowing bent constructs.
+# @slot calcs          Results from calculations.
+# @slot plotdata       Information for plotting the grid.
+#
+# @export
+# @author  Mark Heckmann
+#
 setClass( "repgrid", 
 		  representation( meta = "list",
 						          scale = "list",

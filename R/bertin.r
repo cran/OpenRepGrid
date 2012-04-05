@@ -207,7 +207,9 @@ bertin2PlusLegend <- function(x, ratings=TRUE, top=unit(40, "mm"),
 #       -splitString has a bug, breaks too late
 #       -trimming of elements and constructs
 #
-#' Workhorse for the biplot printing. Prints a bertin to the output 
+#' Workhorse for the biplot printing. 
+#'
+#' Prints a bertin to the output 
 #' device. It uses the R base graphics system and 
 #' this is very fast. This is useful for working with grids. Not so much for
 #' producing high-quality output.
@@ -450,6 +452,7 @@ bertinBase <- function(nrow, ncol, labels="", labels.elements="",
 
 
 #' Make Bertin display of grid data.
+#'
 #' One of the most popular ways of displaying grid data has been adopted 
 #' from Bertin's (1974) graphical proposals, which have had an immense 
 #' influence onto data visualization. One of the most appealing 
@@ -561,7 +564,9 @@ bertin <- function(x, colors=c("white", "black"), showvalues=TRUE,
 
 
 
-#' Bertin display with corresponding cluster anaylsis. Element columns and 
+#' Bertin display with corresponding cluster anaylsis. 
+#'
+#' Element columns and 
 #' constructs rows are ordered according to cluster criterion. Various 
 #' distance measures as well as cluster methods are supported.
 #'

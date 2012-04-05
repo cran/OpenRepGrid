@@ -101,7 +101,7 @@ makeStandardRangeColorRamp <- function(colors, na.col="#FFFFFF", ...){
 #' @param   x
 #' @param   val
 #' @return  list
-#' @nord
+#' @noRd
 #'
 modifyListNull <- function (x, val) 
 {
@@ -129,7 +129,7 @@ modifyListNull <- function (x, val)
 #' @param   x
 #' @param   val
 #' @return  list
-#' @nord
+#' @noRd
 #'
 modifyListNA <- function (x, val) {
     stopifnot(is.list(x), is.list(val))
@@ -265,7 +265,7 @@ cascade <- function(n, type=1){
 #' @param   x
 #' @param   val
 #' @return  list
-#' @nord
+#' @noRd
 insertAt <- function(index.base, index.insert, side="pre"){
 	if(!side %in% c("pre", "post")) 									# Integrity Checks
 		stop("side must be a a string. It can take the values 'pre' or 'post'")					
@@ -615,7 +615,7 @@ randomWords <- function(n){
 	            "money", "he", "owes", "him", "Brownstone", "then", "flees", 
 	            "back", "to", "the", "mainland", "by", "airplane", "before", 
 	            "he", "realizes", "what", "has", "happened", "I", "she")
-	sample(words, n, rep=TRUE)
+	sample(words, n, replace=TRUE)
 }
 
 
@@ -653,7 +653,7 @@ randomSentence <- function(n, maxchar=Inf){
 #' randomSentences(5, 10)     # five random sentences with ten words each
 #' randomSentences(5, 2:10)   # five random sentences between two and ten words
 randomSentences <- function(n, nwords, maxchar=Inf){
-  sapply(sample(nwords, n, rep = TRUE), 
+  sapply(sample(nwords, n, replace = TRUE), 
           randomSentence, maxchar = maxchar)
 }
 

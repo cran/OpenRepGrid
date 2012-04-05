@@ -51,7 +51,8 @@ cNames <- getConstructNames
 #getConstructNames(x)
 
 
-#' Retrieves the construct names from a \code{repgrid}. 
+#' Retrieves the construct names from a \code{repgrid}.
+#' 
 #' Different features like trimming, indexing and choices of seperators
 #' allow to return the kind of format that is needed.
 #'

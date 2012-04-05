@@ -1,16 +1,26 @@
 \name{getNoOfElements}
 \alias{getNoOfElements}
-\title{get number of elements...}
-\usage{getNoOfElements(x)
+\title{get number of elements}
+\usage{
+  getNoOfElements(x)
 }
-\description{get number of elements}
-\value{\code{numeric}}
-\keyword{internal}
-\author{Mark Heckmann}
-\arguments{\item{x}{\code{repgrid} object}
+\arguments{
+  \item{x}{\code{repgrid} object}
 }
-\examples{\dontrun{
+\value{
+  \code{numeric}
+}
+\description{
+  get number of elements
+}
+\examples{
+\dontrun{
 
-getNoOfElements(bell2010)
-}}
+     getNoOfElements(bell2010)
+}
+}
+\author{
+  Mark Heckmann
+}
+\keyword{internal}
 

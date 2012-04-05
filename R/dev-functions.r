@@ -8,6 +8,7 @@
 
 
 #' Generate a random grid (quasis) of prompted size.
+#'
 #' This feature is useful for research purposes like
 #' exploring distributions of indexes etc.
 #'
@@ -46,7 +47,8 @@ randomGrid <- function(nc=10, ne=15, nwc=8, nwe=5, range=c(1,5), prob=NULL, opti
     left <- paste("lconstruct", seq_len(nc), sep="")
     right <- paste("rconstruct", seq_len(nc), sep="")
   }
-  scores <- sample(range[1]:range[2], nc*ne, rep=TRUE, prob=prob) 
+  scores <- sample(range[1]:range[2], nc*ne, 
+                   replace=TRUE, prob=prob) 
   args <- list( name=elem,
   		  	      l.name=left,
   		  	      r.name=right,
@@ -57,6 +59,7 @@ randomGrid <- function(nc=10, ne=15, nwc=8, nwe=5, range=c(1,5), prob=NULL, opti
 
 
 #' Generate a list of random grids (quasis) of prompted size.
+#'
 #' This feature is useful for research purposes like
 #' exploring distributions of indexes etc. The function is a
 #' simple wrapper around \code{\link{randomGrid}}.
@@ -97,7 +100,9 @@ randomGrids <- function(rep=3, nc=10, ne=15, nwc=8, nwe=5,
 
 
 #' Generate random grids and calculate 'Slater distances'
-#' for the elements. All Slater distances
+#' for the elements. 
+#'
+#' All Slater distances
 #' are returned as a vector. The valiues can be used e.g. to 
 #' assess the distributions standard deviation.
 #'

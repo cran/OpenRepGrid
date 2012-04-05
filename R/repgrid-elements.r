@@ -29,7 +29,9 @@ getElements <- function(x){
 }
 
 
-#' Retrieve element names of repgrid object. Funtion si for convenience, 
+#' Retrieve element names of repgrid object. 
+#'
+#' Function for convenience, 
 #' so new users do not have to deal with object slots
 #' as they will typically not have knowledge about R object 
 #' structures (S3, S4).
@@ -55,7 +57,8 @@ eNames <- getElementNames
 # getElementNames(rg1)
 
 
-#' Retrieves the element names from a \code{repgrid}. 
+#' Retrieves the element names from a \code{repgrid}.
+#' 
 #' Different features like trimming, indexing and choices of seperators
 #' allow to return the kind of format that is needed.
 #'
