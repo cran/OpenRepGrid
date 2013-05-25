@@ -371,6 +371,7 @@ normal.ppplot <- function(x, plot=FALSE) {
   else corrs.pp
 }
 
+
 optimal.boxcox <- function(x, lambda = seq(-2, 2, len=200), plot=FALSE) {
   ll <- length(lambda)
   correlations.pp <- numeric(ll)

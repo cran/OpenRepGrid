@@ -2,29 +2,21 @@
 \alias{constructRmsCor}
 \title{Root mean square (RMS) of inter-construct correlations.}
 \usage{
-  constructRmsCor(x,
-    method = c("pearson", "kendall", "spearman"),
-    trim = NA, digits = 2, output = 1)
+  constructRmsCor(x, method = "pearson", trim = NA)
 }
 \arguments{
   \item{x}{\code{repgrid} object}
 
-  \item{method}{a character string indicating which
+  \item{method}{A character string indicating which
   correlation coefficient is to be computed. One of
   \code{"pearson"} (default), \code{"kendall"} or
   \code{"spearman"}, can be abbreviated.  The default is
   \code{"pearson"}.}
 
-  \item{trim}{the number of characters a construct is
-  trimmed to (default is \code{7}). If \code{NA} no
+  \item{trim}{The number of characters a construct is
+  trimmed to (default is \code{NA}). If \code{NA} no
   trimming occurs. Trimming simply saves space when
   displaying correlation of constructs with long names.}
-
-  \item{digits}{\code{numeric}. Number of digits to round
-  to (default is \code{2}).}
-
-  \item{output}{The type of output printed to the console.
-  \code{output=0} will supress printing of the output.}
 }
 \value{
   \code{dataframe} of the RMS of inter-construct
@@ -41,17 +33,15 @@
   2003, p. 86).
 }
 \examples{
-\dontrun{
-
-   # data from grid manual by Fransella, Bell and Bannister
+# data from grid manual by Fransella, Bell and Bannister
    constructRmsCor(fbb2003)
-   constructRmsCor(fbb2003, trim=20, digits=3)
+   constructRmsCor(fbb2003, trim=20)
 
-   # calculate invisibly
-   r <- constructRmsCor(fbb2003, out=0)
-   r
-
-}
+   # modify output
+   r <- constructRmsCor(fbb2003)
+   print(r, digits=5)
+   # access calculation results
+   r[2, 1]
 }
 \author{
   Mark Heckmann
@@ -62,6 +52,6 @@
   John Wiley & Sons.
 }
 \seealso{
-  \code{\link{constructCor}}
+  \code{\link{elementRmsCor}}, \code{\link{constructCor}}
 }
 

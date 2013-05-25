@@ -93,6 +93,7 @@ rg <- importGridstat(file, dir, min=1, max=6)
   \code{\link{importGridcor}},
   \code{\link{importGridstat}},
   \code{\link{importScivesco}},
-  \code{\link{importGridsuite}}, \code{\link{importTxt}}
+  \code{\link{importGridsuite}}, \code{\link{importTxt}},
+  \code{\link{importExcel}}
 }
 

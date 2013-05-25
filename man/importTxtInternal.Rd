@@ -8,7 +8,7 @@
 \arguments{
   \item{file}{Filename including path if file is not in
   current working directory. File can also be a complete
-  URL. The fileformat is .dat.}
+  URL. The fileformat is \code{.txt}.}
 
   \item{dir}{Alternative way to supply the directory where
   the file is located (default \code{NULL}).}
@@ -37,9 +37,7 @@
   optional block contains the range of the rating scale
   used defined by two numbers. The order of the blocks is
   arbitrary. All text not contained within the blocks is
-  discarded and can thus be used for comments. A
-  description of the gridstat data fromat can be found in
-  Bell (2009, p. 5)
+  discarded and can thus be used for comments.
 }
 \details{
   \tabular{l}{ \code{---------------- .txt file
@@ -86,12 +84,6 @@ imp <- importTxtInternal("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
 }
 \author{
   Mark Heckmann
-}
-\references{
-  Bell, R. C. (2009). Gridstat version 5 - A Program for
-  Analyzing the Data of A Repertory Grid (manual).
-  University of Melbourne, Australia: Department of
-  Psychology.
 }
 \keyword{internal}
 

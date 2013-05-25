@@ -1,7 +1,6 @@
-###############################################################################
-###		       import repgrid data from other (grid) programs   			  	    ###
-###############################################################################
 
+###################	import repgrid data from other (grid) programs ############
+#
 # programs currently supported:
 #
 # programs planned to be supported:
@@ -20,7 +19,6 @@
 #
 
 
-###############################################################################
 
 #' convertImportObjectToRepGridObject.
 #'
@@ -57,9 +55,7 @@ convertImportObjectToRepGridObject <- function(import){
 }
 
 
-###############################################################################
-### 							              GRIDSTAT			                              ###
-###############################################################################
+############################ GRIDSTAT #########################################
 
 # gridstat output has the following form.
 # 1) first line:  some description elements. 
@@ -342,7 +338,8 @@ importGridstatInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
 #'                \code{\link{importGridsuite}},
-#'                \code{\link{importTxt}}
+#'                \code{\link{importTxt}},
+#'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
 #' 
@@ -390,9 +387,7 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL){
 
 
 
-###################################################################################
-### 							 GRIDCOR 										###
-###################################################################################
+############################# GRIDCOR #########################################
 
 # gridcor outpout has the following form:
 # "As you can see in this sample file, the first line contains the number of constructs (10), 
@@ -579,7 +574,8 @@ importGridcorInternal <- function(file, dir=NULL){
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
 #'                \code{\link{importGridsuite}},
-#'                \code{\link{importTxt}}
+#'                \code{\link{importTxt}},
+#'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
 #' 
@@ -621,9 +617,8 @@ importGridcor <- function(file, dir=NULL){
 
 
 
-###############################################################################
-### 							              GRIDSUITE									                  ###
-###############################################################################
+############################# GRIDSUITE #######################################
+
 #
 # On www.gridsuite.de there are example files and XSD schemes available.
 # the developers propose XML as the standard grid format
@@ -762,7 +757,8 @@ importGridsuiteInternal <- function(file, dir=NULL){
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
 #'                \code{\link{importGridsuite}},
-#'                \code{\link{importTxt}}
+#'                \code{\link{importTxt}},
+#'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
 #' 
@@ -802,9 +798,7 @@ importGridsuite <- function(file, dir=NULL){
 }
 
 
-###############################################################################
-### 							                SCI:VESCO										              ###
-###############################################################################
+############################# sci:vesco #######################################
 
 # scivesco saves single grids in .scires files which have an XML structure.
 # Note: not all nodes are imported by importScivesco()
@@ -1109,7 +1103,8 @@ convertScivescoImportObjectToRepGridObject <- function(import){
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
 #'                \code{\link{importGridsuite}},
-#'                \code{\link{importTxt}}
+#'                \code{\link{importTxt}},
+#'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
 #' 
@@ -1152,9 +1147,7 @@ importScivesco <- function(file, dir=NULL){
 # str(tmp)
 
 
-###############################################################################
-### 							                IMPORT .TXT									              ###
-###############################################################################
+############################# IMPORT .TXT #######################################
 
 #' ImportTxtInternal is the parser for importTxt.
 #'
@@ -1168,7 +1161,6 @@ importScivesco <- function(file, dir=NULL){
 #' One optional block contains the range of the rating scale used defined by two numbers.
 #' The order of the blocks is arbitrary. All text not contained within the blocks
 #' is discarded and can thus be used for comments.
-#' A description of the gridstat data fromat can be found in Bell (2009, p. 5)
 #'
 #' \tabular{l}{
 #' \code{---------------- .txt file -----------------} \cr \cr
@@ -1208,7 +1200,7 @@ importScivesco <- function(file, dir=NULL){
 #'
 #' @param file	  Filename including path if file is not in current working 
 #'                directory. File can also be a complete URL. The fileformat
-#'                is .dat.
+#'                is \code{.txt}.
 #' @param dir	    Alternative way to supply the directory where the file is located 
 #'                (default \code{NULL}).
 #' @param min	    Optional argument (\code{numeric}, default \code{NULL})
@@ -1217,9 +1209,6 @@ importScivesco <- function(file, dir=NULL){
 #'                for maximum rating value in grid.
 #' @return        List of relevant data.
 #'
-#' @references    Bell, R. C. (2009). Gridstat version 5 - A Program for 
-#'                Analyzing the Data of A Repertory Grid (manual). 
-#'                University of Melbourne, Australia: Department of Psychology.
 #' @export
 #' @keywords internal
 #' @author        Mark Heckmann
@@ -1245,7 +1234,8 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   if (!is.null(dir)) 
     file <- paste(dir, file, sep="/", collapse="")
 
-  data <- readLines(file)    # read txt file line by line
+  data <- readLines(file)             # read txt file line by line
+  data <- gsub("\t", " ", data)       # replace tabulators by simple blank
   
   line.elements <- which(data == "ELEMENTS")
   line.elements.end <- which(data == "END ELEMENTS")
@@ -1265,26 +1255,29 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   l$constructs <- as.list(data[(line.constructs + 1):(line.constructs.end-1)])
   l$constructs <- lapply(l$constructs, function(x) trimBlanksInString(x) )
   tmp <- lapply(l$constructs, function(x) {
-    strsplit(x, ":")[[1]]									# separate emergent and constrast pole by splitting at hyphene, colon or slash (see email from Richard)
+    strsplit(x, ":")[[1]]              # separate emergent and constrast pole by splitting at hyphene, colon or slash (see email from Richard)
   })
   l$emergentPoles <- lapply(tmp, function(x) trimBlanksInString(x[1]) )
-  l$contrastPoles <- lapply(tmp, function(x) trimBlanksInString(x[2]) ) 		
+  l$contrastPoles <- lapply(tmp, function(x) trimBlanksInString(x[2]) ) 
  	
  	# read ratings and convert to numeric
  	op <- options()$warn
  	options(warn=-1)
   l$ratings <- as.list(data[(line.ratings + 1):(line.ratings.end-1)])
   l$ratings <- lapply(l$ratings, function(x){
-    tmp <- strsplit(x, " ")[[1]]
+    tmp <- trimBlanksInString(x)          # trim blanks at beginning and end of string
+    tmp <- strsplit(tmp, "[ \t]+")[[1]]   # split at one or more tabs or blanks
+    tmp <- gsub("[-?]", "NA", tmp)        # replace missing indicators (-,?) by "NA"
     as.numeric(tmp)
   })
  	options(warn=op)
  
- 
   # read range if available
   if (!identical(line.range, integer(0))){
-    range <- strsplit(data[line.range + 1], " ")[[1]]
-    range <- as.numeric(range)
+    d <- data[line.range + 1]             # get line with scale range data
+    tmp <- trimBlanksInString(d)          # trim blanks at beginning and end of string
+    tmp <- strsplit(tmp, "[ \t]+")[[1]]   # split at one or more tabs or blanks
+    range <- as.numeric(tmp)
   } else {
     range <- c( min(unlist(l$ratings), na.rm=T), 
                 max(unlist(l$ratings), na.rm=T))
@@ -1383,7 +1376,8 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
 #'                \code{\link{importGridsuite}},
-#'                \code{\link{importTxt}}
+#'                \code{\link{importTxt}},
+#'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
 #' 
@@ -1401,7 +1395,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #' # using a full path
 #' rg <- importTxt("/Users/markheckmann/data/sample.txt")
 #' 
-#' # load Gridsuite data from URL
+#' # load .txt data from URL
 #' rg <- importTxt("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
 #'
 #' # importing more than one .txt file via R code
@@ -1411,7 +1405,8 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #'
 importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
   if (missing(file)){                                         # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("text files", ".txt"),
+    Filters <- matrix(c("text files", ".txt",
+                        "text files", ".TXT"),
                         ncol=2, byrow = TRUE)
     file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
   }
@@ -1432,12 +1427,209 @@ importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
 
 
 
+############################# IMPORT EXCEL ####################################
+
+
+#' ImportExcelInternal is the parser for importExcel.
+#'
+#' ImportExcelInternal is the parser for importExcel that constructs an import 
+#' object. The \code{.xlsx} or \code{.xls} file has to be in specified fixed 
+#' format. The first row contains the minimum of the rating scale, the names of 
+#' the elements and the maximum of the rating scale. Below every row contains
+#' the left construct pole, the ratings and the right construct pole.
+#'
+#' \tabular{lllll}{
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' }
+#'
+#' Note that the maximum and minimum value has to be defined using the
+#' \code{min} and \code{max} arguments if no values are supplied at the
+#' beginning and end of the first row. Otherwise the scaling range is inferred
+#' from the available data and a warning is issued as the range may be
+#' erroneous. This may effect other functions that depend on knowing the correct
+#' range and it is thus strongly recommended to set the scale range correctly.
+#' 
+#' A sample Excel file can be found here: 
+#' \url{http://www.openrepgrid.uni-bremen.de/data/grid.xlsx}.
+#' 
+#' @param file    Filename including path if file is not in current working 
+#'                directory. File can also be a complete URL. The fileformat
+#'                is \code{.xlsx} or \code{.xls}.
+#' @param dir	    Alternative way to supply the directory where the file is located 
+#'                (default \code{NULL}).
+#' @param sheetIndex  The number of the Excel sheet that contains the grid data.
+#' @param min	    Optional argument (\code{numeric}, default \code{NULL})
+#'                for minimum rating value in grid.
+#' @param max	    Optional argument (\code{numeric}, default \code{NULL})
+#'                for maximum rating value in grid.
+#' @return        List of relevant data.
+#'
+#' @export
+#' @keywords      internal
+#' @author        Mark Heckmann
+#'
+#' @examples \dontrun{
+#' 
+#' # supposing that the data file sample.txt is in the current directory
+#' file <- "grid.xlsx"
+#' imp <- importExcelInternal(file)
+#' 
+#' # specifying a directory (arbitrary example directory)
+#' dir <- "/Users/markheckmann/data"
+#' imp <- importExcelInternal(file, dir)
+#' 
+#' # using a full path
+#' imp <- importExcelInternal("/Users/markheckmann/data/grid.xlsx")
+#' }
+#'
+importExcelInternal <- function(file, dir=NULL, sheetIndex=1, 
+                                min=NULL, max=NULL)
+{
+  if (!is.null(dir)) 
+    file <- paste(dir, file, sep="/", collapse="")
+  x <- read.xlsx(file, sheetIndex=1, header=FALSE)  # read .xlxs or .xls file
+
+  # remove NA lines when too many rows in Excel  
+  na.rows <- apply(x, 1, function(x) all(is.na(unlist(x))))
+  x <- x[!na.rows, ]
+  
+  nc <- nrow(x) - 1   # number of constructs
+  ne <- ncol(x) - 2   # number of elements
+  
+  l <- list()
+  
+  # read elements
+  l$elements <- as.list(as.character((unlist(x[1, 2:(1+ne)]))))  # list of element names
+  
+  # read constructs and trim blanks
+  l$emergentPoles <- as.list(as.character(x[2:(nc + 1), 1]))
+  l$contrastPoles <- as.list(as.character(x[2:(nc + 1), ne + 2]))
+  
+  # read ratings and convert to numeric
+  ratings <- x[-1, c(-1, -(ne +2))]
+  ratings <- sapply(ratings, function(x) as.numeric(as.character(x)))  # convert to numerics
+  l$ratings <- split(ratings, 1:nrow(ratings))                         # convert df to list row-wise
+  #names(l$ratings) <- NULL
+  
+  # read range info if available
+  rmin <- as.numeric(as.vector(x[1,1]))
+  rmax <- as.numeric(as.vector(x[1, ne + 2]))
+  
+  # if not availabe infer range data and issue warning
+  if (identical(rmin, numeric(0)) | identical(rmax, numeric(0))) {
+    warning("the minimum and/or the maximum value of the rating scale have not been set explicitly.", 
+            "The scale range was thus inferred by scanning the available ratings and may be wrong.", 
+            "See ?importExcel for more information", call. = FALSE)  
+    rmin <- min(ratings, na.rm=TRUE)        # infer rating range
+    rmax <- max(ratings, na.rm=TRUE)        
+  }  
+  
+  # overwrite scale range if given in arguments 
+  if (!is.null(min)) 
+    rmin <- min
+  if (!is.null(max)) 
+    rmax <- max
+  
+  l$noConstructs <- nc    # no of constructs
+  l$noElements <- ne      # no of elements
+  l$minValue <- rmin      # minimum value for Likert scale
+  l$maxValue <- rmax      # maximum value for Likert scale 
+  l
+}
+
+
+#' Import grid data from an Excel file.
+#'
+#' If you do not have a grid program at hand you can define a grid using
+#' Microsoft Excel and by saving it as a \code{.xlsx} or \code{.xls} file.
+#' The \code{.xlsx} or \code{.xls} file has to be in specified fixed 
+#' format. The first row contains the minimum of the rating scale, the names of 
+#' the elements and the maximum of the rating scale. Below every row contains
+#' the left construct pole, the ratings and the right construct pole.
+#'
+#' \tabular{lllll}{
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' \code{1} & \code{element 1} & \code{element 2} & \code{element 3} & \code{5} \cr
+#' }
+#'
+#' Note that the maximum and minimum value has to be defined using the
+#' \code{min} and \code{max} arguments if no values are supplied at the
+#' beginning and end of the first row. Otherwise the scaling range is inferred
+#' from the available data and a warning is issued as the range may be
+#' erroneous. This may effect other functions that depend on knowing the correct
+#' range and it is thus strongly recommended to set the scale range correctly.
+#' 
+#' A sample Excel file can be found here: 
+#' \url{http://www.openrepgrid.uni-bremen.de/data/grid.xlsx}.
+#'
+#' @param file    A vector of filenames including the full path if file is not in current working 
+#'                directory. The file suffix has to be \code{.xlsx} or \code{.xls}. 
+#'                If no file is supplied a selection pop up menu is opened to select
+#'                the files.
+#' @param dir	    Alternative way to supply the directory where the file is located 
+#'                (default \code{NULL}).
+#' @param sheetIndex  The number of the Excel sheet that contains the grid data.
+#' @param min	    Optional argument (\code{numeric}, default \code{NULL})
+#'                for minimum rating value in grid.
+#' @param max	    Optional argument (\code{numeric}, default \code{NULL})
+#'                for maximum rating value in grid.
+#' @return        A single \code{repgrid} object in case one file and
+#'                a list of \code{repgrid} objects in case multiple files are imported.
+#' @export
+#' @author        Mark Heckmann
+#'
+#' @seealso       \code{\link{importGridcor}},
+#'                \code{\link{importGridstat}},
+#'                \code{\link{importScivesco}},
+#'                \code{\link{importGridsuite}},
+#'                \code{\link{importTxt}}
+#'
+#' @examples \dontrun{
+#' 
+#' # using the pop-up selection menu
+#' rg <- importExcel()   
+#'
+#' # supposing that the data file sample.txt is in the current directory
+#' file <- "grid.xlsx"
+#' rg <- importExcel(file)
+#' 
+#' # specifying a directory (arbitrary example directory)
+#' dir <- "/Users/markheckmann/data"
+#' rg <- importExcel(file, dir)
+#' 
+#' # using a full path
+#' rg <- importExcel("/Users/markheckmann/data/grid.xlsx")
+#'
+#' # import more than one Excel file via R code
+#' files <- c("grid_1.xlsx", "grid_2.xlsx")
+#' rg <- importExcel(files)
+#' }
+#'
+importExcel <- function(file, dir=NULL, sheetIndex=1, min=NULL, max=NULL)
+{
+  if (missing(file)){                                         # open file selection menu if no file argument is supplied
+    Filters <- matrix(c("excel", ".xlsx",
+                        "excel", ".xls"),
+                      ncol=2, byrow = TRUE)
+    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
+  }
+  imps <- lapply(as.list(file), importExcelInternal,            # make import objects for each .txt file
+                 dir=dir, sheetIndex=sheetIndex,
+                 min=min, max=max)
+  rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
+  if (length(file) == 1) {
+    return(rgs[[1]])                                          # return a single repgrid opbject if a single file is prompted
+  } else {
+    return(rgs)                                               # return a list of repgrid objects
+  }
+}
 
 
 
-###############################################################################
-### 							              IMPORTING GUI  								              ###
-###############################################################################
+############################# IMPORTING GUI ###################################
 
 #' Load repertory grid file using a GUI
 #'

@@ -66,6 +66,7 @@ rg <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
   \code{\link{importGridcor}},
   \code{\link{importGridstat}},
   \code{\link{importScivesco}},
-  \code{\link{importGridsuite}}, \code{\link{importTxt}}
+  \code{\link{importGridsuite}}, \code{\link{importTxt}},
+  \code{\link{importExcel}}
 }
 

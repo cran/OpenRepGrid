@@ -1,85 +1,44 @@
 \name{distanceNormalized}
 \alias{distanceNormalized}
-\title{'normalized inter-element distances' (power transformed Hartmann distances).}
+\title{Standardized inter-element distances' (power transformed
+                   Hartmann distances).}
 \usage{
-  distanceNormalized(x, rep = 100,
-    quant = c(0.05, 0.5, 0.95), significant = FALSE,
-    trim = 10, indexcol = FALSE, prob = NULL, digits = 2,
-    output = 1, progress = TRUE, upper = TRUE)
+  distanceNormalized(x, reps = 1000, prob = NULL,
+    progress = TRUE, distributions = TRUE)
 }
 \arguments{
   \item{x}{\code{repgrid} object.}
 
-  \item{rep}{Number of random grids to generate to produce
+  \item{reps}{Number of random grids to generate to produce
   sample distribution for Hartmann distances (default is
-  \code{100}). Note that a lot of samples may take a while
-  to calculate. Set \code{progress = TRUE} to monitor
-  progress for large samples.}
-
-  \item{quant}{The propabities of the quantiles from the
-  power transformed Hartmann distance distribution that
-  will be returned.  The default is \code{c(.05, .5, .95)}.
-  This corresponds to the lower 5 \%, the mean and the
-  upper 5 \% of the distribution.}
-
-  \item{significant}{Whether to only show values that are
-  outside the quantiles defined in \code{quant}, i.e.
-  onsidered as 'significant' (default is \code{FALSE}.)
-  The first and last value of \code{quant} is used to
-  determine the indifference region. This options only
-  applies when \code{output == 1} is used.}
-
-  \item{trim}{The number of characters a element names are
-  trimmed to (default is \code{10}). If \code{NA} no
-  trimming is done. Trimming simply saves space when
-  displaying the output.}
-
-  \item{indexcol}{Logical. Whether to add an extra index
-  column so the column names are indexes instead of element
-  names. This option renders a neater output as long
-  element names will stretch the output (default is
-  \code{FALSE}). Note that the index column is the first
-  matrix column.}
+  \code{1000}). Note that a lot of samples may take a while
+  to calculate.}
 
   \item{prob}{The probability of each rating value to
   occur.  If \code{NULL} (default) the distribution is
   uniform.  The number of values must match the length of
   the rating scale.}
 
-  \item{digits}{Numeric. Number of digits to round to
-  (default is \code{2}).}
+  \item{progress}{Whether to show a progress bar during
+  simulation (default is \code{TRUE}) (for
+  \code{method="simulate"}).  May be useful when the
+  distribution is estimated on the basis of many quasis.}
 
-  \item{output}{The output type. The default
-  (\code{output=1}) will print the power transformed
-  Hartmann distances to the console.  \code{output=0} will
-  suppress the printing to the console.  In all cases a
-  list containig the results of the calculations is
-  returned invisibly. See value for details.}
-
-  \item{progress}{Whether to show a progress bar (default
-  is \code{TRUE}).  May be useful when the distribution is
-  estimated on the basis of many quasis.}
-
-  \item{upper}{Logical. Whether to display only upper part
-  of the distance matrix (default \code{TRUE}).}
+  \item{distributions}{Wether to additionally return the
+  values of the simulated distributions (Slater etc.) The
+  default is \code{FALSE} as it will quickly boost the
+  object size.}
 }
 \value{
-  A matrix containing Hartmann distances (\code{output=1}
-  and \code{output=2}) or a list (\code{output=3})
-  containing: \cr \item{hartmann}{matrix of Hartmann
-  distances} \item{h.quantiles}{quantiles for Hartmann
-  distances} \item{h.vals}{random values of Hartmann}
-  \item{h.sd}{standard deviation of distribution of
-  Hartmann values} \item{slater}{matrix of Slater
-  distances} \item{sl.quantiles}{quantiles for Slater
-  distances} \item{sl.vals}{vector of all Slater distances}
-  \item{ls.sd}{standard deviation of random Slater
-  distances} \item{normalized}{matrix of power transformed
-  Hartmann distances} \item{n.quantiles}{quantiles for
-  power transformed Hartmann distances}
-  \item{n.vals}{vector of all power transformed Hartmann
-  distances} \item{n.sd}{standard deviation of random power
-  transformed Hartmann distances}
+  A matrix containing the standardized distances. \cr
+  Further data is contained in the object's attributes: \cr
+  \item{\code{"arguments"}}{A list of several parameters
+  including \code{mean} and \code{sd} of Slater
+  distribution.} \item{\code{"quantiles"}}{Quantiles for
+  Slater, Hartmann and power transformed distance
+  distribitions.} \item{\code{"distributions"}}{List with
+  values of the simulated distributions, if
+  \code{distributions=TRUE}.}
 }
 \description{
   Calculate power-transformed Hartmann distances.
@@ -91,32 +50,32 @@
   stable cutoff values used to determine 'significance' of
   inter-element distances. It can be shown that Hartmann
   distances are still affected by grid parameters like size
-  and the range of the rating scale used. The function
-  \code{distanceNormalize} applies a Box-Cox (1964)
-  transformation to the Hartmann distances in order to
-  remove the skew of the Hartmann distance distribution.
+  and the range of the rating scale used (Heckmann, 2012).
+  The function \code{distanceNormalize} applies a Box-Cox
+  (1964) transformation to the Hartmann distances in order
+  to remove the skew of the Hartmann distance distribution.
   The normalized values show to have more stable cutoffs
   (quantiles) and better properties for comparison across
-  grids of different size and scale range.  \cr \cr The
-  function \code{distanceNormalize} will return Slater,
-  Hartmann or power transfpormed Hartmann distances if
-  prompted. It is also possible to return the quantiles of
-  the sample distribution and only the element distances
-  consideres 'significant' according to the quantiles
-  defined.
+  grids of different size and scale range.  \cr
 
-  The 'power tranformed or normalized Hartmann distance'
-  are calulated as follows: The simulated Hartmann
-  distribution is added a constant as the Box-Cox
-  transformation can only be applied to positive values.
-  Then a range of values for lambda in the Box-Cox
-  transformation (Box & Cox, 1964) are tried out. The best
-  lambda is the one maximizing the correlation of the
-  quantiles with the standard normal distribution. The
-  lambda value maximizing normality is used to transform
-  Hartmann distances. As the resulting scale of the power
-  transformation depends on lambda, the resulting values
-  are z-transformed to derive a common scaling.
+  The function \code{distanceNormalize} can also return the
+  quantiles of the sample distribution and only the element
+  distances consideres 'significant' according to the
+  quantiles defined.
+}
+\section{Calculations}{
+  The 'power tranformed Hartmann distance' are calulated as
+  follows: The simulated Hartmann distribution is added a
+  constant as the Box-Cox transformation can only be
+  applied to positive values. Then a range of values for
+  lambda in the Box-Cox transformation (Box & Cox, 1964)
+  are tried out. The best lambda is the one maximizing the
+  correlation of the quantiles with the standard normal
+  distribution. The lambda value maximizing normality is
+  used to transform Hartmann distances. As the resulting
+  scale of the power transformation depends on lambda, the
+  resulting values are z-transformed to derive a common
+  scaling.
 
   The code for the calculation of the optimal lambda was
   written by Ioannis Kosmidis.
@@ -124,17 +83,27 @@
 \examples{
 \dontrun{
 
+   ### basics  ###
+
    distanceNormalized(bell2010)
-   distanceNormalized(bell2010, trim=40, index=T, sig=T)
+   n <- distanceNormalized(bell2010)
+   n
 
-   ### histogram of power transformed Hartmann distances indifference region
-   d <- distanceNormalized(bell2010, out=0)
-   hist(d$n.vals, breaks=100)
-   abline(v=d$n.quant, col="red")
+   # printing options
+   print(n)
+   print(n, digits=4)
+   # 'significant' distances only
+   print(n, p=c(.05, .95))
 
-   ### histogram of Hartmann distances and indifference region
-   hist(d$h.vals, breaks=100)
-   abline(v=d$h.quant, col="red")
+   # access cells of distance matrix
+   n[1,2]
+
+   ### advanced  ###
+
+   # histogram of Slater distances and indifference region
+   n <- distanceNormalized(bell2010, distributions=TRUE)
+   l <- attr(n, "distributions")
+   hist(l$bc, breaks=100)
 
 }
 }
@@ -150,6 +119,12 @@
   grid technique: Results and consequences of a Monte Carlo
   study. \emph{International Journal of Personal Construct
   Psychology, 5}(1), 41-56.
+
+  Heckmann, M. (2012). Standardizing inter-element
+  distances in grids - A revision of Hartmann's distances,
+  11th Biennal Conference of the European Personal
+  Construct Association (EPCA), Dublin, Ireland, Paper
+  presentation, July 2012.
 
   Slater, P. (1977). \emph{The measurement of intrapersonal
   space by Grid technique}. London: Wiley.

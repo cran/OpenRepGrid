@@ -85,7 +85,7 @@ rg <- importTxt(file, dir)
 # using a full path
 rg <- importTxt("/Users/markheckmann/data/sample.txt")
 
-# load Gridsuite data from URL
+# load .txt data from URL
 rg <- importTxt("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
 
 # importing more than one .txt file via R code
@@ -100,6 +100,7 @@ rg <- importTxt(files)
   \code{\link{importGridcor}},
   \code{\link{importGridstat}},
   \code{\link{importScivesco}},
-  \code{\link{importGridsuite}}, \code{\link{importTxt}}
+  \code{\link{importGridsuite}}, \code{\link{importTxt}},
+  \code{\link{importExcel}}
 }
 

@@ -8,16 +8,13 @@
   objects.
 }
 \examples{
-\dontrun{
-   x <- randomGrid()
+x <- randomGrid()
    x[1:4, ]
    x[ , 1:3]
    x[1:4,1:3]
    x[1,1]
 }
-}
 \author{
   Mark heckmann
 }
-\keyword{internal}
 

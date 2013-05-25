@@ -3,7 +3,7 @@
 \title{Generate random grids and calculate 'Slater distances'
 for the elements.}
 \usage{
-  quasiDistributionDistanceSlater(rep, nc, ne, range,
+  quasiDistributionDistanceSlater(reps, nc, ne, range,
     prob = NULL, progress = TRUE)
 }
 \arguments{

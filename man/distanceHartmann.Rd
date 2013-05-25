@@ -1,92 +1,57 @@
 \name{distanceHartmann}
 \alias{distanceHartmann}
-\title{'Hartmann distance' (standardized Euclidean distances).}
+\title{'Hartmann distance' (standardized Slater distances).}
 \usage{
-  distanceHartmann(x, rep = 100, meantype = 2,
-    quant = c(0.05, 0.5, 0.95), significant = FALSE,
-    trim = 10, indexcol = FALSE, prob = NULL, digits = 2,
-    output = 1, progress = TRUE, upper = TRUE)
+  distanceHartmann(x, method = "paper", reps = 10000,
+    prob = NULL, progress = TRUE, distributions = FALSE)
 }
 \arguments{
   \item{x}{\code{repgrid} object.}
 
-  \item{rep}{Number of random grids to generate to produce
-  sample distribution for Slater distances (default is
-  \code{100}). Note that a lot of samples may take a while
-  to calculate. Set \code{progress = TRUE} to monitor
-  progress for large samples.}
+  \item{method}{The method used for distance calculation,
+  on of \code{"paper", "simulate", "new"}. \code{"paper"}
+  uses the parameters as given in Hartmann (1992) for
+  caclulation.  \code{"simulate"} (default) simulates a
+  Slater distribution for the caclulation. In a future
+  version the time consuming simulation will be replaced by
+  more accurate parameters for Hartmann distances than used
+  in Hartmann (1992).}
 
-  \item{meantype}{The type of mean to use for
-  standardization.  \code{meantype=1} will use the
-  empirical mean (which is 1 and the default)
-  \code{meantype=2} will use the expected mean, i. e. 1.}
-
-  \item{quant}{The propabities of the quantiles from the
-  Slater distance distribution that will be returned.  The
-  default is \code{c(.05, .5, .95)}. This corresponds to
-  the lower 5 \%, the mean and the upper 5 \% of the
-  distribution.}
-
-  \item{significant}{Whether to only show values that are
-  outside the quantiles defined in \code{quant}, i.e.
-  onsidered as 'significant' (default is \code{FALSE}.)
-  The first and last value of \code{quant} is used to
-  determine the indifference region. This options only
-  applies when \code{output == 1} is used.}
-
-  \item{trim}{The number of characters a element names are
-  trimmed to (default is \code{10}). If \code{NA} no
-  trimming is done. Trimming simply saves space when
-  displaying the output.}
-
-  \item{indexcol}{Logical. Whether to add an extra index
-  column so the column names are indexes instead of element
-  names. This option renders a neater output as long
-  element names will stretch the output (default is
-  \code{FALSE}). Note that the index column is the first
-  matrix column.}
+  \item{reps}{Number of random grids to generate sample
+  distribution for Slater distances (default is
+  \code{10000}). Note that a lot of samples may take a
+  while to calculate.}
 
   \item{prob}{The probability of each rating value to
   occur.  If \code{NULL} (default) the distribution is
   uniform.  The number of values must match the length of
   the rating scale.}
 
-  \item{digits}{Numeric. Number of digits to round to
-  (default is \code{2}).}
+  \item{progress}{Whether to show a progress bar during
+  simulation (default is \code{TRUE}) (for
+  \code{method="simulate"}).  May be useful when the
+  distribution is estimated on the basis of many quasis.}
 
-  \item{output}{The output type. The default
-  (\code{output=1}) will print the Hartmann distances,
-  \code{output=2} the Slater and \code{output=3} both
-  distances to the console.  \code{output=0} will suppress
-  the printing to the console.  In all cases a list
-  containig the results of the calculations is returned
-  invisibly. See value for details.}
-
-  \item{progress}{Whether to show a progress bar (default
-  is \code{TRUE}).  May be useful when the distribution is
-  estimated on the basis of many quasis.}
-
-  \item{upper}{Logical. Whether to display only upper part
-  of the distance matrix (default \code{TRUE}).}
+  \item{distributions}{Wether to additionally return the
+  values of the simulated distributions (Slater etc.) The
+  default is \code{FALSE} as it will quickly boost the
+  object size.}
 }
 \value{
-  A matrix containing Hartmann distances (\code{output=1}
-  and \code{output=2}) or a list (\code{output=3})
-  containing: \cr \item{hartmann}{matrix of Hartmann
-  distances} \item{h.quantiles}{quantiles for Hartmann
-  distances} \item{h.vals}{random values of Hartmann}
-  \item{h.sd}{standard deviation of distribution of
-  Hartmann values} \item{slater}{matrix of Slater
-  distances} \item{sl.quantiles}{quantiles for Slater
-  distances} \item{sl.vals}{vector of all Slater distances}
-  \item{ls.sd}{standard deviation of random Slater
-  distances}
+  A matrix containing Hartmann distances. \cr In the
+  attributes several additional parameters can be found:
+  \cr \item{\code{"arguments"}}{A list of several
+  parameters including \code{mean} and \code{sd} of Slater
+  distribution.} \item{\code{"quantiles"}}{Quantiles for
+  Slater and Hartmann distance distribition.}
+  \item{\code{"distributions"}}{List with values of the
+  simulated distributions.}
 }
 \description{
   Calculate Hartmann distance
 }
 \details{
-  Hartmann (1992) showed in a Monte Carlo study that Slater
+  Hartmann (1992) showed in a simulation study that Slater
   distances (see \code{\link{distanceSlater}}) based on
   random grids, for which Slater coined the expression
   quasis, have a skewed distribution, a mean and a standard
@@ -99,17 +64,22 @@
   version of 'Slater distances'. Note that Hartmann
   distances are multiplied by -1. Hence, negative Hartmann
   values represent dissimilarity, i.e. a big Slater
-  distance.  \cr \cr The function \code{distanceHartmann}
-  conducts a small Monte Carlo simulation for the supplied
-  grid. I. e. a number of quasis of the same size and with
-  the same scale range as the grid under investigation are
-  generated. A distrubution of Slater distances derived
-  from the quasis is calculated and used for Hartmann's
-  standardization.  \cr \cr It is also possible to return
-  the quantiles of the sample distribution and only the
-  element distances consideres 'significant' according to
-  the quantiles defined.
+  distance. \cr
 
+  There are two ways to use this function. Hartmann
+  distances can either be calculated based on the reference
+  values (i.e. means and standard deviations of Slater
+  distance distributions) as given by Hartmann in his
+  paper. The second option is to conduct an instant
+  simulation for the supplied grid size for each
+  calculation. The second option will be more accurate when
+  a big number of quasis is used in the simulation. \cr
+
+  It is also possible to return the quantiles of the sample
+  distribution and only the element distances consideres
+  'significant' according to the quantiles defined.
+}
+\section{Calculation}{
   The 'Hartmann distance' is calculated as follows
   (Hartmann 1992, p. 49).  \cr \deqn{D = -1
   (\frac{D_{slater} - M_c}{sd_c})}{D = -1 (D_slater - M_c /
@@ -121,18 +91,29 @@
 \examples{
 \dontrun{
 
+   ### basics  ###
+
    distanceHartmann(bell2010)
-   distanceHartmann(bell2010, trim=40, index=T, sig=T)
+   distanceHartmann(bell2010, method="simulate")
+   h <- distanceHartmann(bell2010, method="simulate")
+   h
 
-   ### histogram of Slater distances and indifference region
-   d <- distanceHartmann(bell2010, out=0)
-   hist(d$sl.vals, breaks=100)
-   abline(v=d$sl.quant, col="red")
+   # printing options
+   print(h)
+   print(h, digits=6)
+   # 'significant' distances only
+   print(h, p=c(.05, .95))
 
-   ### histogram of Hartmann distances and indifference region
-   hist(d$h.vals, breaks=100)
-   abline(v=d$h.quant, col="red")
+   # access cells of distance matrix
+   h[1,2]
 
+   ### advanced  ###
+
+   # histogram of Slater distances and indifference region
+   h <- distanceHartmann(bell2010, distributions=TRUE)
+   l <- attr(h, "distributions")
+   hist(l$slater, breaks=100)
+   hist(l$hartmann, breaks=100)
 }
 }
 \author{
