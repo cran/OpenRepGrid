@@ -7,8 +7,8 @@ Type: Package
 LazyLoad: yes
 Author: Mark Heckmann
 Description: Tools to analyse repertory grid data
-Version: 0.1.7
-Date: 2013-05-25
+Version: 0.1.8
+Date: 2013-06-13
 Depends: methods, grid, colorspace, plyr, abind, rgl, GPArotation,
         psych, XML, tcltk, xlsx, pvclust
 Collate: 'data-openrepgrid.r' 'repgrid.r' 'repgrid-basicops.r' 'zzz.r'
@@ -17,7 +17,7 @@ Collate: 'data-openrepgrid.r' 'repgrid.r' 'repgrid-basicops.r' 'zzz.r'
         'export.r' 'import.r' 'bertin.r' 'calc.r' 'dev-functions.r'
         'measures.r' 'repgrid-output.r' 'repgrid-plots.r' 'rgl-3d.r'
         'settings.r' 'distance.R' 'double-entry.R'
-Packaged: 2013-05-26 14:19:42 UTC; mark
+Packaged: 2013-06-13 22:07:28 UTC; mark
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-05-26 16:52:16
+Date/Publication: 2013-06-14 07:18:33
