@@ -1008,8 +1008,15 @@ importScivescoInternal <- function(file, dir=NULL){
       selectPole <- "RatingPole2" 
     ratingsList <- xmlChildren(xmlChildren(x)[[selectPole]])
     ratings <- lapply(ratingsList, xmlAttrs)
-    df.ratings <- plyr:::list_to_dataframe(ratings)[-1]
-    round(as.numeric(df.ratings$Value), digits)
+    
+    ## old plyr code removed due to ::: in v0.1.9
+    #df.ratings <- plyr:::list_to_dataframe(ratings)[-1]
+    #round(as.numeric(df.ratings$Value), digits)
+    
+    # new code
+    df.ratings.2 <- list_to_dataframe(ratings)[-1]
+    names(df.ratings.2) <- "Value"
+    round(as.numeric(as.character(df.ratings.2$Value)), digits)
   }
   l$ratings <- NA
   l$ratings1 <-  lapply(level.3.InterviewResultTurnsCollection, 
@@ -1275,8 +1282,9 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   if (!is.null(dir)) 
     file <- paste(dir, file, sep="/", collapse="")
 
-  data <- readLines(file)             # read txt file line by line
-  data <- gsub("\t", " ", data)       # replace tabulators by simple blank
+  data <- readLines(file)               # read txt file line by line
+  data <- gsub("\t", " ", data)         # replace tabulators by simple blank
+  data <- data[str_trim(data) != ""]    # remove all empty lines
   
   line.elements <- which(data == "ELEMENTS")
   line.elements.end <- which(data == "END ELEMENTS")
@@ -1285,7 +1293,9 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   line.ratings <- which(data == "RATINGS") 
   line.ratings.end <- which(data == "END RATINGS")
   line.range <- which(data == "RANGE")
- 
+  line.bipolar.implications <- which(data == "BIPOLAR IMPLICATIONS") 
+  line.bipolar.implications.end <- which(data == "END BIPOLAR IMPLICATIONS")
+  
   l <- list()
   
   # read elements and trim blanks
@@ -1328,7 +1338,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
               "See ?importTxt for more information", call. = FALSE)      
     }
   }
-
+  
   l$noConstructs <- length(l$constructs)   # no of constructs
   l$noElements <- length(l$elements)       # no of elements
   l$minValue <- range[1]                   # minimum value for Likert scale
@@ -1342,7 +1352,13 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
     l$maxValue <- range[2]
   } else l$maxValue <- max
   
-  l
+  # read bipolar implications if available 
+  if (!identical(line.bipolar.implications, integer(0)) & 
+      !identical(line.bipolar.implications.end, integer(0))) {
+    l$bipolar.implications <- as.list(data[(line.bipolar.implications + 1):(line.bipolar.implications.end-1)])
+    l$bipolar.implications <- lapply(l$bipolar.implications, function(x) trimBlanksInString(x) )  
+  }
+  l  
 }
 
 
@@ -1530,7 +1546,17 @@ importExcelInternal <- function(file, dir=NULL, sheetIndex=1,
 {
   if (!is.null(dir)) 
     file <- paste(dir, file, sep="/", collapse="")
-  x <- read.xlsx(file, sheetIndex=1, header=FALSE)  # read .xlxs or .xls file
+  
+  if (requireNamespace("xlsx", quietly=TRUE) )  {
+    x <- xlsx::read.xlsx(file, sheetIndex=1, header=FALSE)  # read .xlxs or .xls file
+  } else {
+    stop("\n---------------------------------------------------------------------------\n",
+         "  This functions requires the xlsx package to be installed.\n",
+         "  xlsx in turn requires the Java Runtime Environment (JRE) on your system.\n",
+         "  Install the JRE and the xlsx package if you want to use this feature.\n",
+         "---------------------------------------------------------------------------",
+         call. = FALSE)    
+  }
 
   # remove NA lines when too many rows in Excel  
   na.rows <- apply(x, 1, function(x) all(is.na(unlist(x))))
@@ -1657,7 +1683,7 @@ importExcel <- function(file, dir=NULL, sheetIndex=1, min=NULL, max=NULL)
                       ncol=2, byrow = TRUE)
     file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
   }
-  imps <- lapply(as.list(file), importExcelInternal,            # make import objects for each .txt file
+  imps <- lapply(as.list(file), importExcelInternal,          # make import objects for each .txt file
                  dir=dir, sheetIndex=sheetIndex,
                  min=min, max=max)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
