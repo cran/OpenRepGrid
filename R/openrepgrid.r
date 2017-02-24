@@ -10,9 +10,9 @@
 #' Psychology (PCP) in a broad range of fields. For an introduction into the 
 #' technique see e.g. Fransella, Bell and Bannister (2003).
 #' 
-#'
-#' @author    Current members of the \pkg{OpenRepGrid} development team: Mark Heckmann. 
-#'            Everyone who is interested in developing the package is invited to join.
+#' @author    \pkg{OpenRepGrid} was initiated by Mark Heckmann. 
+#'            Current contributors are: Mark Heckmann, Alejandro García.
+#'            Researchers interested in developing the package are invited to join.
 #'
 #'            The \pkg{OpenRepGrid} package development is hosted on github (\url{http://github.com/markheckmann/OpenRepGrid}).
 #'            The github site provides information and allows to file bug reports or feature requests.
@@ -41,7 +41,8 @@
 #' @keywords package repgrid
 #' @name OpenRepGrid
 #' @docType package
-#' @import methods grid colorspace plyr stringr abind rgl GPArotation psych XML tcltk pvclust
+#' @import methods graphics grid utils stats grDevices plyr stringr abind rgl GPArotation psych XML tcltk pvclust
+#' @importFrom colorspace HSV diverge_hcl hex hex2RGB
 NULL
 
 

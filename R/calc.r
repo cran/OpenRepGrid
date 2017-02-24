@@ -1172,7 +1172,7 @@ alignByIdeal <- function(x, ideal, high=TRUE){
 #'                   For additional information on the different types type
 #'                   \code{?dist}. 
 #' @param  cmethod   The agglomeration method to be used. This should be (an
-#'                   unambiguous abbreviation of) one of \code{"ward"}, 
+#'                   unambiguous abbreviation of) one of \code{"ward"},
 #'                   \code{"single"}, \code{"complete"}, \code{"average"}, 
 #'                   \code{"mcquitty"}, \code{"median"} or \code{"centroid"}.
 #' @param  p         The power of the Minkowski distance, in case \code{"minkowski"}
@@ -1228,6 +1228,9 @@ cluster <- function(x, along=0, dmethod="euclidean", cmethod="ward", p=2,
   cmethods <- c("ward", "single", "complete", "average", "mcquitty", "median", "centroid")
   cmethod <- match.arg(cmethod, cmethods)
   
+  # if (cmethod == "ward")
+  #   cmethod <- "ward.D"  # due to a change in hclust, now two ward methods exist. We use the older one
+  # 
   if (is.null(main))
     main <- paste(dmethod, "distance and", cmethod, "clustering")
   if (! along %in% 0:2)
@@ -1368,6 +1371,9 @@ align <- function(x, along = 0, dmethod = "euclidean",
 #'
 #' @examples \dontrun{
 #'
+#'  # pvclust must be loaded
+#'  library(pvclust)
+#'  
 #'  # p-values for construct dendrogram
 #'  s <- clusterBoot(boeker)
 #'  plot(s)
@@ -1392,7 +1398,7 @@ clusterBoot <- function(x, along=1, align=TRUE, dmethod = "euclidean",
     set.seed(seed)  
   if (along ==1)
     xr <- t(xr)       
-  pv.e <- pvclust(xr, method.hclust=cmethod, method.dist=dmethod, r=r, nboot=nboot, ...)
+  pv.e <- pvclust::pvclust(xr, method.hclust=cmethod, method.dist=dmethod, r=r, nboot=nboot, ...)
   pv.e
 }
 
