@@ -1,21 +1,25 @@
 Package: OpenRepGrid
 License: GPL (>= 2)
-Title: Tools to Analyse Repertory Grid Data
+Title: Tools to Analyze Repertory Grid Data
 LazyData: yes
 Type: Package
 LazyLoad: yes
-Authors@R: person("Mark", "Heckmann", email = "heckmann@uni-bremen.de",
+Authors@R: person("Mark", "Heckmann", email = "heckmann.mark@gmail.com",
     role = c("aut", "cre"))
-Description: A set of functions to analyze repertory grid data.
-Version: 0.1.10
-Date: 2017-02-24
+Description: Analyze repertory grids, a qualitative-quantitative 
+    data collection technique devised by George A. Kelly in the 1950s. Today, grids are used across 
+    various domains ranging from clinical psychology to marketing. The package contains
+    functions to quantitatively analyze and visualize repertory grid data 
+    (see e.g. Bell, 2005, <doi:10.1002/0470013370.ch9>; 
+    Fransella, Bell, & Bannister, 2004, ISBN: 978-0-470-09080-0).
+Version: 0.1.12
+Date: 2018-05-31
 Encoding: UTF-8
 URL: http://openrepgrid.org,
         https://github.com/markheckmann/OpenRepGrid
 Imports: methods, graphics, grid, utils, stats, grDevices, plyr,
         stringr, abind, rgl, colorspace, GPArotation, psych, XML,
-        tcltk, pvclust
-Suggests: xlsx
+        tcltk, pvclust, openxlsx
 Collate: 'bertin.r' 'calc.r' 'data-openrepgrid.r' 'dev-functions.r'
         'distance.R' 'double-entry.R' 'export.r' 'gmMain.r' 'import.r'
         'measures.r' 'onair.r' 'openrepgrid.r' 'repgrid.r'
@@ -26,7 +30,7 @@ Collate: 'bertin.r' 'calc.r' 'data-openrepgrid.r' 'dev-functions.r'
 RoxygenNote: 6.0.1
 NeedsCompilation: no
 Author: Mark Heckmann [aut, cre]
-Maintainer: Mark Heckmann <heckmann@uni-bremen.de>
-Packaged: 2017-02-24 13:50:36 UTC; mark
+Maintainer: Mark Heckmann <heckmann.mark@gmail.com>
+Packaged: 2018-05-31 22:06:52 UTC; heckm
 Repository: CRAN
-Date/Publication: 2017-02-24 16:46:36
+Date/Publication: 2018-05-31 22:52:29 UTC
