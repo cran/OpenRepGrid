@@ -12,7 +12,10 @@ getConstructNames(x)
 \description{
 Get construct names
 }
-\author{
-Mark Heckmann
+\section{Deprecated functions}{
+ \code{getConstructNames()},
+  and \code{cNames()} have been deprecated.
+  Instead use \code{constructs()}.
 }
+
 \keyword{internal}

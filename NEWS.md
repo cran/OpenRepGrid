@@ -1,5 +1,61 @@
+# NEWS
 
-# OpenRepGrid 0.1.11 (not yet released) 
+# OpenRepGrid (development version)
+
+## TODOs
+
+  * switch to cli package for console output?
+  * make some function generic so they accept repgridlists as well (index functions)
+  * Format scripts with RStudio comment headers to make them more readable
+  * Redo printing wherever necessary
+  * replace print funs in constructCor etc. with print_square_matrix 
+  * move gh-pages to /docs folder
+  * add tests
+  * biplot with others in one function (see email José)
+  * intensity for elements does not yet match
+  * add tests for reorder
+  * build bipolar variant of construct matches? (similar to IC)
+
+# OpenRepGrid 0.1.14
+  
+  * remove TCLTK import. No interactive windows any more.
+  * move CI/CD from Travis to github actions
+  * resolve conflicts while loading packages
+  * update docs for indexPolarity
+  * reverse as alternative to swapPoles
+  * indexBieri: Bieri index of cognitive complexity
+  * matches: count rating matches in pairs of constructs and elements 
+  * reorder method to invert construct and/or element order
+  * dilemmatic construct (indexDilemmatic)
+  * polarization measure (indexPolarization)
+  * new print option for indexIntensity
+  * normalize argument in distance and indexSelfConstruction
+  * plot method for indexDilemma to produce network graphs
+  * add logo to documentation
+  * cognitive self construction: self vs. ideal vs. others (indexSelfConstruction)
+  * addAvgElement to add an average element
+  * rep method for regrid objects creates gridlist 
+  * summary measures for indexDilemma (PID, IID, PICID)
+  * midpoint function (alias for getScaleMidpoint)
+  * print method for indexDilemma
+  * fix indexDilemma output bug (#17, thanks to José Antonio González Del Puerto aka @MindCartographer)
+  * perturbation of grid ratings by perturbate and grids_perturbate
+  * indexPvaff now uses PCA of construct centered raw data in line with biplot (and Gridcor) 
+  * allow blanks at end of line after tags in importTxt
+  * grids_leave_n_out and grids_bootstrap for resampling constructs
+  * gridlist class, a simple list of repgrid objects
+
+# OpenRepGrid 0.1.13 
+
+  * indexDilemma was improved and fixed (thanks to Diego Vitali aka @artoo-git)
+  * biplot2d does now hide construct points as default setting (cex=0)
+  * setting a rating value outside the defined scale range now throws an error
+  * 'ratings' to access and replace grid ratings added
+  * 'elements' added to get and set element names replaces 'getElementNames' and 'eNames' which have become deprecated.
+  * 'constructs', 'leftpoles', and 'rightpoles' added to get and set construct poles replace 'getConstructNames' and 'cNames' which have become  deprecated.
+
+# OpenRepGrid 0.1.11
+
   * saveAsExcel to save grids as Microsoft Excel files
   * replace xlsx by openxlsx to import Excel files to get rid of JRE dependency
   

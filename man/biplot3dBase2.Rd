@@ -4,10 +4,21 @@
 \alias{biplot3dBase2}
 \title{biplot3dBase2 is the workhorse to draw a grid in rgl (3D device).}
 \usage{
-biplot3dBase2(x, dim = 1:3, labels.e = TRUE, labels.c = TRUE,
-  lines.c = 1, lef = 1.1, frame = 1, col.frame = grey(0.6),
-  col.sphere = "black", alpha.sphere = 0.05, zoom = 1,
-  draw.xyz.axes = TRUE, ...)
+biplot3dBase2(
+  x,
+  dim = 1:3,
+  labels.e = TRUE,
+  labels.c = TRUE,
+  lines.c = 1,
+  lef = 1.1,
+  frame = 1,
+  col.frame = grey(0.6),
+  col.sphere = "black",
+  alpha.sphere = 0.05,
+  zoom = 1,
+  draw.xyz.axes = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -24,11 +35,11 @@ biplot3dBase2(x, dim = 1:3, labels.e = TRUE, labels.c = TRUE,
 
 \item{lef}{Construct lines extension factor.}
 
-\item{col.frame}{Color of the sourrounding frame.}
+\item{col.frame}{Color of the surrounding frame.}
 
-\item{col.sphere}{Color of sourrouding sphere (default\code{"black"}).}
+\item{col.sphere}{Color of surrounding sphere (default\code{"black"}).}
 
-\item{alpha.sphere}{Numeric. alpha blending of the sourrounding sphere (default\code{".05"}).}
+\item{alpha.sphere}{Numeric. alpha blending of the surrounding sphere (default\code{".05"}).}
 
 \item{zoom}{Not yet used. Scaling factor for all vectors. Can be used to zoom
 the plot in and out (default \code{1}).}
@@ -41,8 +52,5 @@ the plot in and out (default \code{1}).}
 }
 \description{
 biplot3dBase2 is the workhorse to draw a grid in rgl (3D device).
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

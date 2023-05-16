@@ -38,8 +38,8 @@ widths_matrix_columns <- function(x){
 }
 
 
-random_df <- function(nrow=ncol, ncol=nrow, wrow=6, wcol=10){
-  x <- data.frame(replicate(ncol, sample(1:5, nrow, replace=TRUE)))
+random_df <- function(nrow=ncol, ncol = nrow, wrow = 6, wcol = 10) {
+  x <- data.frame(replicate(ncol, sample(1:5, nrow, replace = TRUE)))
   rownames(x) <- replicate(nrow, randomSentence(wrow))
   colnames(x) <- replicate(ncol, randomSentence(wcol))
   x
@@ -51,9 +51,9 @@ random_df <- function(nrow=ncol, ncol=nrow, wrow=6, wcol=10){
 # @param  right number of empty columns added at right side (default 0)
 # @return matrix
 # @keywords internal
-add_empty_cols <- function(x, left=0, right=0){
-  x <- cbind(matrix(" ", nrow=nrow(x), ncol=left), x)
-  x <- cbind(x, matrix(" ", nrow=nrow(x), ncol=right))
+add_empty_cols <- function(x, left = 0, right = 0) {
+  x <- cbind(matrix(" ", nrow = nrow(x), ncol = left), x)
+  x <- cbind(x, matrix(" ", nrow = nrow(x), ncol = right))
   x
 }
 
@@ -70,14 +70,13 @@ add_empty_cols <- function(x, left=0, right=0){
 # @param  anchors   two integers specifying at which columns matrices are aligned
 # @return matrix
 #
-# @author            Mark Heckmann
 # @keywords internal
 # @examples \dontrun{
 #   um <- matrix("u", ncol=10, nrow=5)
 #   lm <- matrix("l", ncol=8, nrow=3)
 #   bind_matrices_horizontally(um, lm, anchors=c(3,1))
 # }
-bind_matrices_horizontally <- function(um, lm, anchors=c(1,1)){
+bind_matrices_horizontally <- function(um, lm, anchors = c(1,1)) {
   diff.left <- diff(anchors)                  # add columns on left side
   if (diff.left <= 0) {             
     um.ncols.empty.left <- 0
@@ -86,8 +85,8 @@ bind_matrices_horizontally <- function(um, lm, anchors=c(1,1)){
     um.ncols.empty.left <- abs(diff.left)
     lm.ncols.empty.left <- 0
   }
-  um <- add_empty_cols(um, left=um.ncols.empty.left)
-  lm <- add_empty_cols(lm, left=lm.ncols.empty.left)
+  um <- add_empty_cols(um, left = um.ncols.empty.left)
+  lm <- add_empty_cols(lm, left = lm.ncols.empty.left)
   
   diff.right <- diff(c(ncol(um), ncol(lm)))   # add columns on right side
   if (diff.right <= 0) {
@@ -97,8 +96,8 @@ bind_matrices_horizontally <- function(um, lm, anchors=c(1,1)){
     um.ncols.empty.right <- abs(diff.right)
     lm.ncols.empty.right <- 0
   }
-  um <- add_empty_cols(um, right=um.ncols.empty.right)
-  lm <- add_empty_cols(lm, right=lm.ncols.empty.right)
+  um <- add_empty_cols(um, right = um.ncols.empty.right)
+  lm <- add_empty_cols(lm, right = lm.ncols.empty.right)
   
   rbind(um, lm)
 }
@@ -106,7 +105,8 @@ bind_matrices_horizontally <- function(um, lm, anchors=c(1,1)){
 
 
 # break at any point possible
-break_output <- function(mat, ncolkeep=14, keeprows=TRUE){
+break_output <- function(mat, ncolkeep = 14, keeprows=TRUE) 
+{
    availchar <- options()$width          # get console size (problematic update)
    #print(availchar)
    #if (availchar < ncolkeep)             # set FALSE to avoid endless recursion
@@ -115,32 +115,73 @@ break_output <- function(mat, ncolkeep=14, keeprows=TRUE){
      mat.tmp <- mat[ , 1:(availchar - 1)]
      out.tmp <- collapse_matrix(mat.tmp, collapse = "")  # collapse rows
      matrix_to_console(out.tmp)                          # print first part to console
-     cat("\n")           # empty line after print out to seperate prints
+     cat("\n")           # empty line after print out to separate                              prints
     # if (keeprows) {     # rownames after each pagebreak?
    #    mat.residual <- mat[ , c(1:(ncolkeep), availchar:ncol(mat))] 
     # } else {
-       mat.residual <- mat[ , c(availchar:ncol(mat)), drop=FALSE]
+       mat.residual <- mat[ , c(availchar:ncol(mat)), drop = FALSE]
      #}
      Recall(mat.residual)     # recursive output call            
    } else {
-     out <- collapse_matrix(mat, collapse="")   # collapse rows
+     out <- collapse_matrix(mat, collapse = "")   # collapse rows
      matrix_to_console(out)                     # print to console
    }
 }
    
-trim_string <- function(vec, trim=NA){
+trim_string <- function(vec, trim=NA) {
   if (!is.na(trim))
     vec <- substr(vec, 1, trim)
   vec
 }
 
-make_sep_mat_atomic <- function(sep, nr){
+make_sep_mat_atomic <- function(sep, nr) {
   sep.atomic <- strsplit(sep, "")[[1]]
   matrix(sep.atomic, nrow = nr, 
-                     ncol=nchar(sep), byrow=TRUE)
+                     ncol = nchar(sep), byrow = TRUE)
 }
 
 
+
+#' Colorize matrix cell rows using crayon colors
+#' 
+#' Atomic matrices can be wrapped into crayon color codes without 
+#' destroying the structure or alignment. Used to indicate 
+#' preferred poles.
+#' 
+#' @param m A matrix.
+#' @param colors crayon colors as a string. One of 
+#' black, red, green, yellow, blue, magenta, cyan, white,
+#' silver.
+#' @export
+#' @keywords internal
+#' @examples 
+#' m <- as.matrix(mtcars)
+#' colorize_matrix_rows(m, "red")
+#' 
+colorize_matrix_rows <- function(m, colors = "white", na.val = "white") 
+{
+  if (!crayon::has_color())
+    return(m)
+
+  nr <- nrow(m)
+  if (length(colors) == 1)
+    colors <- rep(colors, nr)
+  if (length(colors) != nr)
+    stop("Length of colors must match number of matrix rows", call. = FALSE)
+  
+  # colorize by row
+  colors[is.na(colors)] <- na.val
+  cc <- colors %in% c("black", "red", "green", "yellow", "blue",  "magenta", "cyan", "white", "silver")
+  if (!all(cc))
+    stop("Only crayon colors are allowed", call. = FALSE)
+  
+  ii <- seq_len(nr)
+  for (i in ii) {  
+    color_fun <- match.fun(colors[i])
+    m[i, ] <- color_fun(m[i, ])
+  }
+  m
+}
 
 
 df_out <- function(df,                # data frame
@@ -151,8 +192,8 @@ df_out <- function(df,                # data frame
                    just.rows="r",     # justification of row names
                    just.main="l",     # justification of body
                    max.char.rows=200, # max no of chars of row names to be printed
-                   sep=" ",           # seperator symbol between columns
-                   sep2="   ",        # seperator between row names and first column
+                   sep=" ",           # separator symbol between columns
+                   sep2="   ",        # separator between row names and first column
                    equal=FALSE,       # equal width for columns (max column width)
                    prefix="",         # optional prefix before printed column name 
                                       # (e.g. "+---"). characters
@@ -171,7 +212,7 @@ df_out <- function(df,                # data frame
     cut <- recycle(cut, 2)
   if (length(id) == 1)
     id <- recycle(id, 2)    
-  if (!identical(left, NA) & !identical(right, NA)){
+  if (!identical(left, NA) & !identical(right, NA)) {
     if (length(left) != length(right))
       stop("left and right must have the same length")
     if (length(left) != nrow(df) | length(right) != nrow(df))
@@ -199,55 +240,55 @@ df_out <- function(df,                # data frame
   # idside    side at which id is attached (1=start, 2=end)
   # trim      number of chars to trim strings to
   # just      justification of text (l, c, r)
-  make_mat_leftright <- function(vec, id=TRUE, idside=1, trim=NA, just="r"){
+  make_mat_leftright <- function(vec, id = TRUE, idside = 1, trim = NA, just = "r"){
     if (!is.na(trim))               # trim rownames
       left <- substr(vec, 1, trim)
-    if (id){                        # add id number to each row
-      ids <- paste("(", seq_along(vec), ")", sep="")
+    if (id) {                        # add id number to each row
+      ids <- paste("(", seq_along(vec), ")", sep = "")
       if (idside == 1)              # ids at start of string (for right side constructs)
         vec <- paste(ids, vec)
       else  vec <- paste(vec, ids)  # ids at end of string (for left side constructs)
     }
-    vec <- format(vec, justify=just)   # justify rownames
+    vec <- format(vec, justify = just)   # justify rownames
     as.matrix(vec)
   }
   
   # make left and right matrices
-  mat.left <- matrix("", nrow=nrow(df), ncol=0)     # default void matrix to start from
-  mat.right <- matrix("", nrow=nrow(df), ncol=0)    # default void matrix to start from
+  mat.left <- matrix("", nrow = nrow(df), ncol = 0)     # default void matrix to start from
+  mat.right <- matrix("", nrow = nrow(df), ncol = 0)    # default void matrix to start from
 
   if (!identical(left, NA))                                 # trimming occures in all cases if prompted
-    left <- trim_string(left, trim=trim[1])
+    left <- trim_string(left, trim = trim[1])
   if (!identical(right, NA))                          
-    right <- trim_string(right, trim=trim[1])  
-  leftright <- paste(left, right, sep=" - ")        # join left and right strings
+    right <- trim_string(right, trim = trim[1])  
+  leftright <- paste(left, right, sep = " - ")        # join left and right strings
 
   # decision where and how to put left and right vectors
   if (showopt == 1) {              # #1 left to left, right to right
     if (!identical(left, NA))
-      mat.left <- make_mat_leftright(left, id=id[1], idside=2, just="r")
+      mat.left <- make_mat_leftright(left, id = id[1], idside = 2, just = "r")
     if (!identical(right, NA))
-      mat.right <- make_mat_leftright(right, id=id[1], idside=1, just="l")
+      mat.right <- make_mat_leftright(right, id = id[1], idside = 1, just = "l")
   } else if (showopt == 2) {       # #2 left and right on left side
-    if (!identical(left, NA) & !identical(right, NA)){
-      mat.left <- make_mat_leftright(leftright, id=id[1], idside=2, just="r") 
+    if (!identical(left, NA) & !identical(right, NA)) {
+      mat.left <- make_mat_leftright(leftright, id = id[1], idside = 2, just = "r") 
     } else if (identical(left, NA) & !identical(right, NA)) {
-      mat.left <- make_mat_leftright(right, id=id[1], idside=2, just="r")
+      mat.left <- make_mat_leftright(right, id = id[1], idside = 2, just = "r")
     } else if (!identical(left, NA) & identical(right, NA)) {
-      mat.left <- make_mat_leftright(left, id=id[1], idside=2, just="r")
+      mat.left <- make_mat_leftright(left, id = id[1], idside = 2, just = "r")
     }
   } else if (showopt == 3) {       # #3 left and right on right side
     if (!identical(left, NA) & !identical(right, NA)) {
-      mat.right <- make_mat_leftright(leftright, id=id[1], idside=1, just="l")
+      mat.right <- make_mat_leftright(leftright, id = id[1], idside = 1, just = "l")
     } else if (identical(left, NA) & !identical(right, NA)) {
-      mat.right <- make_mat_leftright(right, id=id[1], idside=1, just="l")
+      mat.right <- make_mat_leftright(right, id = id[1], idside = 1, just = "l")
     } else if (!identical(left, NA) & identical(right, NA)) {
-      mat.right <- make_mat_leftright(left, id=id[1], idside=1, just="l")
+      mat.right <- make_mat_leftright(left, id = id[1], idside = 1, just = "l")
     }      
   }  # #0 left and right unused, mat.left and mat.right remain void
 
   mat.m <- make_mat_main(df)
-  mat.m.atomic <- matrix_to_single_char_matrix(mat.m, collapse=sep)
+  mat.m.atomic <- matrix_to_single_char_matrix(mat.m, collapse = sep)
 
   mat.left.atomic <- matrix_to_single_char_matrix(mat.left)
   mat.right.atomic <- matrix_to_single_char_matrix(mat.right)
@@ -277,32 +318,32 @@ df_out <- function(df,                # data frame
     names.columns <- substr(names.columns, 1, trim[2])
 
   ### hat = FALSE   (upper matrix u in descending form)
-  if (!hatform){
+  if (!hatform) {
     if (id[2]) {                                    # add id number to each col
-       ids <- paste(seq_along(names.columns), "-", sep=" ")
+       ids <- paste(seq_along(names.columns), "-", sep = " ")
        names.columns <- paste(ids, names.columns)
     }
 
-    names.columns <- paste(prefix, names.columns, sep="") # add prefix (default "")
+    names.columns <- paste(prefix, names.columns, sep = "") # add prefix (default "")
     ncol.mat.columns <- max(columns.start + 
                             nchar(names.columns) - 1)     # min no columns mat.u
     nrow.mat.columns <- length(names.columns) + 1
-    mat.u.atomic <- matrix(" ", nrow=nrow.mat.columns,    # empty matrix
-                           ncol=ncol.mat.columns)              
+    mat.u.atomic <- matrix(" ", nrow = nrow.mat.columns,    # empty matrix
+                           ncol = ncol.mat.columns)              
 
     # fill matrix upper
     names.atomic.list <- strsplit(names.columns, "")
     lengths.colnames <- nchar(names.columns)
-    for (j in seq_along(columns.start)){  # vertical lines ("|") at column starts
+    for (j in seq_along(columns.start)) {  # vertical lines ("|") at column starts
       mat.u.atomic[(j + 1):nrow(mat.u.atomic), columns.start[j]] <- "|"
       mat.u.atomic[j, columns.start[j]:(columns.start[j] + 
-                   lengths.colnames[j] -1)] <- names.atomic.list[[j]]
+                   lengths.colnames[j] - 1)] <- names.atomic.list[[j]]
     }
     extra.cols.left <- 0                              # to suit results of hat=TRUE part
   }
 
   ### hat = TRUE  (upper matrix u in hat form)
-  if (hatform){
+  if (hatform) {
     ncol <- length(names.columns)                     # no of columns
     midcol <- ceiling((ncol + 1) / 2)                 # determine middle column
     index.cols.left <- 1:(midcol - 1)                 # index of left columns
@@ -313,13 +354,13 @@ df_out <- function(df,                # data frame
     if (id[2]) {                                      # add id number to each col
       ids.left <- seq_along(names.columns)[index.cols.left]
       ids.right <- seq_along(names.columns)[index.cols.right]
-      colnames.left <- paste(colnames.left, ids.left, sep=" - ")
-      colnames.right <- paste(ids.right, colnames.right, sep=" - ")
+      colnames.left <- paste(colnames.left, ids.left, sep = " - ")
+      colnames.right <- paste(ids.right, colnames.right, sep = " - ")
     }  
     
     # add prefix to both sides (default "")
-    colnames.left <- paste(colnames.left, strReverse(prefix), sep="")  # left side has revesred prefix 
-    colnames.right <- paste(prefix, colnames.right, sep="")
+    colnames.left <- paste(colnames.left, strReverse(prefix), sep = "")  # left side has revesred prefix 
+    colnames.right <- paste(prefix, colnames.right, sep = "")
     colnames.leftright <- c(colnames.left, colnames.right)
     lengths.colnames <- nchar(colnames.leftright)
   
@@ -333,8 +374,8 @@ df_out <- function(df,                # data frame
     }
     ncol.mat.upper <- extra.cols.left + maxpos                                    # ncol of upper matrix
     nrow.mat.upper <- max(c(length(colnames.left), length(colnames.right))) + 1   # nrow of upper matrix
-    mat.u.atomic <- matrix(" ", nrow=nrow.mat.upper,    # empty upper matrix to get filled
-                                ncol=ncol.mat.upper)
+    mat.u.atomic <- matrix(" ", nrow = nrow.mat.upper,    # empty upper matrix to get filled
+                                ncol = ncol.mat.upper)
                                   
     names.atomic.list.left <- strsplit(colnames.left, "")
     names.atomic.list.right <- strsplit(colnames.right, "")
@@ -346,7 +387,7 @@ df_out <- function(df,                # data frame
     nc <- length(columns.start)
     columns.start.offsetted <- extra.cols.left + columns.start
     for (j in seq_along(columns.start)) {  # vertical lines ("|") at column starts
-      if (j < ceiling((nc + 1)/ 2)) {
+      if (j < ceiling((nc + 1) / 2)) {
         mat.u.atomic[(bottom.row - j + 1):bottom.row, 
                       columns.start.offsetted[j]] <- "|"
         mat.u.atomic[(bottom.row - j), 
@@ -363,8 +404,16 @@ df_out <- function(df,                # data frame
     }   # TODO: right side one row too much, maybe erase
   }
 
+  # colorize constructs by pole preference 
+  # TODO: Extract pole preferences here
+  # rows <- nrow(mat.left.atomic)
+  # colors_ <- sample(c("red", "green", "yellow", "silver", "white"), rows, T)
+  mat.left.atomic <- colorize_matrix_rows(mat.left.atomic, "white")
+  mat.right.atomic <- colorize_matrix_rows(mat.right.atomic, "white")
+  
+  # browser()
   # same part for both types
-  mat.sep2.atomic <- make_sep_mat_atomic(sep2, nr=nrow(df))     # matrix to separate left and main, or main and right
+  mat.sep2.atomic <- make_sep_mat_atomic(sep2, nr = nrow(df))     # matrix to separate left and main, or main and right
   mat.lm.atomic <- cbind( mat.left.atomic, mat.sep2.atomic, mat.m.atomic, # lower matrix lm
                               mat.sep2.atomic, mat.right.atomic)
                                                     
@@ -372,7 +421,7 @@ df_out <- function(df,                # data frame
   anchor.um <- extra.cols.left + 1
   anchor.lm <- ncol(mat.left.atomic) + ncol(mat.sep2.atomic) + 1
   mat.out.atomic <- bind_matrices_horizontally(mat.u.atomic, mat.lm.atomic,
-                                               anchors=c(anchor.um, anchor.lm))
+                                               anchors = c(anchor.um, anchor.lm))
                                                                                      
   # cut output at sides if prompted
   diff.left <- diff(c(anchor.um, anchor.lm))
@@ -384,17 +433,17 @@ df_out <- function(df,                # data frame
   start.main.at <- lm.empty.cols.left + ncol(cbind(mat.left.atomic, mat.sep2.atomic))
   end.main.at <- start.main.at + ncol(mat.m.atomic)
   
-  if (!is.na(cut[1]) | !is.na(cut[2])){   
-    if (is.na(cut[1])){
+  if (!is.na(cut[1]) | !is.na(cut[2])) {   
+    if (is.na(cut[1])) {
       end.left <- 1        
     } else {
-      end.left <- trim_val(start.main.at - cut[1], minmax=c(1, 200))        
+      end.left <- trim_val(start.main.at - cut[1], minmax = c(1, 200))        
     }
-    if (is.na(cut[2])){
+    if (is.na(cut[2])) {
       end.right <- ncol(mat.out.atomic)        
     } else {
       end.right <- trim_val(end.main.at  + cut[2],
-                            minmax=c(1, ncol(mat.out.atomic)))        
+                            minmax = c(1, ncol(mat.out.atomic)))        
     }
     mat.out.atomic <- mat.out.atomic[ , end.left:end.right]           
   }
@@ -409,9 +458,9 @@ df_out <- function(df,                # data frame
 
 
 
+# Show method -------------------------------------------------
 
 
-###############################################################################
 # repgrid show method
 
 # @usage \S4method{show}{repgrid}(object)
@@ -432,7 +481,6 @@ df_out <- function(df,                # data frame
 # @param object a \code{repgrid} object
 # @docType methods
 # @usage \S4method{show}{repgrid}(object)
-# @author            Mark Heckmann
 # @include repgrid.r
 #
 
@@ -461,13 +509,13 @@ setMethod("show", "repgrid", function(object){
   }
   
   # make data frame for left and right constructs
-  constructs <- getConstructNames(x)
+  con <- constructs(x)
   
   # make data frame for data
   df.ratings <- as.data.frame(x@ratings[ , ,1, drop=FALSE])     # extract scores
-  colnames(df.ratings) <- getElementNames(x)                    # name columns
-  left <- constructs[ ,1]
-  right <- constructs[, 2]
+  colnames(df.ratings) <- elements(x)                    # name columns
+  left <- con[ ,1]
+  right <- con[, 2]
   df_out(df.ratings, left, right, just.main="r", hatform=hatform, id=id, 
         trim=trim, cut=cut, equal=F, showopt=showopt)
   cat("\n")

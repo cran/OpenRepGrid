@@ -34,9 +34,6 @@ TODO: The element and construct IDs are not used yet. Thus,
 \examples{
 \dontrun{
 
-# using the pop-up selection menu
-rg <- importGridsuite()
-
 # supposing that the data file gridsuite.xml is in the current directory
 file <- "gridsuite.xml"
 rg <- importGridsuite(file)
@@ -48,8 +45,6 @@ rg <- importGridsuite(file, dir)
 # using a full path
 rg <- importGridsuite("/Users/markheckmann/data/gridsuite.xml")
 
-# load Gridsuite data from URL
-rg <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
 }
 
 
@@ -69,7 +64,4 @@ rg <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
                \code{\link{importGridsuite}},
                \code{\link{importTxt}},
                \code{\link{importExcel}}
-}
-\author{
-Mark Heckmann
 }

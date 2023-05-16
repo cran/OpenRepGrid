@@ -15,6 +15,9 @@
 #'                    \code{?dist}. 
 #' @param  p          The power of the Minkowski distance, in case \code{"minkowski"}
 #'                    is used as argument for \code{dmethod}.
+#' @param normalize   Use normalized distances. The distances are divided by the 
+#'                    highest possible value given the rating scale fo the grid, 
+#'                    so all distances are in the interval [0,1].
 #' @param trim        The number of characters a construct or element is trimmed to (default is
 #'                    \code{20}). If \code{NA} no trimming occurs. Trimming
 #'                    simply saves space when displaying correlation of constructs
@@ -25,36 +28,36 @@
 #' @param ...         Additional parameters to be passed to function \code{dist}.
 #'                    Type \code{dist} for further information. 
 #' @return            \code{matrix} object.
-#'
-#' @author            Mark Heckmann
 #' @export
 #' @examples \dontrun{
 #'
 #'    # between constructs
-#'    distance(bell2010, along=1)
+#'    distance(bell2010, along = 1)
+#'    distance(bell2010, along = 1, normalize = TRUE)
+#'    
 #'    # between elements
-#'    distance(bell2010, along=2)
+#'    distance(bell2010, along = 2)
 #'  
 #'    # several distance methods
-#'    distance(bell2010, dm="man")         # manhattan distance
-#'    distance(bell2010, dm="mink", p=3)   # minkowski metric to the power of 3
+#'    distance(bell2010, dm = "man")           # manhattan distance
+#'    distance(bell2010, dm = "mink", p = 3)   # minkowski metric to the power of 3
 #'
 #'    # to save the results without printing to the console
-#'    d <- distance(bell2010, trim=7)
+#'    d <- distance(bell2010, trim = 7)
 #'    d
 #'    
 #'    # some more options when printing the distance matrix
-#'    print(d, digits=5)
-#'    print(d, col.index=FALSE)
-#'    print(d, upper=FALSE)
+#'    print(d, digits = 5)
+#'    print(d, col.index = FALSE)
+#'    print(d, upper = FALSE)
 #'    
 #'    # accessing entries from the matrix
 #'    d[1,3]
 #'
 #' }
 #'
-distance <- function(x, along=1, dmethod="euclidean", 
-                     p=2, trim=20, index=TRUE, ...)
+distance <- function(x, along = 1, dmethod = "euclidean", 
+                     p = 2, normalize = FALSE, trim = 20, index = TRUE, ...)
 {  
   dmethods <- c("euclidean", "maximum", "manhattan",    # possible distance methods
                 "canberra", "binary", "minkowski")
@@ -67,11 +70,46 @@ distance <- function(x, along=1, dmethod="euclidean",
     r <- t(r)
   d <- dist(r, method = dmethod, p = p, ...)
   d <- as.matrix(d) 
-  d <- addNamesToMatrix2(x, d, index=index, trim=trim, along=along)  
+  d <- addNamesToMatrix2(x, d, index = index, trim = trim, along = along)  
   class(d) <-  c("distance", "matrix")
-  attr(d, "arguments") <- list(along=along, dmethod=dmethod, p=p, 
-                               notes=NULL, cutoff=NULL)
+  attr(d, "arguments") <- list(along = along, dmethod = dmethod, p = p, 
+                               notes = NULL, cutoff = NULL,
+                               normalize = normalize)
+  
+  # normalize distances
+  if (normalize) {
+    mx <- dist_minmax(x, along = along, dmethod = dmethod, p = p, max.only = TRUE)
+    d <- d / mx
+  }
+  
   return(d)
+}
+
+
+#' Calculate minimal and maximal possible distance
+#' 
+#' While the minimal distance will usually be zero,
+#' the maximal distance can be used to normalize arbitrary distances.
+#' @keywords internal
+#' 
+dist_minmax <- function(x, along = 1, dmethod = "euclidean", p = 2, max.only = FALSE) 
+{
+  R <- ratings(x)
+  # constructs = 1, elements = 2
+  if (along == 2) {
+    R <- t(R)
+  } 
+  r3 <- r2 <- r1 <- R[1, , drop = FALSE] # make it work with single constructs or element
+  sc <- getScale(x)
+  r1[ , ] <- sc["min"]
+  r2[ , ] <- sc["min"]
+  r3[ , ] <- sc["max"]
+  r <- rbind(r1, r2, r3)
+  d <- dist(r, method = dmethod, p = p)
+  minmax <- range(as.vector(d))
+  if (max.only)
+    return(minmax[2])
+  minmax
 }
 
 
@@ -95,18 +133,18 @@ distance <- function(x, along=1, dmethod="euclidean",
 #' @method            print distance
 #' @keywords          internal
 #'
-print.distance <- function(x, digits=2, col.index=TRUE,
-                           upper=TRUE, diag=FALSE, cutoffs=NA, ...)
+print.distance <- function(x, digits = 2, col.index = TRUE,
+                           upper = TRUE, diag = FALSE, cutoffs = NA, ...)
 {
   diag <- !diag                   # convert as used in upper.tri
   args <- attr(x, "arguments")
   d <- x
   class(d) <- "matrix" 
   d <- round(d, digits)     
-  e <- format(d, nsmall=digits)   # convert to characters for printing
+  e <- format(d, nsmall = digits)   # convert to characters for printing
   
   ## console output ##  
-  blank <- paste(rep(" ",  max(nchar(as.vector(e)))), collapse="", sep="")
+  blank <- paste(rep(" ",  max(nchar(as.vector(e)))), collapse = "", sep = "")
   
   # remove values above or below explicit cutoff
   if (!is.na(cutoffs[1])) { 
@@ -115,7 +153,7 @@ print.distance <- function(x, digits=2, col.index=TRUE,
   }
   
   if (upper)
-    e[lower.tri(e, diag=diag)] <- blank
+    e[lower.tri(e, diag = diag)] <- blank
   # make index column for neater colnames
   if (col.index)                                   
     e <- addIndexColumnToMatrix(e) else
@@ -130,9 +168,10 @@ print.distance <- function(x, digits=2, col.index=TRUE,
     cat("\nDistances between elements") 
     cat("\n##########################")
   }
-  cat("\n\nDistance method: ", args$dmethod, "\n")
+  cat("\n\nDistance method: ", args$dmethod)
   if (args$dmethod == "minkowski")
-    cat("power p:", args$p, "\n")
+    cat("\nPower p:", args$p)
+  cat("\nNormalized:", args$normalize)
   cat("\n")
   print(e) 
   if (!is.null(args$notes))
@@ -160,7 +199,7 @@ slaterStandardization <- function(x)
   D <- sweep(x, 1, apply(x, 1, mean))     # row-center data
   S <- sum(diag(t(D) %*% D))
   U <- (2 * S/(m - 1))^0.5
-  E/U                                     # devide by expected distance unit
+  E/U                                     # divide by expected distance unit
 }
 
 
@@ -195,7 +234,7 @@ slaterStandardization <- function(x)
 #' \deqn{U = (2S/(m-1))^{1/2}}{U = (2S/(m-1))^.5} 
 #' where \eqn{m}{m} denotes the number of elements of the grid.
 #' The standardized Slater distances is the matrix of Euclidean distances
-#' \eqn{E}{E} devided by the expected distance \eqn{U}{U}. 
+#' \eqn{E}{E} divided by the expected distance \eqn{U}{U}. 
 #' \deqn{E/U}{E/U}
 #'
 #' 
@@ -217,8 +256,6 @@ slaterStandardization <- function(x)
 #'
 #'                    Slater, P. (1977). \emph{The measurement of intrapersonal 
 #'                    space by Grid technique.} Vol. II. London: Wiley.
-#'
-#' @author            Mark Heckmann
 #' @export
 #' @seealso \code{\link{distanceHartmann}}
 #' @examples 
@@ -399,7 +436,7 @@ getDistributionParameters <- function(x, probs=c(.01, .025, .05, .1, .9, .95, .9
 #' a big number of quasis is used in the simulation. \cr
 #' 
 #' It is also possible to return the quantiles of the sample distribution and
-#' only the element distances consideres 'significant' according to the
+#' only the element distances considered 'significant' according to the
 #' quantiles defined.
 #'
 #'
@@ -409,15 +446,15 @@ getDistributionParameters <- function(x, probs=c(.01, .025, .05, .1, .9, .95, .9
 #' \deqn{D = -1 (\frac{D_{slater} - M_c}{sd_c})}{D = -1 (D_slater - M_c / sd_c)}
 #' Where \eqn{D_{slater}}{D_slater} denotes the Slater distances of the grid,
 #' \eqn{M_c}{M_c} the sample distribution's mean value and 
-#' \eqn{sd_c}{sd_c} the sample distributions's standard deviation.
+#' \eqn{sd_c}{sd_c} the sample distribution's standard deviation.
 #'
 #' @title 'Hartmann distance' (standardized Slater distances).
 #' @param x           \code{repgrid} object.
 #' @param method      The method used for distance calculation, on of 
 #'                    \code{"paper", "simulate", "new"}. \code{"paper"} uses the 
-#'                    parameters as given in Hartmann (1992) for caclulation.
+#'                    parameters as given in Hartmann (1992) for calculation.
 #'                    \code{"simulate"} (default) simulates a Slater distribution
-#'                    for the caclulation. In a future version the time consuming
+#'                    for the calculation. In a future version the time consuming
 #'                    simulation will be replaced by more accurate parameters for
 #'                    Hartmann distances than used in Hartmann (1992).    
 #' @param reps        Number of random grids to generate sample distribution for 
@@ -430,7 +467,7 @@ getDistributionParameters <- function(x, probs=c(.01, .025, .05, .1, .9, .95, .9
 #'                    (default is \code{TRUE}) (for \code{method="simulate"}).
 #'                    May be useful when the distribution is estimated on the basis
 #'                    of many quasis.
-#' @param distributions Wether to additionally return the values of the simulated
+#' @param distributions Whether to additionally return the values of the simulated
 #'                    distributions (Slater etc.) The default is \code{FALSE}
 #'                    as it will quickly boost the object size.
 #' @return            A matrix containing Hartmann distances. \cr
@@ -438,7 +475,7 @@ getDistributionParameters <- function(x, probs=c(.01, .025, .05, .1, .9, .95, .9
 #'                    \item{\code{"arguments"}}{A list of several parameters 
 #'                           including \code{mean} and \code{sd} of Slater distribution.}
 #'                    \item{\code{"quantiles"}}{Quantiles for Slater and Hartmann 
-#'                          distance distribition.}
+#'                          distance distribution.}
 #'                    \item{\code{"distributions"}}{List with values of the 
 #'                          simulated distributions.}
 #'                                    
@@ -447,7 +484,6 @@ getDistributionParameters <- function(x, probs=c(.01, .025, .05, .1, .9, .95, .9
 #'                    Carlo study. \emph{International Journal of Personal 
 #'                    Construct Psychology, 5}(1), 41-56.
 #' @export
-#' @author            Mark Heckmann
 #' @seealso \code{\link{distanceSlater}}
 #' @examples \dontrun{
 #'
@@ -561,7 +597,7 @@ distanceHartmann <- function(x, method="paper", reps=10000,
 #' 
 #' @param x           Object of class hdistance. 
 #' @inheritParams      print.distance
-#' @param p           Quantiles corresponding to probablities are used as cutoffs. 
+#' @param p           Quantiles corresponding to probabilities are used as cutoffs. 
 #'                    Currently only works for Hartmann distances. If used 
 #'                    \code{cutoffs} is overwritten.
 #' @param ...         Not evaluated.                  
@@ -627,10 +663,10 @@ print.hdistance <- function(x, digits=2, col.index=TRUE,
 #' 
 #' The function \code{distanceNormalize} can also return
 #' the quantiles of the sample distribution and only the element distances
-#' consideres 'significant' according to the quantiles defined.
+#' considered 'significant' according to the quantiles defined.
 #' 
 #' @section Calculations:
-#' The 'power tranformed Hartmann distance' are calulated as
+#' The 'power transformed Hartmann distance' are calculated as
 #' follows: The simulated Hartmann distribution is added a constant as the
 #' Box-Cox transformation can only be applied to positive values. Then a range
 #' of values for lambda in the Box-Cox transformation (Box & Cox, 1964) are
@@ -657,7 +693,7 @@ print.hdistance <- function(x, digits=2, col.index=TRUE,
 #'                    \item{\code{"arguments"}}{A list of several parameters 
 #'                           including \code{mean} and \code{sd} of Slater distribution.}
 #'                    \item{\code{"quantiles"}}{Quantiles for Slater, Hartmann 
-#'                          and power transformed distance distribitions.}
+#'                          and power transformed distance distributions.}
 #'                    \item{\code{"distributions"}}{List with values of the 
 #'                          simulated distributions, if \code{distributions=TRUE}.}
 #'                                    
@@ -678,9 +714,7 @@ print.hdistance <- function(x, digits=2, col.index=TRUE,
 #'                    Slater, P. (1977). \emph{The measurement of intrapersonal space 
 #'                    by Grid technique}. London: Wiley.
 #'
-#'
 #' @export
-#' @author            Mark Heckmann
 #' @seealso           \code{\link{distanceHartmann}} and \code{\link{distanceSlater}}.
 #' @examples \dontrun{
 #'
@@ -738,7 +772,7 @@ distanceNormalized <- function(x, reps=1000, prob=NULL, progress=TRUE,
   }
   
   # make bc transformations for all Hartmann data
-  bc.dist <-  bc.transform(d$hartmann)    # transform simulated Hartmann distribition
+  bc.dist <-  bc.transform(d$hartmann)    # transform simulated Hartmann distribution
   bc.vals <- bc.transform(h)         # transform grid data
   bc.qs <- quantile(bc.dist, ps, na.rm=TRUE)
    

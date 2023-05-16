@@ -3,7 +3,6 @@
 \name{statsElements}
 \alias{statsElements}
 \alias{statsConstructs}
-\alias{statsConstructs}
 \title{Descriptive statistics for constructs and elements of a grid.}
 \usage{
 statsElements(x, index = TRUE, trim = 20)
@@ -72,9 +71,4 @@ Note that standard deviation and variance are estimated ones,
    d[1, "sd"]   # sd of ratings on first construct
 }
 
-}
-\author{
-Mark Heckmann
-
-Mark Heckmann
 }

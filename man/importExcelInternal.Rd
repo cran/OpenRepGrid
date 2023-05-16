@@ -2,10 +2,9 @@
 % Please edit documentation in R/import.r
 \name{importExcelInternal}
 \alias{importExcelInternal}
-\title{workhiorse function (parser) for importExcel.}
+\title{workhorse function (parser) for importExcel.}
 \usage{
-importExcelInternal(file, dir = NULL, sheetIndex = 1, min = NULL,
-  max = NULL)
+importExcelInternal(file, dir = NULL, sheetIndex = 1, min = NULL, max = NULL)
 }
 \arguments{
 \item{file}{A vector of filenames including the full path if file is not in current working 
@@ -23,9 +22,6 @@ for minimum rating value in grid.}
 for maximum rating value in grid.}
 }
 \description{
-workhiorse function (parser) for importExcel.
-}
-\author{
-Mark Heckmann
+workhorse function (parser) for importExcel.
 }
 \keyword{internal}

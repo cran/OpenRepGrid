@@ -4,8 +4,16 @@
 \alias{randomGrids}
 \title{Generate a list of random grids (quasis) of prompted size.}
 \usage{
-randomGrids(rep = 3, nc = 10, ne = 15, nwc = 8, nwe = 5,
-  range = c(1, 5), prob = NULL, options = 1)
+randomGrids(
+  rep = 3,
+  nc = 10,
+  ne = 15,
+  nwc = 8,
+  nwe = 5,
+  range = c(1, 5),
+  prob = NULL,
+  options = 1
+)
 }
 \arguments{
 \item{rep}{Number of grids to be produced (default is \code{3}).}
@@ -46,7 +54,4 @@ simple wrapper around \code{\link{randomGrid}}.
      x
 }
 
-}
-\author{
-Mark Heckmann
 }

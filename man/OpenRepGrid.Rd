@@ -6,6 +6,7 @@
 \alias{OpenRepGrid-package}
 \title{\pkg{OpenRepGrid}: an R package for the analysis of repertory grids.}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right; padding-left: 10px;' alt='logo' width='120'}}
 The \pkg{OpenRepGrid} package provides tools for the analysis of repertory grid data.
 The repertory grid is a method devised by George Alexander Kelly
 in his seminal work "The Psychology of Personal Constructs" published in 1955.
@@ -14,9 +15,9 @@ Psychology (PCP) in a broad range of fields. For an introduction into the
 technique see e.g. Fransella, Bell and Bannister (2003).
 }
 \note{
-To get started with \pkg{OpenRepGrid} visit the project's home under \url{www.openrepgrid.org}. 
-           On this site you will find tutorials, explanation about the theory, methods of analysis and 
-           the according R code.
+To get started with \pkg{OpenRepGrid} visit the project's home under
+           \href{https://openrepgrid.org}{openrepgrid.org}. On this site you will find tutorials, 
+           explanation about the theory, the analysis methods and the corresponding R code.
 
            To see the preferable citation of the \pkg{OpenRepGrid} package, type 
            \code{citation("OpenRepGrid")} into the R console.
@@ -34,16 +35,24 @@ Fransella, F., Bell, R. C., & Bannister, D. (2003). \emph{A Manual for Repertory
              Kelly, G. A. (1955). \emph{The psychology of personal constructs. Vol. I, II.} 
                  New York: Norton, (2nd printing: 1991, Routledge, London, New York).
 }
-\author{
-\pkg{OpenRepGrid} was initiated by Mark Heckmann. 
-           Current contributors are: Mark Heckmann, Alejandro García.
-           Researchers interested in developing the package are invited to join.
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/markheckmann/OpenRepGrid}
+}
 
-           The \pkg{OpenRepGrid} package development is hosted on github (\url{http://github.com/markheckmann/OpenRepGrid}).
-           The github site provides information and allows to file bug reports or feature requests.
+}
+\author{
+\pkg{OpenRepGrid} is maintained by Mark Heckmann. 
+           Other contributors: Alejandro García, Diego Vitali.
+           Researchers interested in \href{http://docu.openrepgrid.org/contribute.html}{contributing}
+           to the package are welcome.
+
+           The \pkg{OpenRepGrid} code is hosted on \href{https://github.com/markheckmann/OpenRepGrid}{GitHub}.
+           The GitHub site provides additional information and allows to file bug reports or feature requests.
            Bug reports can also be emailed to the package maintainer or issued on 
-           \url{http://www.openrepgrid.org} under section \emph{Suggestions/Issues}.
-           The package maintainer is Mark Heckmann  <heckmann(at)uni-bremen.de>.
+           \href{https://openrepgrid.org}{openrepgrid.org} under section \emph{Suggestions/Issues}.
+           The package maintainer is Mark Heckmann <heckmann(dot)mark(at)gmail(dot)com>.
 }
 \keyword{package}
 \keyword{repgrid}

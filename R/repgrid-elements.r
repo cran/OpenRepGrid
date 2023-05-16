@@ -1,6 +1,7 @@
-################################################################
+#----------------------------------------------#
 ### 				basic element operations				 ###
-################################################################
+#----------------------------------------------#
+
 # Function that start with e. operate on the elements only.
 # These functions serve for basic operations on elements.
 # In case a function needs to operate on elements and other
@@ -10,7 +11,7 @@
 # create new functions they will be needed.
 
 ### basic functions:
-# -------------------------
+# ------------------------- #
 # add elements
 # delete elements
 # rename elements (full and abbreviated names)
@@ -29,23 +30,26 @@ getElements <- function(x){
 }
 
 
-#' Retrieve element names of repgrid object. 
+#' Retrieve element names of repgrid object.
 #'
-#' Function for convenience, 
-#' so new users do not have to deal with object slots
-#' as they will typically not have knowledge about R object 
-#' structures (S3, S4).
+#' Function for convenience, so new users do not have to deal with object slots
+#' as they will typically not have knowledge about R object structures (S3, S4).
 #'
-#' @param x         \code{repgrid} object.
-#' @return vector   Vector containing the names of the elements.
-#'
+#' @param x \code{repgrid} object.
+#' @return vector Vector containing the names of the elements.
+#' @section Deprecated functions: \code{getElementNames()},
+#'   \code{getElementNames2()}, and \code{eNames()} have been deprecated.
+#'   Instead use \code{elements()}.
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
 #'
-getElementNames <- function(x){
+getElementNames <- function(x)
+{
 	if(!inherits(x, "repgrid")) 							# check if x is repgrid object
 		stop("Object x must be of class 'repgrid'.")	
+  
+  .Deprecated("elements")
+  
 	sapply(x@elements, function(x) x$name)
 }
 eNames <- getElementNames
@@ -57,16 +61,18 @@ eNames <- getElementNames
 # getElementNames(rg1)
 
 
+
+
 #' Retrieves the element names from a \code{repgrid}.
 #' 
-#' Different features like trimming, indexing and choices of seperators
+#' Different features like trimming, indexing and choices of separators
 #' allow to return the kind of format that is needed.
 #'
 #' @title Retrieve element names in needed format.
 #'
 #' @param x       \code{repgrid} object.
 #' @param trim    Number of characters to trim the construct names to
-#'                (default \code{NA}). \code{NA} will surpress trimming.
+#'                (default \code{NA}). \code{NA} will suppress trimming.
 #'                The length of \code{index} is not included in the 
 #'                trimming.
 #' @param index   Logical. Whether to add a index number before the construct
@@ -74,8 +80,6 @@ eNames <- getElementNames
 #' @param pre     String before index number (default \code{(}).
 #' @param post    String after index number (default \code{) }).
 #' @return        Vector with (trimmed) element names.
-#'
-#' @author        Mark Heckmann
 #' @export
 #' @keywords internal
 #' @examples \dontrun{
@@ -90,14 +94,15 @@ eNames <- getElementNames
 getElementNames2 <- function(x, trim=20, index=F, 
                              pre="(", post=") " ){
   if (!inherits(x, "repgrid")) 							
-   	 stop("Object x must be of class 'repgrid'")
-  enames <- getElementNames(x)
+    stop("Object x must be of class 'repgrid'")
+  
+  enames <- elements(x)
   
   # add numeric index in front of elements
   if (index)
     ind <- paste(pre, seq_along(enames), post, sep="") else
-    ind  <- ""
-
+      ind  <- ""
+  
   # trim names if prompted
   if (!is.na(trim)){                          
     enames <- substr(enames, 1, trim)
@@ -105,6 +110,68 @@ getElementNames2 <- function(x, trim=20, index=F,
   
   enames.new <- paste(ind, enames, sep="") 
   enames.new
+}
+
+
+
+
+#' Get or replace element names 
+#' 
+#' Allows to get and set element names. 
+#' Replaces the older functions \code{getElementNames}, \code{getElementNames2},
+#' and \code{eNames} which are deprecated.
+#' 
+#' @param  x A repgrid object.
+#' @rdname elements
+#' @export
+#' @examples 
+#' 
+#' # copy Boeker grid to x
+#' x <- boeker
+#' 
+#' ## get element names
+#' e <- elements(x)
+#' e
+#' 
+#' ## replace element names
+#' elements(x) <- rev(e)       # reverse all element names
+#' elements(x)[1] <- "Hannes"  # replace name of first element
+#' 
+#' # replace names of elements 1 and 3
+#' elements(x)[c(1,3)] <- c("element 1", "element 3")   
+#'  
+elements <- function(x)
+{
+  # check if x is a repgrid object
+  if (!inherits(x, "repgrid")) 
+    stop("Object x must be of class 'repgrid'.")
+  
+  # get name property from each element
+  sapply(x@elements, function(x) x$name)
+}
+
+
+#' @param position Index where to insert element.
+#' @param value Character vector of element names.
+#' @rdname elements
+#' @export
+#' 
+`elements<-` <- function(x, position, value) 
+{
+  # check if x is a repgrid object
+  if (!inherits(x, "repgrid")) 
+    stop("Object x must be of class 'repgrid'.")
+  
+  # get element names and replace one or more
+  e.names <- elements(x)
+  e.names[position] <- value
+  
+  # replace name propert of each element
+  for (i in seq_along(e.names)) {
+    x@elements[[i]]$name <- e.names[i]
+  }
+  
+  x
 }
 
 

@@ -4,14 +4,13 @@
 \alias{indexBias}
 \title{Calculate 'bias' of grid as defined by Slater (1977).}
 \usage{
-indexBias(x, min, max, digits = 2)
+indexBias(x, min = NULL, max = NULL, digits = 2)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
 
-\item{min}{Minimum grid scale value.}
-
-\item{max}{Maximum grid scale value.}
+\item{min, max}{Minimum and maximum grid scale values. Nor needed 
+if they are set for the grid.}
 
 \item{digits}{Numeric. Number of digits to round to (default is 
 \code{2}).}
@@ -20,11 +19,15 @@ indexBias(x, min, max, digits = 2)
 Numeric.
 }
 \description{
-"Bias records a tendency for reponses to accumulate at one end of the 
+"Bias records a tendency for responses to accumulate at one end of the 
 grading scale" (Slater, 1977, p.88).
 }
 \note{
 STATUS:    Working and checked against example in Slater, 1977, p. 87.
+}
+\examples{
+indexBias(boeker)
+
 }
 \references{
 Slater, P. (1977). \emph{The measurement of intrapersonal space 
@@ -32,7 +35,4 @@ Slater, P. (1977). \emph{The measurement of intrapersonal space
 }
 \seealso{
 \code{\link{indexVariability}}
-}
-\author{
-Mark Heckmann
 }

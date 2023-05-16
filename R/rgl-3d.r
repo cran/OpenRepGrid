@@ -5,14 +5,11 @@
 #' @param a.cex       cex for axis labels.
 #' @param a.col       axis color.
 #' @param a.radius      radius of spheres at the end points of the axes.
-#' @param labels      logical. wether to draw axis labels.
-#' @param spheres     logical. wether to draw axis spheres at the end points.  
+#' @param labels      logical. whether to draw axis labels.
+#' @param spheres     logical. whether to draw axis spheres at the end points.  
 #' @param ...         not evaluated.
-#'
-#' @author  Mark Heckmann
 #' @export
 #' @keywords internal
-#'
 rglDrawStandardAxes <- function(max.dim=1, lwd=1, a.cex=1.1, a.col="black",
                                 a.radius=.05, labels=TRUE, spheres=FALSE, ...){
   lines3d(c(0, max.dim), c(0,0), c(0,0), lwd=lwd, col=a.col)
@@ -29,8 +26,8 @@ rglDrawStandardAxes <- function(max.dim=1, lwd=1, a.cex=1.1, a.col="black",
     spheres3d(0, 0, max.dim, radius=a.radius, col=a.col)    
   }
 }
-# rgl.open()
-# rgl.points(rnorm(1000), rnorm(1000), rnorm(1000), color=heat.colors(1000))
+# open3d()
+# points3d(rnorm(1000), rnorm(1000), rnorm(1000), color=heat.colors(1000))
 # rglDrawStandardAxes(3)
 
 
@@ -39,8 +36,6 @@ rglDrawStandardAxes <- function(max.dim=1, lwd=1, a.cex=1.1, a.col="black",
 #' @param max.dim   soon
 #' @param lwd       soon
 #' @param col       soon
-#'
-#' @author  Mark Heckmann
 #' @export
 #' @keywords internal
 #'
@@ -80,8 +75,6 @@ rglDrawElementLabels <- function(coords, labels=FALSE, dim=1:3, e.radius=.1, e.c
 #' @param c.radius        radius of construct spheres.
 #' @param c.sphere.col    color of construct spheres.
 #' @param ...             not evaluated.
-#'
-#' @author  Mark Heckmann
 #' @export
 #' @keywords internal
 #'
@@ -100,8 +93,6 @@ rglDrawConstructPoints <- function(coords, dim=1:3, c.radius=.02, c.sphere.col=g
 #' @param c.cex       cex for construct text.
 #' @param c.text.col  color for construct text.
 #' @param ...         not evaluated.
-#'
-#' @author  Mark Heckmann
 #' @export
 #' @keywords internal
 #'
@@ -126,16 +117,14 @@ rglDrawConstructLabels <- function(coords, labels=FALSE, dim=1:3,
 #'                        \code{0 =} no lines, \code{1 =} lines from constructs to outer frame,
 #'                        \code{2 =} lines from the center to outer frame.
 #' @param lef             Construct lines extension factor.
-#' @param alpha.sphere    Numeric. alpha blending of the sourrounding sphere (default\code{".05"}).
-#' @param col.sphere      Color of sourrouding sphere (default\code{"black"}).
+#' @param alpha.sphere    Numeric. alpha blending of the surrounding sphere (default\code{".05"}).
+#' @param col.sphere      Color of surrounding sphere (default\code{"black"}).
 #' @param ext.sphere      Extension factor for sphere
-#' @param col.frame       Color of the sourrounding frame.
+#' @param col.frame       Color of the surrounding frame.
 #' @param zoom            Not yet used. Scaling factor for all vectors. Can be used to zoom
 #'                        the plot in and out (default \code{1}). 
 #' @param draw.xyz.axes   Draw standard XYZ axes.                     
 #' @param ...             Parameters to be passed on.  
-#'
-#' @author  Mark Heckmann
 #' @keywords internal
 #' @export
 #'
@@ -158,15 +147,15 @@ biplot3dBase2 <- function(x, dim=1:3, labels.e=TRUE, labels.c=TRUE, lines.c=1,
   par3d(params=list(
         windowRect=c(100,100,600,600)))           # enlarge and position 3d device
   view3d(theta = 0, phi = 0, zoom=.6)             # change 3d view angle
-  rgl.bg(color="white")                           # set background color
+  bg3d(color="white")                           # set background color
      
   # select spheres to draw and labels to show
   # select which elements to show
   if (identical(labels.e, TRUE)) 
-    labels.e <- getElementNames(x)  
+    labels.e <- elements(x)  
   if (identical(labels.c, TRUE)){
-    labels.l <- getConstructNames(x)$l
-    labels.r <- getConstructNames(x)$r
+    labels.l <- constructs(x)$leftpole
+    labels.r <- constructs(x)$rightpole
   } else {
     labels.r <- FALSE
     labels.l <- FALSE
@@ -314,7 +303,7 @@ biplot3dBase2 <- function(x, dim=1:3, labels.e=TRUE, labels.c=TRUE, lines.c=1,
 #' @param col.active    Columns (elements) that are no supplementary points, i.e. they are used
 #'                      in the SVD to find principal components. default is to use all elements.
 #' @param col.passive   Columns (elements) that are supplementary points, i.e. they are NOT used
-#'                      in the SVD but projecte into the component space afterwards. They do not 
+#'                      in the SVD but projected into the component space afterwards. They do not 
 #'                      determine the solution. Default is \code{NA}, i.e. no elements are set 
 #'                      supplementary.
 #'
@@ -326,8 +315,8 @@ biplot3dBase2 <- function(x, dim=1:3, labels.e=TRUE, labels.c=TRUE, lines.c=1,
 #' @param e.cex         Size of element labels.
 #' @param e.text.col    Color of element labels.
 #'
-#' @param alpha.sphere  Numeric. alpha blending of the sourrounding sphere (default\code{".05"}).
-#' @param col.sphere    Color of sourrouding sphere (default\code{"black"}).
+#' @param alpha.sphere  Numeric. alpha blending of the surrounding sphere (default\code{".05"}).
+#' @param col.sphere    Color of surrounding sphere (default\code{"black"}).
 #'
 #' @param unity         Scale elements and constructs coordinates to unit scale (maximum of 1)
 #'                      so they are printed more neatly (default \code{TRUE}).
@@ -338,10 +327,7 @@ biplot3dBase2 <- function(x, dim=1:3, labels.e=TRUE, labels.c=TRUE, lines.c=1,
 #' @param zoom          Not yet used. Scaling factor for all vectors. Can be used to zoom
 #'                      the plot in and out (default \code{1}).
 #' @param ...           Parameters to be passed on.
-#'
-#' @author  Mark Heckmann
 #' @export
-#'
 #' @seealso   Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
 #'            2D biplots:
 #'            \code{\link{biplot2d}},
@@ -469,7 +455,7 @@ biplotSlater3d <- function(x, center=1, g=1, h=1, ...){
 #' cases it may be of interest to explore the grid space from 
 #' a certain angle, e.g. to gain an optimal view onto the set 
 #' of elements under investigation (e.g. Raeithel, 1998).
-#' Note that the eigenstructure analysisis just a special case 
+#' Note that the eigenstructure analysis just a special case 
 #' of a biplot that can also be produced using the 
 #' \code{\link{biplot3d}} function with the arguments 
 #' \code{center=4, g=1, h=1}.
@@ -485,10 +471,7 @@ biplotSlater3d <- function(x, center=1, g=1, h=1, ...){
 #' @param h             Power of the singular value matrix assigned to the right singular 
 #'                      vectors, i.e. the elements.
 #' @param ...           Additional arguments to be passed to \code{\link{biplot3d}}.
-#'
-#' @author  Mark Heckmann
 #' @export
-#'
 #' @seealso   Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
 #'            2D biplots:
 #'            \code{\link{biplot2d}},
@@ -528,7 +511,7 @@ biplotEsa3d <- function(x, center=1, g=1, h=1, ...){
 #' to a position defined by \code{theta} and \code{phi} in Euler angles.
 #' Three default viewpoints are implemented rendering a view 
 #' so that two axes span a plane and the third axis is 
-#' poiting out of the screen.
+#' pointing out of the screen.
 #' 
 #' @param view    Numeric. Specifying one of three default views.
 #'                1 = XY, 2=XZ and 3=YZ-plane.
@@ -536,10 +519,7 @@ biplotEsa3d <- function(x, center=1, g=1, h=1, ...){
 #' @param phi     Numeric. Euler angle. Overrides view setting.
 #'
 #' return \code{NULL}.
-#'
-#' @author  Mark Heckmann
 #' @export
-#'
 #' @seealso   Interactive 3D biplots:
 #'            \code{\link{biplot3d}},      
 #'            \code{\link{biplotSlater3d}},
@@ -574,9 +554,9 @@ home <- function(view=1, theta=NULL, phi=NULL){
 
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 ###                              EXAMPLES                                   ###
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 # biplot3d(raeithel, labels.c=F)
 # 
@@ -602,10 +582,10 @@ home <- function(view=1, theta=NULL, phi=NULL){
 
 
 
-# mouseTrackballOrigin <- function(button = 1, dev = rgl.cur(), origin=c(0,0,0) ) {
+# mouseTrackballOrigin <- function(button = 1, dev = cur3d(), origin=c(0,0,0) ) {
 #    width <- height <- rotBase <- NULL
 #    userMatrix <- list()
-#    cur <- rgl.cur()
+#    cur <- cur3d()
 #    offset <- NULL
 #    scale <- NULL
 # 
@@ -629,16 +609,16 @@ home <- function(view=1, theta=NULL, phi=NULL){
 #        vp <- par3d("viewport")
 #        width <<- vp[3]
 #        height <<- vp[4]
-#        cur <<- rgl.cur()
+#        cur <<- cur3d()
 #        bbox <- par3d("bbox")
 #        center <- c(sum(bbox[1:2])/2, sum(bbox[3:4])/2, sum(bbox[5:6])/2)
 #        scale <<- par3d("scale")
 #        offset <<- (center - origin)*scale
 #        for (i in dev) {
-#            if (inherits(try(rgl.set(i, TRUE)), "try-error")) dev <<- dev[dev != i]
+#            if (inherits(try(set3d(i, TRUE)), "try-error")) dev <<- dev[dev != i]
 #            else userMatrix[[i]] <<- par3d("userMatrix")
 #        }
-#        rgl.set(cur, TRUE)
+#        set3d(cur, TRUE)
 #        rotBase <<- screenToVector(x, height - y)
 #    }
 # 
@@ -648,24 +628,25 @@ home <- function(view=1, theta=NULL, phi=NULL){
 #        axis <- xprod(rotBase, rotCurrent)
 #        mouseMatrix <- rotationMatrix(angle, axis[1], axis[2], axis[3])
 #        for (i in dev) {
-#            if (inherits(try(rgl.set(i, TRUE)), "try-error")) dev <<- dev[dev != i]
+#            if (inherits(try(set3d(i, TRUE)), "try-error")) dev <<- dev[dev != i]
 #            else par3d(userMatrix = t(translationMatrix(-offset[1], -offset[2], -offset[3])) %*% mouseMatrix  %*% t(translationMatrix(offset[1], offset[2], offset[3])) %*%userMatrix[[i]])
 #        }
-#        rgl.set(cur, TRUE)
+#        set3d(cur, TRUE)
 #    }
 # 
 #    for (i in dev) {
-#        rgl.set(i, TRUE)
+#        set3d(i, TRUE)
 #        rgl.setMouseCallbacks(button, begin = trackballBegin, update = trackballUpdate, end = NULL)
 #    }
-#    rgl.set(cur, TRUE)
+#    set3d(cur, TRUE)
 # }
 
 # additioally load functions from demo(). see email from Duncan Murdoch 25.04.2011
 # mouseTrackballOrigin()
 
 
-#########################################################################################
+#//////////////////////////////////////////////////////////////////////////////
+
 # TODO: rotations of the biplot
 # 
 # eulerxyz <- function(phi, theta, psi){

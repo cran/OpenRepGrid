@@ -13,14 +13,14 @@ biplotEsa2d(x, center = 4, g = 1, h = 1, ...)
 0= no centering, 1= row mean centering (construct), 
 2= column mean centering (elements), 3= double-centering (construct and element means),
 4= midpoint centering of rows (constructs).
-Eigenstructure analyis uses midpoint centering (\code{4}).}
+Eigenstructure analysis uses midpoint centering (\code{4}).}
 
 \item{g}{Power of the singular value matrix assigned to the left singular 
-vectors, i.e. the constructs. Eigenstructure analyis uses  
+vectors, i.e. the constructs. Eigenstructure analysis uses  
 \code{g=1}.}
 
 \item{h}{Power of the singular value matrix assigned to the right singular 
-vectors, i.e. the elements. Eigenstructure analyis uses  
+vectors, i.e. the elements. Eigenstructure analysis uses  
 \code{h=1}.}
 
 \item{...}{Additional parameters for be passed to \code{\link{biplot2d}}.}
@@ -36,7 +36,7 @@ To see all the parameters that can be changed see \code{\link{biplot2d}}.
 }
 \examples{
 \dontrun{
-   # See examples in \\code{\\link{biplot2d}} as the same arguments
+   # See examples in \code{\link{biplot2d}} as the same arguments
    # can used for this function.
 }
 
@@ -65,7 +65,4 @@ Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
            \code{\link{biplotSlater3d}};\cr
            Function to set view in 3D:
            \code{\link{home}}.
-}
-\author{
-Mark Heckmann
 }

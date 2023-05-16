@@ -4,11 +4,27 @@
 \alias{biplotSimple}
 \title{A graphically unsophisticated version of a biplot.}
 \usage{
-biplotSimple(x, dim = 1:2, center = 1, normalize = 0, g = 0, h = 1 -
-  g, unity = T, col.active = NA, col.passive = NA, scale.e = 0.9,
-  zoom = 1, e.point.col = "black", e.point.cex = 1,
-  e.label.col = "black", e.label.cex = 0.7, c.point.col = grey(0.6),
-  c.label.col = grey(0.6), c.label.cex = 0.6, ...)
+biplotSimple(
+  x,
+  dim = 1:2,
+  center = 1,
+  normalize = 0,
+  g = 0,
+  h = 1 - g,
+  unity = T,
+  col.active = NA,
+  col.passive = NA,
+  scale.e = 0.9,
+  zoom = 1,
+  e.point.col = "black",
+  e.point.cex = 1,
+  e.label.col = "black",
+  e.label.cex = 0.7,
+  c.point.col = grey(0.6),
+  c.label.col = grey(0.6),
+  c.label.cex = 0.6,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -39,7 +55,7 @@ so they are printed more neatly (default \code{TRUE}).}
 in the SVD to find principal components. default is to use all elements.}
 
 \item{col.passive}{Columns (elements) that are supplementary points, i.e. they are NOT used
-in the SVD but projecte into the component space afterwards. They do not 
+in the SVD but projected into the component space afterwards. They do not 
 determine the solution. Default is \code{NA}, i.e. no elements are set 
 supplementary.}
 
@@ -61,7 +77,7 @@ the plot in and out (default \code{1}).}
 
 \item{c.label.col}{Color of the construct labels (default is \code{grey(.6)}.}
 
-\item{c.label.cex}{Size of the costruct labels (default is \code{.6}.}
+\item{c.label.cex}{Size of the construct labels (default is \code{.6}.}
 
 \item{...}{Parameters to be passed on to \code{center()} and \code{normalize}.}
 }
@@ -107,7 +123,4 @@ Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
            \code{\link{biplotSlater3d}};\cr
            Function to set view in 3D:
            \code{\link{home}}.
-}
-\author{
-Mark Heckmann
 }

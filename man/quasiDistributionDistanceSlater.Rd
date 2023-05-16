@@ -5,8 +5,14 @@
 \title{Generate random grids and calculate 'Slater distances'
 for the elements.}
 \usage{
-quasiDistributionDistanceSlater(reps, nc, ne, range, prob = NULL,
-  progress = TRUE)
+quasiDistributionDistanceSlater(
+  reps,
+  nc,
+  ne,
+  range,
+  prob = NULL,
+  progress = TRUE
+)
 }
 \arguments{
 \item{nc}{Number of constructs (default 10).}
@@ -26,9 +32,8 @@ If \code{NULL} (default) the distribution is uniform.}
 A vector containing Slater distance values.
 }
 \description{
-All Slater distances
-are returned as a vector. The valiues can be used e.g. to 
-assess the distributions standard deviation.
+All Slater distances are returned as a vector. The values can be used e.g. to assess the
+distributions standard deviation.
 }
 \examples{
 \dontrun{
@@ -45,8 +50,5 @@ assess the distributions standard deviation.
 \code{\link{randomGrids}};  
          \code{\link{distanceSlater}}; 
          \code{\link{distanceHartmann}}.
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

@@ -4,13 +4,33 @@
 \alias{biplot3d}
 \title{Draw grid in rgl (3D device).}
 \usage{
-biplot3d(x, dim = 1:3, labels.e = TRUE, labels.c = TRUE, lines.c = TRUE,
-  lef = 1.3, center = 1, normalize = 0, g = 0, h = 1,
-  col.active = NA, col.passive = NA, c.sphere.col = grey(0.4),
-  c.cex = 0.6, c.text.col = grey(0.4), e.sphere.col = grey(0),
-  e.cex = 0.6, e.text.col = grey(0), alpha.sphere = 0.05,
-  col.sphere = "black", unity = FALSE, unity3d = FALSE, scale.e = 0.9,
-  zoom = 1, ...)
+biplot3d(
+  x,
+  dim = 1:3,
+  labels.e = TRUE,
+  labels.c = TRUE,
+  lines.c = TRUE,
+  lef = 1.3,
+  center = 1,
+  normalize = 0,
+  g = 0,
+  h = 1,
+  col.active = NA,
+  col.passive = NA,
+  c.sphere.col = grey(0.4),
+  c.cex = 0.6,
+  c.text.col = grey(0.4),
+  e.sphere.col = grey(0),
+  e.cex = 0.6,
+  e.text.col = grey(0),
+  alpha.sphere = 0.05,
+  col.sphere = "black",
+  unity = FALSE,
+  unity3d = FALSE,
+  scale.e = 0.9,
+  zoom = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -47,7 +67,7 @@ vectors, i.e. the elements.}
 in the SVD to find principal components. default is to use all elements.}
 
 \item{col.passive}{Columns (elements) that are supplementary points, i.e. they are NOT used
-in the SVD but projecte into the component space afterwards. They do not 
+in the SVD but projected into the component space afterwards. They do not 
 determine the solution. Default is \code{NA}, i.e. no elements are set 
 supplementary.}
 
@@ -63,9 +83,9 @@ supplementary.}
 
 \item{e.text.col}{Color of element labels.}
 
-\item{alpha.sphere}{Numeric. alpha blending of the sourrounding sphere (default\code{".05"}).}
+\item{alpha.sphere}{Numeric. alpha blending of the surrounding sphere (default\code{".05"}).}
 
-\item{col.sphere}{Color of sourrouding sphere (default\code{"black"}).}
+\item{col.sphere}{Color of surrounding sphere (default\code{"black"}).}
 
 \item{unity}{Scale elements and constructs coordinates to unit scale (maximum of 1)
 so they are printed more neatly (default \code{TRUE}).}
@@ -131,7 +151,4 @@ Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
            \code{\link{biplotSlater3d}};\cr
            Function to set view in 3D:
            \code{\link{home}}.
-}
-\author{
-Mark Heckmann
 }

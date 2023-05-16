@@ -9,8 +9,7 @@ importGridstat(file, dir = NULL, min = NULL, max = NULL)
 \arguments{
 \item{file}{Filename including path if file is not in current working 
 directory. File can also be a complete URL. The fileformat
-is \code{.dat}. If no file is supplied a selection pop up menu 
-is opened to select the files.}
+is \code{.dat}.}
 
 \item{dir}{Alternative way to supply the directory where the file is located 
 (default \code{NULL}).}
@@ -41,11 +40,11 @@ Note that the gridstat data format does not contain explicit
                not set explicitly when using the importing function.
                
                The function only reads data from the latest GridStat version.
-               The latest version allows the seperation of the left and right pole
-               by using on of the following symbols \code{/:-} (hyphene, colon and dash). Older versions may not
-               seperate the left and right pole. This will cause all labels to be assigned to 
+               The latest version allows the separation of the left and right pole
+               by using on of the following symbols \code{/:-} (hyphen, colon and dash). Older versions may not
+               separate                              the left and right pole. This will cause all labels to be assigned to 
                the left pole only when importing. You may fix this by simply entering
-               one of the construct seperator symbols into the GridStat file between each
+               one of the construct separator symbols into the GridStat file between each
                left and right construct pole.
 
                The third line of a GridStat file may contain a no labels statement (i.e. a
@@ -55,9 +54,6 @@ Note that the gridstat data format does not contain explicit
 }
 \examples{
 \dontrun{
-
-# using the pop-up selection menu
-rg <- importGridstat()
 
 # supposing that the data file gridstat.dat is in the current working directory
 file <- "gridstat.dat"
@@ -70,16 +66,13 @@ rg <- importGridstat(file, dir)
 # using a full path (example)
 rg <- importGridstat("/Users/markheckmann/data/gridstat.dat")
 
-# load gridstat data from URL
-rg <- importGridstat("http://www.openrepgrid.uni-bremen.de/data/gridstat.dat")
-
 # setting rating scale range
 rg <- importGridstat(file, dir, min=1, max=6)
 }
 
 }
 \references{
-Bell, R. C. (1998)  GRIDSTAT: A program for analysing the data of a 
+Bell, R. C. (1998)  GRIDSTAT: A program for analyzing the data of a 
                repertory grid. Melbourne: Author.
 }
 \seealso{
@@ -89,7 +82,4 @@ Bell, R. C. (1998)  GRIDSTAT: A program for analysing the data of a
                \code{\link{importGridsuite}},
                \code{\link{importTxt}},
                \code{\link{importExcel}}
-}
-\author{
-Mark Heckmann
 }

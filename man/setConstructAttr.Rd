@@ -4,8 +4,16 @@
 \alias{setConstructAttr}
 \title{Set the attributes of a construct}
 \usage{
-setConstructAttr(x, pos, l.name, r.name, l.preferred, r.preferred, l.emerged,
-  r.emerged)
+setConstructAttr(
+  x,
+  pos,
+  l.name,
+  r.name,
+  l.preferred,
+  r.preferred,
+  l.emerged,
+  r.emerged
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -41,7 +49,4 @@ Set the attributes of a construct i.e. name, abbreviation, status etc.
 }
 \seealso{
 \code{\link{setElementAttr}}
-}
-\author{
-Mark Heckmann
 }

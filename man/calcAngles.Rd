@@ -19,7 +19,7 @@ vector.   The angles of each row point with the origin as reference.
 }
 \description{
 The angles of the points given by the values in the first and second
-column of a matrix seen from the origin are calulated in degrees.
+column of a matrix seen from the origin are calculated in degrees.
 }
 \examples{
 \dontrun{
@@ -27,8 +27,5 @@ column of a matrix seen from the origin are calulated in degrees.
    calcAngles(matrix(rnorm(9), 3))
 }
 
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.r
 \name{stepChart}
 \alias{stepChart}
-\title{Density histogram withs steps instead of bars}
+\title{Density histogram with steps instead of bars}
 \usage{
 stepChart(vals, breaks = "Sturges", add = FALSE, ...)
 }
@@ -28,8 +28,5 @@ for the heights.
    stepChart(x, add=T, breaks=50, col="red")
 }
 
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

@@ -9,7 +9,7 @@ setMeta(x, type, id, name)
 \arguments{
 \item{x}{repgrid object}
 
-\item{type}{typemof grid in use (rating, ranked, implication)}
+\item{type}{type of grid in use (rating, ranked, implication)}
 
 \item{id}{id of the interview}
 
@@ -27,8 +27,5 @@ set meta data of a grid (e.g. id, name of interview partner)
    ####  TODO  ####
 }
 
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

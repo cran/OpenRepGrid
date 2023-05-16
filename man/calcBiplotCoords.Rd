@@ -4,8 +4,7 @@
 \alias{calcBiplotCoords}
 \title{Calculate coordinates for biplot.}
 \usage{
-calcBiplotCoords(x, g = 0, h = 1 - g, col.active = NA, col.passive = NA,
-  ...)
+calcBiplotCoords(x, g = 0, h = 1 - g, col.active = NA, col.passive = NA, ...)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -20,7 +19,7 @@ vectors, i.e. the elements.}
 in the SVD to find principal components. default is to use all elements.}
 
 \item{col.passive}{Columns (elements) that are supplementary points, i.e. they are NOT used
-in the SVD but projecte into the component space afterwards. They do not 
+in the SVD but projected into the component space afterwards. They do not 
 determine the solution. Default is \code{NA}, i.e. no elements are set 
 supplementary.}
 
@@ -31,8 +30,5 @@ a \code{list}.
 }
 \description{
 Calculate coordinates for biplot.
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

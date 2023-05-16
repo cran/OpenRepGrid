@@ -4,7 +4,7 @@
 ###   They are supposd to facilitate adding new functions for               ###
 ###   newcomers to R.                                                       ###
 ###   Most functions are documentetd in OpenRepGrid-internal                ###
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 
 #' Generate a random grid (quasis) of prompted size.
@@ -25,8 +25,6 @@
 #' @return \code{repgrid} object.
 #'
 #' @export
-#' @author    Mark Heckmann
-#'
 #' @examples \dontrun{
 #'
 #'      x <- randomGrid()
@@ -37,7 +35,8 @@
 #'      x
 #' }
 #'
-randomGrid <- function(nc=10, ne=15, nwc=8, nwe=5, range=c(1,5), prob=NULL, options=1){
+randomGrid <- function(nc=10, ne=15, nwc=8, nwe=5, range=c(1,5), prob=NULL, options=1)
+{
   if (options == 1){          # full constructs and element names
     elem <- randomSentences(ne, nwe)
     left <- randomSentences(nc, nwc)
@@ -78,8 +77,6 @@ randomGrid <- function(nc=10, ne=15, nwc=8, nwe=5, range=c(1,5), prob=NULL, opti
 #' @return          A list of \code{repgrid} objects.
 #'
 #' @export
-#' @author    Mark Heckmann
-#'
 #' @examples \dontrun{
 #'
 #'      x <- randomGrids()
@@ -102,9 +99,8 @@ randomGrids <- function(rep=3, nc=10, ne=15, nwc=8, nwe=5,
 #' Generate random grids and calculate 'Slater distances'
 #' for the elements. 
 #'
-#' All Slater distances
-#' are returned as a vector. The valiues can be used e.g. to 
-#' assess the distributions standard deviation.
+#' All Slater distances are returned as a vector. The values can be used e.g. to assess the
+#' distributions standard deviation.
 #'
 #' @param rep       Number of grids to be produced (default is \code{3}).
 #' @param nc        Number of constructs (default 10).
@@ -115,8 +111,6 @@ randomGrids <- function(rep=3, nc=10, ne=15, nwc=8, nwe=5,
 #' @param progress  Whether to show a progress bar.
 #'  
 #' @return          A vector containing Slater distance values.
-#'
-#' @author          Mark Heckmann
 #' @keywords        internal
 #' @export
 #' @seealso \code{\link{randomGrids}};  
@@ -154,7 +148,6 @@ quasiDistributionDistanceSlater <- function(rep, nc, ne, range, prob=NULL, progr
 #' @return            A list of \code{repgrid} objects with all possible permutations
 #'                    of the grid.
 #'
-#' @author            Mark Heckmann
 #' @export
 #' @examples \dontrun{
 #' 
@@ -188,8 +181,6 @@ permuteConstructs <- function(x, progress=TRUE){
 #' @param n       The number of permutations to produce.
 #' @return        A \code{repgrid} object if \code{n=1} or a list of 
 #'                \code{repgrid} objects if \code{n>1}.
-#'
-#' @author        Mark Heckmann
 #' @export      
 #' @keywords       internal
 #'

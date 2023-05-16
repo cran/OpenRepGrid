@@ -4,19 +4,36 @@
 \alias{bertin}
 \title{Make Bertin display of grid data.}
 \usage{
-bertin(x, colors = c("white", "black"), showvalues = TRUE, xlim = c(0.2,
-  0.8), ylim = c(0, 0.6), margins = c(0, 1, 1), cex.elements = 0.7,
-  cex.constructs = 0.7, cex.text = 0.6, col.text = NA, border = "white",
-  lheight = 0.75, id = c(T, T), cc = 0, cr = 0, cc.old = 0,
-  cr.old = 0, col.mark.fill = "#FCF5A4", print = TRUE, ...)
+bertin(
+  x,
+  colors = c("white", "black"),
+  showvalues = TRUE,
+  xlim = c(0.2, 0.8),
+  ylim = c(0, 0.6),
+  margins = c(0, 1, 1),
+  cex.elements = 0.7,
+  cex.constructs = 0.7,
+  cex.text = 0.6,
+  col.text = NA,
+  border = "white",
+  lheight = 0.75,
+  id = c(T, T),
+  cc = 0,
+  cr = 0,
+  cc.old = 0,
+  cr.old = 0,
+  col.mark.fill = "#FCF5A4",
+  print = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
 
-\item{colors}{Vector. Two or more colors defininig the color ramp for 
+\item{colors}{Vector. Two or more colors defining the color ramp for 
 the bertin (default \code{c("white", "black")}).}
 
-\item{showvalues}{Logical. Wether scores are shown in bertin}
+\item{showvalues}{Logical. Whether scores are shown in bertin}
 
 \item{xlim}{Vector. Left and right limits inner bertin (default 
 \code{c(.2, .8)}).}
@@ -38,13 +55,13 @@ right margin in npc coordinates (i.e. 0 to zero).}
 the color of the text is chosen according to the 
 background color. If the background ist bright the text 
 will be black and vice versa. When a color is specified
-the color is set independetn of background.}
+the color is set independent of background.}
 
 \item{border}{Border color of the bertin cells (default \code{white}).}
 
 \item{lheight}{Line height for constructs.}
 
-\item{id}{Logical. Wheteher to print id number for constructs and elements
+\item{id}{Logical. Whether to print id number for constructs and elements
 respectively (default \code{c(T,T)}).}
 
 \item{cc}{Numeric. Current column to mark.}
@@ -69,7 +86,7 @@ row and column are printed.}
 One of the most popular ways of displaying grid data has been adopted 
 from Bertin's (1974) graphical proposals, which have had an immense 
 influence onto data visualization. One of the most appealing 
-ideas presented by Bertin is the concept of the reordable matrix. 
+ideas presented by Bertin is the concept of the reorderable matrix. 
 It is comprised of graphical displays for each cell, allowing to 
 identify structures by eye-balling reordered versions of the data matrix 
 (see Bertin, 1974). In the context of repertory grids, 

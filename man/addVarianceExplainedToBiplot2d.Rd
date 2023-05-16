@@ -4,10 +4,21 @@
 \alias{addVarianceExplainedToBiplot2d}
 \title{Adds the percentage of the sum-of-squares explained by each axis to the plot.}
 \usage{
-addVarianceExplainedToBiplot2d(x, dim = c(1, 2, 3), var.cex = 0.7,
-  var.show = TRUE, var.col = grey(0.1), axis.ext = 0.1, center = 1,
-  normalize = 0, g = 0, h = 1 - g, col.active = NA, col.passive = NA,
-  ...)
+addVarianceExplainedToBiplot2d(
+  x,
+  dim = c(1, 2, 3),
+  var.cex = 0.7,
+  var.show = TRUE,
+  var.col = grey(0.1),
+  axis.ext = 0.1,
+  center = 1,
+  normalize = 0,
+  g = 0,
+  h = 1 - g,
+  col.active = NA,
+  col.passive = NA,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object containing the biplot coords, i.e. after 
@@ -45,7 +56,7 @@ vectors, i.e. the elements.}
 in the SVD to find principal components. default is to use all elements.}
 
 \item{col.passive}{Columns (elements) that are supplementary points, i.e. they are NOT used
-in the SVD but projecte into the component space afterwards. They do not 
+in the SVD but projected into the component space afterwards. They do not 
 determine the solution. Default is \code{NA}, i.e. no elements are set 
 supplementary.}
 
@@ -53,8 +64,5 @@ supplementary.}
 }
 \description{
 Adds the percentage of the sum-of-squares explained by each axis to the plot.
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

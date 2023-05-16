@@ -4,8 +4,7 @@
 \alias{mapCoordinatesToColor}
 \title{Determine color values according to a given range of values.}
 \usage{
-mapCoordinatesToColor(z, colors = c("white", "black"), val.range = c(0.2,
-  0.8))
+mapCoordinatesToColor(z, colors = c("white", "black"), val.range = c(0.2, 0.8))
 }
 \arguments{
 \item{z}{numeric vector.}
@@ -22,8 +21,5 @@ From a given numeric vector z the range is determined and the values are
 linearly mapped onto the interval given by \code{val.range}. Then 
 a color ramp using the colors given by \code{color} is created and 
 the mapped values are transformed into hex color values.
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

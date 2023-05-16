@@ -4,8 +4,14 @@
 \alias{modifyElement}
 \title{modifyElement}
 \usage{
-modifyElement(x, pos, name = NA, abbreviation = NA, status = NA,
-  replace = FALSE)
+modifyElement(
+  x,
+  pos,
+  name = NA,
+  abbreviation = NA,
+  status = NA,
+  replace = FALSE
+)
 }
 \arguments{
 \item{x}{repgrid object}
@@ -18,7 +24,7 @@ modifyElement(x, pos, name = NA, abbreviation = NA, status = NA,
 
 \item{status}{(optional) status of element (e.g. ideal etc.)}
 
-\item{replace}{logical. wether to overwrite cuttent settings if NA provided}
+\item{replace}{logical. whether to overwrite current settings if NA provided}
 }
 \value{
 \code{repgrid} object

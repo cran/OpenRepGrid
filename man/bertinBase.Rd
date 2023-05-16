@@ -4,20 +4,42 @@
 \alias{bertinBase}
 \title{Workhorse for the biplot printing.}
 \usage{
-bertinBase(nrow, ncol, labels = "", labels.elements = "",
-  labels.left = "", labels.right = "", col.text = NA, cex.text = 0.6,
-  cex.elements = 0.7, cex.constructs = 0.7, col.fill = grey(0.8),
-  border = "white", xlim = c(0, 1), ylim = c(0, 1), margins = c(0, 1,
-  1), lheight = 0.75, text.margin = 0.005, elements.offset = c(0.002,
-  0.002), id = c(T, T), cc = 0, cr = 0, cc.old = 0, cr.old = 0,
-  col.mark.fill = "#FCF5A4", print = TRUE, byrow = FALSE, add = FALSE)
+bertinBase(
+  nrow,
+  ncol,
+  labels = "",
+  labels.elements = "",
+  labels.left = "",
+  labels.right = "",
+  col.text = NA,
+  cex.text = 0.6,
+  cex.elements = 0.7,
+  cex.constructs = 0.7,
+  col.fill = grey(0.8),
+  border = "white",
+  xlim = c(0, 1),
+  ylim = c(0, 1),
+  margins = c(0, 1, 1),
+  lheight = 0.75,
+  text.margin = 0.005,
+  elements.offset = c(0.002, 0.002),
+  id = c(T, T),
+  cc = 0,
+  cr = 0,
+  cc.old = 0,
+  cr.old = 0,
+  col.mark.fill = "#FCF5A4",
+  print = TRUE,
+  byrow = FALSE,
+  add = FALSE
+)
 }
 \arguments{
 \item{margins}{Vector of length three (default \code{margins=c(0,1,1)}). 
 1st element denotes the left, 2nd the upper and 3rd the 
 right margin in npc coordinates (i.e. 0 to zero).}
 
-\item{add}{Logical. Wether to add bertin to existent plot (default is 
+\item{add}{Logical. Whether to add bertin to existent plot (default is 
 \code{FALSE}). If \code{TRUE, plot.new()} will not be called
 \code{par(new=TRUE)}.}
 
@@ -37,8 +59,5 @@ Prints a bertin to the output
 device. It uses the R base graphics system and 
 this is very fast. This is useful for working with grids. Not so much for
 producing high-quality output.
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

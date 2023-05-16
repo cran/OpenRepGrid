@@ -4,9 +4,18 @@
 \alias{addConstruct}
 \title{Add a new construct to an existing grid object.}
 \usage{
-addConstruct(x, l.name = NA, r.name = NA, scores = NA, l.preferred = NA,
-  r.preferred = NA, l.emerged = NA, r.emerged = NA, position = NA,
-  side = "pre")
+addConstruct(
+  x,
+  l.name = NA,
+  r.name = NA,
+  scores = NA,
+  l.preferred = NA,
+  r.preferred = NA,
+  l.emerged = NA,
+  r.emerged = NA,
+  position = NA,
+  side = "pre"
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -49,7 +58,4 @@ Add a new construct to an existing grid object.
 }
 \seealso{
 \code{\link{addElement}}
-}
-\author{
-Mark Heckmann
 }

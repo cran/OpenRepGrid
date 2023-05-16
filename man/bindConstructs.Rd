@@ -23,7 +23,7 @@ The girds must have the same set of elements and an identical
 scale range. The order of the elements may differ.
 }
 \details{
-This function can be used in order to analyse multiple grids
+This function can be used in order to analyze multiple grids
 as one 'big grid' (eg. Slater, 1977, chap. 11).
 }
 \examples{
@@ -41,7 +41,4 @@ as one 'big grid' (eg. Slater, 1977, chap. 11).
 \references{
 Slater, P. (1977). \emph{The measurement of intrapersonal space 
              by grid technique}. London: Wiley.
-}
-\author{
-Mark Heckmann
 }

@@ -1,6 +1,8 @@
-###############################################################################
-###							DEFINITION OF THE STRUCTURE OF REPGRID CLASS							  ###
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
+#
+#							DEFINITION OF THE STRUCTURE OF REPGRID CLASS
+#
+#//////////////////////////////////////////////////////////////////////////////
 
 # In this file the repgrid classes are defined.
 # Design note: 	the objects will be defined using S4 classes.
@@ -32,7 +34,6 @@
 # @slot plotdata       Information for plotting the grid.
 #
 # @export
-# @author  Mark Heckmann
 #
 setClass( "repgrid", 
 		  representation( meta = "list",
@@ -51,8 +52,6 @@ setClass( "repgrid",
 #' @return \code{repgrid} object       
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
-#'
 makeEmptyRepgrid <- function(){
 	x <- new("repgrid")
 	x@ratings <- array(NA, c(0, 0, 3)) 				# ,,1 = coupled ratings; decoupled ratings: ,,2 left pole  ,,3 right pole

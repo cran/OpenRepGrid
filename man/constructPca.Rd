@@ -4,8 +4,13 @@
 \alias{constructPca}
 \title{Principal component analysis (PCA) of inter-construct correlations.}
 \usage{
-constructPca(x, nfactors = 3, rotate = "varimax", method = "pearson",
-  trim = NA)
+constructPca(
+  x,
+  nfactors = 3,
+  rotate = "varimax",
+  method = "pearson",
+  trim = NA
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -67,7 +72,4 @@ Fransella, F., Bell, R. & Bannister, D. (2003). \emph{A Manual for Repertory
 \seealso{
 To extract the PCA loadings for further processing see
                    \code{\link{constructPcaLoadings}}.
-}
-\author{
-Mark Heckmann
 }

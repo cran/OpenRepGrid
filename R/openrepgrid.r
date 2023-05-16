@@ -3,6 +3,7 @@
 
 #' \pkg{OpenRepGrid}: an R package for the analysis of repertory grids. 
 #'
+#' \if{html}{\figure{logo.png}{options: style='float: right; padding-left: 10px;' alt='logo' width='120'}}
 #' The \pkg{OpenRepGrid} package provides tools for the analysis of repertory grid data.
 #' The repertory grid is a method devised by George Alexander Kelly
 #' in his seminal work "The Psychology of Personal Constructs" published in 1955.
@@ -10,19 +11,20 @@
 #' Psychology (PCP) in a broad range of fields. For an introduction into the 
 #' technique see e.g. Fransella, Bell and Bannister (2003).
 #' 
-#' @author    \pkg{OpenRepGrid} was initiated by Mark Heckmann. 
-#'            Current contributors are: Mark Heckmann, Alejandro García.
-#'            Researchers interested in developing the package are invited to join.
+#' @author    \pkg{OpenRepGrid} is maintained by Mark Heckmann. 
+#'            Other contributors: Alejandro García, Diego Vitali.
+#'            Researchers interested in \href{http://docu.openrepgrid.org/contribute.html}{contributing}
+#'            to the package are welcome.
 #'
-#'            The \pkg{OpenRepGrid} package development is hosted on github (\url{http://github.com/markheckmann/OpenRepGrid}).
-#'            The github site provides information and allows to file bug reports or feature requests.
+#'            The \pkg{OpenRepGrid} code is hosted on \href{https://github.com/markheckmann/OpenRepGrid}{GitHub}.
+#'            The GitHub site provides additional information and allows to file bug reports or feature requests.
 #'            Bug reports can also be emailed to the package maintainer or issued on 
-#'            \url{http://www.openrepgrid.org} under section \emph{Suggestions/Issues}.
-#'            The package maintainer is Mark Heckmann  <heckmann(at)uni-bremen.de>.
+#'            \href{https://openrepgrid.org}{openrepgrid.org} under section \emph{Suggestions/Issues}.
+#'            The package maintainer is Mark Heckmann <heckmann(dot)mark(at)gmail(dot)com>.
 #'
-#' @note      To get started with \pkg{OpenRepGrid} visit the project's home under \url{www.openrepgrid.org}. 
-#'            On this site you will find tutorials, explanation about the theory, methods of analysis and 
-#'            the according R code.
+#' @note      To get started with \pkg{OpenRepGrid} visit the project's home under
+#'            \href{https://openrepgrid.org}{openrepgrid.org}. On this site you will find tutorials, 
+#'            explanation about the theory, the analysis methods and the corresponding R code.
 #'
 #'            To see the preferable citation of the \pkg{OpenRepGrid} package, type 
 #'            \code{citation("OpenRepGrid")} into the R console.
@@ -41,9 +43,12 @@
 #' @keywords package repgrid
 #' @name OpenRepGrid
 #' @docType package
-#' @import methods graphics grid utils stats grDevices plyr stringr abind rgl GPArotation psych XML tcltk pvclust
+#' @import methods graphics grid utils grDevices stringr abind rgl psych XML pvclust dplyr
+#' @rawNamespace import(stats, except=c(lag,filter))
+#' @rawNamespace import(plyr, except = c(failwith,id,count,mutate,desc,rename,summarize,summarise,filter,arrange))
 #' @importFrom colorspace HSV diverge_hcl hex hex2RGB
-NULL
+#' @importFrom crayon bold black red green yellow blue magenta cyan white silver
+"_PACKAGE"
 
 
 #############################  Package overview  ##############################
@@ -52,7 +57,7 @@ NULL
 #'
 #' This documentation page contains an overview over the package functions
 #' ordered by topics. The best place to start learning OpenRepGrid will
-#' be the package website \url{http://www.openrepgrid.org} though.
+#' be the package website \url{https://openrepgrid.org} though.
 #' 
 #' @section Functions sorted by topic: 
 #' 
@@ -95,7 +100,7 @@ NULL
 #' \emph{Bertin plots} \tab \cr
 #'   \tab \cr
 #'   \code{\link{bertin}}             \tab  Make Bertin display of grid data \cr
-#'   \code{\link{bertinCluster}}      \tab	Bertin display with corresponding cluster anaylsis \cr
+#'   \code{\link{bertinCluster}}      \tab	Bertin display with corresponding cluster analysis \cr
 #'   \tab \cr
 #'   \tab \cr
 #' \emph{Biplots} \tab \cr
@@ -120,7 +125,7 @@ NULL
 #' \tabular{ll}{
 #' \code{\link{indexConflict1}}	  \tab Conflict measure for grids (Slade & Sheehan, 1979) based on correlations \cr
 #' \code{\link{indexConflict2}}	  \tab Conflict measure for grids (Bassler et al., 1992) based on correlations \cr
-#' \code{\link{indexConflict3}}	  \tab Conflict or inconsistenciy measure for grids (Bell, 2004) based on distances \cr
+#' \code{\link{indexConflict3}}	  \tab Conflict or inconsistency measure for grids (Bell, 2004) based on distances \cr
 #' \code{\link{indexDilemma}}	    \tab Detect implicative dilemmas (conflicts) \cr
 #'    \tab \cr
 #' \code{\link{indexIntensity}}	  \tab Intensity index \cr
@@ -134,7 +139,7 @@ NULL
 #' 
 #' \tabular{ll}{
 #' \code{\link{alignByIdeal}}     \tab  Align constructs using the ideal element to gain pole preferences \cr
-#' \code{\link{alignByLoadings}}  \tab	Align constructs by loadings on first pricipal component \cr
+#' \code{\link{alignByLoadings}}  \tab	Align constructs by loadings on first principal component \cr
 #' \code{\link{reorder2d}}        \tab Order grid by angles between construct and/or elements in 2D \cr
 #' }
 #' 
@@ -240,7 +245,7 @@ NULL
 #' \code{\link{getRatingLayer}}       \tab Retrieve grid scores from grid object. \cr
 #' \code{\link{getNoOfConstructs}}    \tab Get the number of constructs in a grid object.    \cr
 #' \code{\link{getNoOfElements}}      \tab Get the number of elements in a grid object.   \cr
-#' \code{\link{dim}}                  \tab Get grid dimensions, i.e. contructs x elements.    \cr
+#' \code{\link{dim}}                  \tab Get grid dimensions, i.e. constructs x elements.    \cr
 #' \code{\link{getScale}}             \tab Get minimum and maximum scale value used in grid.  \cr
 #' \code{\link{getScaleMidpoint}}     \tab Get midpoint of the grid rating scale.    \cr
 #' \code{\link{getConstructNames}}    \tab Get construct names.                       \cr
@@ -259,11 +264,11 @@ NULL
 #' @author    Current members of the \pkg{OpenRepGrid} development team: Mark Heckmann. 
 #'            Everyone who is interested in developing the package is invited to join.
 #'
-#'            The \pkg{OpenRepGrid} package development is hosted on github (\url{http://github.com/markheckmann/OpenRepGrid}).
+#'            The \pkg{OpenRepGrid} package development is hosted on github (\url{https://github.com/markheckmann/OpenRepGrid}).
 #'            The github site provides information and allows to file bug reports or feature requests.
 #'            Bug reports can also be emailed to the package maintainer or issued on 
-#'            \url{http://www.openrepgrid.org} under section \emph{Suggestions/Issues}.
-#'            The package maintainer is Mark Heckmann <heckmann(at)uni-bremen.de>.
+#'            \url{https://openrepgrid.org} under section \emph{Suggestions/Issues}.
+#'            The package maintainer is Mark Heckmann <heckmann(dot)mark(at)gmail(dot)com>.
 #'
 #' @name OpenRepGrid-overview
 #' @keywords package

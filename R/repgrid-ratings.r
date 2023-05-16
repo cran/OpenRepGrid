@@ -1,6 +1,9 @@
-################################################################
-### 				basic ratings operations				 ###
-################################################################
+#//////////////////////////////////////////////////////////////////////////////
+#
+#      				           basic ratings operations				 
+#
+#//////////////////////////////////////////////////////////////////////////////
+
 
 
 # sets up an array of proper dimension and dim names to be filled with ratings
@@ -107,8 +110,7 @@ r.setRatings <- function(x, scores=NA, rows=NA, cols=NA, layer=1, ...){
 # a <- abind(a, makeNewElementColumn(a), along=2)				# attach new column
 # a <- a[, c(index$index.base.new, index$index.insert.new), ]	# reorder by pos
 # a
-
-######################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 
 r.makeNewElementColumn <- function(x, pos=NA){
@@ -127,7 +129,7 @@ r.makeNewElementColumn <- function(x, pos=NA){
 
 
 
-r.makeNewConstructRow <- function(x, pos=NA){	
+r_makeNewConstructRow <- function(x, pos=NA){	
 	if(is.na(pos[1]&length(pos)==1)) pos <- nrow(x@ratings)+1
 	if(!is.numeric(pos) | pos > nrow(x@ratings)+1 | pos < 1)
 		stop("pos must be between 1 number of constructs plus one.")
@@ -139,7 +141,7 @@ r.makeNewConstructRow <- function(x, pos=NA){
 	x
 }
 #x <- makeEmptyRepgrid()
-#x <- r.makeNewConstructRow(x)
+#x <- r_makeNewConstructRow(x)
 
 
 r.addColumns <- function(x, no, position=NA, side="pre"){

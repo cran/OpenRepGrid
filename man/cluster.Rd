@@ -4,9 +4,22 @@
 \alias{cluster}
 \title{Cluster analysis (of constructs or elements).}
 \usage{
-cluster(x, along = 0, dmethod = "euclidean", cmethod = "ward", p = 2,
-  align = TRUE, trim = NA, main = NULL, mar = c(4, 2, 3, 15), cex = 0,
-  lab.cex = 0.8, cex.main = 0.9, print = TRUE, ...)
+cluster(
+  x,
+  along = 0,
+  dmethod = "euclidean",
+  cmethod = "ward",
+  p = 2,
+  align = TRUE,
+  trim = NA,
+  main = NULL,
+  mar = c(4, 2, 3, 15),
+  cex = 0,
+  lab.cex = 0.8,
+  cex.main = 0.9,
+  print = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -47,7 +60,7 @@ function and cluster method.}
 
 \item{cex.main}{Size parameter for the plot title (default is \code{.9}).}
 
-\item{print}{Logical. Wether to print the dendrogram (default is \code{TRUE}).}
+\item{print}{Logical. Whether to print the dendrogram (default is \code{TRUE}).}
 
 \item{...}{Additional parameters to be passed to plotting function from
 \code{as.dendrogram}. Type \code{?as.dendrogram} for further 
@@ -92,7 +105,4 @@ Repertory Grids in Human Resource Development. \emph{Personnel Review,
 }
 \seealso{
 \code{\link{bertinCluster}}
-}
-\author{
-Mark Heckmann
 }

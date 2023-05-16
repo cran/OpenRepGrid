@@ -4,8 +4,14 @@
 \alias{rglDrawConstructLabels}
 \title{draw constructs in rgl}
 \usage{
-rglDrawConstructLabels(coords, labels = FALSE, dim = 1:3, c.cex = 0.6,
-  c.text.col = grey(0.4), ...)
+rglDrawConstructLabels(
+  coords,
+  labels = FALSE,
+  dim = 1:3,
+  c.cex = 0.6,
+  c.text.col = grey(0.4),
+  ...
+)
 }
 \arguments{
 \item{coords}{coordinates for constructs labels.}
@@ -22,8 +28,5 @@ rglDrawConstructLabels(coords, labels = FALSE, dim = 1:3, c.cex = 0.6,
 }
 \description{
 draw constructs in rgl
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

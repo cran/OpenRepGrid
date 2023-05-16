@@ -1,13 +1,15 @@
-###############################################################################
-###		       data that comes along with the OpenRepGrid package			  	    ###
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
+#
+#  		       data that comes along with the OpenRepGrid package			  	    
+#
+#//////////////////////////////////////////////////////////////////////////////
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Bell (2010).
 #'
-#' Grid data orginated (but is not shown in the paper) from a study by Haritos, 
+#' Grid data originated (but is not shown in the paper) from a study by Haritos, 
 #' Gindinis, Doan and Bell (2004) on element role titles. It was used to 
 #' demonstrate the effects of construct alignment in Bell (2010, p. 46).
 #'
@@ -56,7 +58,7 @@ NULL
 # save("bell2010", file="../data/bell2010.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Bell and McGorry (1992).
 #'
@@ -118,7 +120,7 @@ NULL
 # save("bellmcgorry1992", file="../data/bellmcgorry1992.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Boeker (1996).
 #'
@@ -175,7 +177,7 @@ NULL
 # save("boeker", file="../data/boeker.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Fransella, Bell and Bannister (2003).
 #'
@@ -215,11 +217,11 @@ NULL
 # save("fbb2003", file="../data/fbb2003.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Feixas and Saul (2004). 
 #'
-#'A desription by the authors:
+#'A description by the authors:
 #' "When Teresa, 22 years old, was seen by the second author (LAS) at the 
 #' psychological services of the University of Salamanca, she was in the 
 #' final year of her studies in chemical sciences. Although Teresa proves 
@@ -290,7 +292,7 @@ NULL
 
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Case as described by the authors:
 #' "Sarah, aged 32, was referred with problems of depression and sexual 
@@ -302,7 +304,7 @@ NULL
 #' group and at 3- and 6-month follow-up." (Leach et al. 2001, p. 230).\cr \cr
 #' 
 #' \code{leach2001a} is the pre-therapy, \code{leach2001b}
-#' is the post-therapy therapy datset. The construct and elements are 
+#' is the post-therapy therapy dataset. The construct and elements are 
 #' identical.
 #'
 #' @title   Pre- and post therapy dataset from Leach et al. (2001).
@@ -352,7 +354,7 @@ NULL
 # save("leach2001a", file="../data/leach2001a.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 
 # name.abb <- c("CS", "SN", "WG", "MG", "Fa", "Pa", "IS", "Mo", "AC") # not included yet
@@ -389,7 +391,7 @@ NULL
 
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Mackay (1992). Data set 'Grid C'-
 #'
@@ -430,7 +432,7 @@ NULL
 # save("mackay1992", file="../data/mackay1992.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Raeithel (1998).
 #' 
@@ -482,7 +484,7 @@ NULL
 # save("raeithel", file="../data/raeithel.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Drug addict's grid data set from Slater (1977, p. 32).
 #'
@@ -535,7 +537,7 @@ NULL
 # save("slater1977a", file="../data/slater1977a.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Grid data from Slater (1977). 
 #'
@@ -584,7 +586,7 @@ NULL
 # save("slater1977b", file="../data/slater1977b.RData")
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 
 

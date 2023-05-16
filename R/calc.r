@@ -26,7 +26,6 @@
 #' @note          Note that standard deviation and variance are estimations, 
 #'                i.e. including Bessel's correction. For more info type \code{?describe}.
 #'
-#' @author        Mark Heckmann
 #' @export
 #' @aliases statsElements statsConstructs 
 #' @rdname stats
@@ -96,7 +95,6 @@ print.statsElements <- function(x, digits=2, ...)
 #' @note          Note that standard deviation and variance are estimated ones, 
 #'                i.e. including Bessel's correction. For more info type \code{?describe}.
 #'
-#' @author        Mark Heckmann
 #' @export
 #' @rdname stats
 #'
@@ -152,8 +150,8 @@ print.statsConstructs <- function(x, digits=2, ...)
 
 getScoreDataFrame <- function(x){
   sc <- x@ratings[,,1]
-  rownames(sc) <- getConstructNames(x)$l
-  colnames(sc) <- getElementNames(x)
+  rownames(sc) <- constructs(x)$l
+  colnames(sc) <- elements(x)
   sc
 }
 
@@ -162,7 +160,7 @@ getScoreDataFrame <- function(x){
 #
 makeDiscrepancy <- function(x, disc, remove=TRUE){
   sc <- x@ratings[,,1]
-  colnames(sc) <- getElementNames(x)
+  colnames(sc) <- elements(x)
   scDiscElement <- sc[, disc]
   if (remove)
     sc[, -disc] - scDiscElement else 
@@ -194,15 +192,15 @@ statsDiscrepancy <- function(x, disc, sort=TRUE){
 # plot(as.dendrogram(fit), horiz = F)
 
 
-###############################################################################
+#/////////////////////////////////////////////////////////////////////////////
 # order elements and constructs by angles in first two dimensions from
 # singular value decomposition approach (cf. Raeithel ???)
-###############################################################################
+#/////////////////////////////////////////////////////////////////////////////
 
 #' Calculate angles for points in first two columns.
 #'
 #' The angles of the points given by the values in the first and second
-#' column of a matrix seen from the origin are calulated in degrees.
+#' column of a matrix seen from the origin are calculated in degrees.
 #'
 #' @param x           A matrix.
 #' @param dim         Dimensions used for calculating angles.
@@ -210,7 +208,6 @@ statsDiscrepancy <- function(x, disc, sort=TRUE){
 #'                    basis.
 #' @return  vector.   The angles of each row point with the origin as reference.
 #'
-#' @author       Mark Heckmann
 #' @keywords internal
 #'
 #' @examples \dontrun{
@@ -241,7 +238,6 @@ calcAngles <- function(x, dim=c(1,2), clockwise=TRUE){
 #' @return  A list containing the indexes to reorder the grid. The 
 #'          first list element for the constructs, the second for the elements indexes.
 #'
-#' @author        Mark Heckmann
 #' @keywords internal
 #' @examples \dontrun{
 #'
@@ -297,7 +293,6 @@ angleOrderIndexes2d <- function(x, dim=c(1,2), clockwise=TRUE){
 #'
 #' @return            Reordered \code{repgrid} object. 
 #'
-#' @author            Mark Heckmann
 #' @export
 #'
 #' @examples \dontrun{
@@ -324,9 +319,8 @@ reorder2d <- function(x, dim=c(1,2), center=1, normalize=0, g=0, h=1-g,
 
 
   
-  
-  
-###############################################################################
+#### __________________ ####
+####      ELEMENTS      ####
 
 
 #' Calculate the correlations between elements.
@@ -339,7 +333,7 @@ reorder2d <- function(x, dim=c(1,2), center=1, normalize=0, g=0, h=1-g,
 #'
 #' @param x         \code{repgrid} object.
 #' @param rc        Use Cohen's rc which is invariant to construct 
-#'                  reflection (see desciption above). It is used as the default.
+#'                  reflection (see description above). It is used as the default.
 #' @param method    A character string indicating which correlation coefficient 
 #'                  is to be computed. One of \code{"pearson"} (default), 
 #'                  \code{"kendall"} or \code{"spearman"}, can be abbreviated.
@@ -364,7 +358,6 @@ reorder2d <- function(x, dim=c(1,2), center=1, normalize=0, g=0, h=1-g,
 #'
 #' @return  \code{matrix} of element correlations
 #'
-#' @author        Mark Heckmann
 #' @export
 #' @seealso \code{\link{constructCor}}
 #'
@@ -468,7 +461,7 @@ print.elementCor <- function(x, digits=2, col.index=TRUE, upper=TRUE, ...)
 #'                  
 #' @param x       \code{repgrid} object.
 #' @param rc      Whether to use Cohen's rc which is invariant to construct 
-#'                reflection (see desciption above). It is used as the default.
+#'                reflection (see description above). It is used as the default.
 #' @param method  A character string indicating which correlation coefficient 
 #'                to be computed. One of \code{"pearson"} (default), 
 #'                \code{"kendall"} or \code{"spearman"}, can be abbreviated.
@@ -479,7 +472,6 @@ print.elementCor <- function(x, digits=2, col.index=TRUE, upper=TRUE, ...)
 #'                with long names.
 #' @return        \code{dataframe} of the RMS of inter-element correlations
 #'
-#' @author        Mark Heckmann
 #' @export
 #' @seealso  \code{\link{constructRmsCor}}, \code{\link{elementCor}}
 #'
@@ -514,7 +506,9 @@ elementRmsCor <- function(x, rc = TRUE, method = "pearson", trim = NA)
 }
 
 
-###############################################################################
+#### __________________ ####
+####      CONSTRUCTS    ####
+
 
 #' Calculate correlations between constructs. 
 #'
@@ -533,7 +527,6 @@ elementRmsCor <- function(x, rc = TRUE, method = "pearson", trim = NA)
 #' @param index     Whether to print the number of the construct. 
 #' @return          Returns a matrix of construct correlations.
 #'
-#' @author          Mark Heckmann
 #' @export
 #' @seealso \code{\link{elementCor}}
 #'
@@ -631,8 +624,6 @@ print.constructCor <- function(x, digits=2, col.index=TRUE,
 #'                simply saves space when displaying correlation of constructs
 #'                with long names.
 #' @return        \code{dataframe} of the RMS of inter-construct correlations
-#'
-#' @author        Mark Heckmann
 #' @export
 #' @seealso    \code{\link{elementRmsCor}}, \code{\link{constructCor}}
 #'
@@ -693,13 +684,13 @@ print.rmsCor <- function(x, digits=2, ...)
 
 #' Calculate Somers' d for the constructs. 
 #'
-#' Somer'ss d is an  assymetric association measure as it depends on which 
+#' Somer's d is an  asymmetric association measure as it depends on which 
 #' variable is set as dependent and independent.
 #' The direction of dependency needs to be specified.
 #'
 #' @param x           \code{repgrid} object
 #' @param dependent   A string denoting the direction of dependency in the output 
-#'                    table (as d is assymetrical). Possible values are \code{"columns"}
+#'                    table (as d is asymmetrical). Possible values are \code{"columns"}
 #'                    (the default) for setting the columns as dependent, \code{"rows"} 
 #'                    for setting the rows as the dependent variable and 
 #'                    \code{"symmetric"} for the 
@@ -718,7 +709,6 @@ print.rmsCor <- function(x, digits=2, ...)
 #'                    for Ordinal Variables. \emph{American Sociological Review, 27}(6),
 #'                    799-811.
 #'
-#' @author            Mark Heckmann
 #' @export
 #'
 #' @examples \dontrun{
@@ -727,7 +717,7 @@ print.rmsCor <- function(x, digits=2, ...)
 #'    constructD(fbb2003, "c")  # row as dependent
 #'    constructD(fbb2003, "s")  # symmetrical index
 #'  
-#'    # surpress printing
+#'    # suppress printing
 #'    d <- constructD(fbb2003, out=0, trim=5)
 #'    d
 #'    
@@ -832,7 +822,6 @@ print.constructD <- function(x, digits=1, col.index=TRUE, ...)
 #'
 #' @seealso           To extract the PCA loadings for further processing see
 #'                    \code{\link{constructPcaLoadings}}.
-#' @author            Mark Heckmann
 #' @export
 #' 
 #' @references        Fransella, F., Bell, R. & Bannister, D. (2003). \emph{A Manual for Repertory 
@@ -875,6 +864,59 @@ constructPca <- function(x, nfactors=3, rotate="varimax", method = "pearson" ,
   class(pc) <- c("constructPca", class(pc))
   attr(pc, "arguments") <- list(nfactors=nfactors, rotate=rotate, method=method)
   return(pc)
+}
+
+# TODO
+constructPca_new <- function(x, nfactors = 3, method = "raw", rotate = "none", trim = NA) 
+{
+  method <- match.arg(method,c("raw", "pearson", "kendall", "spearman")) 
+  
+  # PCA of construct centered raw data 
+  if (method == "raw") {
+    input <- "matrix of construct centered raw data"
+    r <- ratings(x) 
+    p <- stats::prcomp(t(r), center = TRUE, scale. = FALSE)  
+    eigenvalues <- p$sdev^2
+    load_mat <- p$rotation
+  } 
+  
+  
+  # PCA of construct correlations
+  if (method != "raw") {
+    input <- "construct correlation matrix"
+    rotate <- match.arg(rotate, c("none", "varimax", "promax", "cluster"))
+    if (!rotate %in% c("none", "varimax", "promax", "cluster"))
+      stop('only "none", "varimax", "promax" and "cluster" are possible rotations')
+    
+    res <- constructCor(x, method = method, trim = trim)          # calc inter constructs correations                    
+    pc <- principal(res, nfactors = nfactors, rotate = rotate)  # do PCA
+    class(pc) <- c("constructPca", class(pc))
+    
+    load_mat <- loadings(pc)
+    class(load_mat) <- "matrix"
+    eigenvalues <- pc$values
+  }
+  
+  
+  
+  # attr(pc, "arguments") <- list(nfactors = nfactors, rotate = rotate, method = method)
+  return(pc)
+  
+  # new structure
+  list(
+    input = input,
+    method = method,
+    nfactors = nfactors,
+    rotation = "none",
+    eigenvalues = eigenvalues,
+    loadings = load_mat
+    
+    
+  )
+  scale(t(r))^2 %>% sum
+  
+  apply(load_mat, 2, function(x) sum(x^2))  
+  
 }
 
 
@@ -926,12 +968,12 @@ print.constructPca <- function(x, digits=2, cutoff=0, ...)
 }
 
 
-#' Align constructs by loadings on first pricipal component. 
+#' Align constructs by loadings on first principal component. 
 #'
 #' In case a construct loads negatively on the first principal
 #' component, the function \code{\link{alignByLoadings}} will reverse it 
 #' so that all constructs have positive loadings on the first 
-#' principal component (see deatil section for more).
+#' principal component (see detail section for more).
 #'
 #' The direction of the constructs in a grid is arbitrary and 
 #' a reflection of a scale does not affect the information 
@@ -951,7 +993,7 @@ print.constructPca <- function(x, digits=2, cutoff=0, ...)
 #' @param trim      The number of characters a construct is trimmed to (default is
 #'                  \code{10}). If \code{NA} no trimming is done. Trimming
 #'                  simply saves space when displaying the output.
-#' @param index     Whether to print the number of the construct (e.g. for correltion 
+#' @param index     Whether to print the number of the construct (e.g. for correlation 
 #'                  matrices). The default is \code{TRUE}.
 #' @return          An object of class \code{alignByLoadings} containing a list 
 #'                  of calculations with the following entries:
@@ -965,7 +1007,7 @@ print.constructPca <- function(x, digits=2, cutoff=0, ...)
 #' @note            Bell (2010) proposed a solution for the problem of construct 
 #'                  alignment. As construct reversal has an effect on element 
 #'                  correlation and thus on any measure that based on element 
-#'                  correlation (Mackay, 1992), it is desireable to have a 
+#'                  correlation (Mackay, 1992), it is desirable to have a 
 #'                  standard method for 
 #'                  construct alignment independently from its semantics (preferred 
 #'                  pole etc.). Bell (2010) proposes to align constructs in a way
@@ -976,15 +1018,11 @@ print.constructPca <- function(x, digits=2, cutoff=0, ...)
 #'                  \emph{Personal Construct Theory & Practice, 7}, 42-48.
 #' 
 #'                  Mackay, N. (1992). Identification, Reflection, 
-#'                  and Correlation: Problems in ihe bases of repertory 
+#'                  and Correlation: Problems in the bases of repertory 
 #'                  grid measures. \emph{International Journal of Personal
 #'                  Construct Psychology, 5}(1), 57-75. 
-#'
-#' @author          Mark Heckmann
 #' @export
-#'
 #' @seealso \code{\link{alignByIdeal}}
-#'
 #' @examples 
 #'
 #'   # reproduction of the example in the Bell (2010)
@@ -1007,7 +1045,7 @@ print.constructPca <- function(x, digits=2, cutoff=0, ...)
 #'   a$loadings.after
 #'
 alignByLoadings <- function(x, trim=20, index=TRUE){
-  options(warn=1)                                      # surpress warnings (TODO sometimes error in SVD due to singularities in grid)
+  options(warn=1)                                      # suppress warnings (TODO sometimes error in SVD due to singularities in grid)
   ccor.old <- constructCor(x, trim=trim, index=index)  # construct correlation unreversed
   pc.old <- principal(ccor.old)                        # calc principal component (psych pkg)
   reverseIndex <- 
@@ -1078,7 +1116,7 @@ print.alignByLoadings <- function(x, digits=2, col.index=TRUE, ...)
 #' correlations (Mackay, 1992) and on the spatial representation and clustering
 #' of the grid (Bell, 2010). Hence, it is desirable to follow a protocol to 
 #' align constructs that will render unique results. A common approach is
-#' to align constucts by pole preference, i. e. aligninig all positive and  
+#' to align constructs by pole preference, i. e. aligning all positive and  
 #' negative poles. This can e. g. be achieved using \code{\link{swapPoles}}.
 #' If an ideal element is present, this element can be used to identify
 #' the positive and negative pole. The function \code{alignByIdeal} will
@@ -1104,7 +1142,7 @@ print.alignByLoadings <- function(x, digits=2, col.index=TRUE, ...)
 #'                \emph{Personal Construct Theory & Practice, 7}, 42-48.
 #' 
 #'                Mackay, N. (1992). Identification, Reflection, 
-#'                and Correlation: Problems in ihe bases of repertory 
+#'                and Correlation: Problems in the bases of repertory 
 #'                grid measures. \emph{International Journal of Personal
 #'                Construct Psychology, 5}(1), 57-75. 
 #'          
@@ -1113,9 +1151,7 @@ print.alignByLoadings <- function(x, digits=2, col.index=TRUE, ...)
 #'                way? \emph{Journal of Constructivist Psychology, 23}(4), 337-356.
 #'
 #' @export
-#' @author    Mark Heckmann
 #' @seealso \code{\link{alignByLoadings}}
-#'
 #' @examples \dontrun{
 #'
 #'   feixas2004                             # original grid
@@ -1146,7 +1182,8 @@ alignByIdeal <- function(x, ideal, high=TRUE){
 }
 
 
-#### CLUSTER ANALYIS ####
+#### __________________ ####
+####   CLUSTER ANALYIS  ####
 
 #' Cluster analysis (of constructs or elements).
 #'
@@ -1189,7 +1226,7 @@ alignByIdeal <- function(x, ideal, high=TRUE){
 #' @param cex        Size parameter for the nodes. Usually not needed.              
 #' @param lab.cex    Size parameter for the constructs on the right side.
 #' @param cex.main   Size parameter for the plot title (default is \code{.9}).
-#' @param print      Logical. Wether to print the dendrogram (default is \code{TRUE}).
+#' @param print      Logical. Whether to print the dendrogram (default is \code{TRUE}).
 #' @param ...        Additional parameters to be passed to plotting function from
 #'                   \code{as.dendrogram}. Type \code{?as.dendrogram} for further 
 #'                   information. This option is usually not needed, except if special
@@ -1201,7 +1238,6 @@ alignByIdeal <- function(x, ideal, high=TRUE){
 #' Repertory Grids in Human Resource Development. \emph{Personnel Review,
 #' 11}(4), 15-22. doi:10.1108/eb055464.
 #' 
-#' @author            Mark Heckmann
 #' @export
 #' @seealso           \code{\link{bertinCluster}}
 #'
@@ -1296,23 +1332,23 @@ align <- function(x, along = 0, dmethod = "euclidean",
 #' p-values are calculated for each branch of the cluster dendrogram to indicate
 #' the stability of a specific partition. \code{clusterBoot} will yield the same
 #' clusters as the \code{\link{cluster}} function (i.e. standard hierarchical 
-#' clustering) with additional p-values. Two kindes of p-values are reported: 
+#' clustering) with additional p-values. Two kinds of p-values are reported: 
 #' bootstrap probabilities (BP) and approximately unbiased (AU) probabilities
 #' (see Details section for more information).
 #' 
 #' In standard (hierarchical) cluster analysis the question arises which of the 
-#' idientified structures are significant or just emerged by chance. Over the
+#' identified structures are significant or just emerged by chance. Over the
 #' last decade several methods have been developed to test structures for
 #' robustness. One line of research in this area is based on resampling. The
 #' idea is to resample the rows or columns of the data matrix and to build the
 #' dendrogram for each bootstrap sample (Felsenstein, 1985). The p-values
-#' indicates the pecentage of times a specific structure is identified across
+#' indicates the percentage of times a specific structure is identified across
 #' the bootstrap samples. It was shown that the p-value is biased (Hillis &
 #' Bull, 1993; Zharkikh & Li, 1995). In the literature several methods for bias
 #' correction have been proposed. In \code{clusterBoot} a method based on the
 #' \emph{multiscale bootstrap} is used to derive corrected (approximately 
 #' unbiased) p-values (Shimodaira, 2002, 2004). In conventional bootstrap 
-#' analysis the size of the bootstrap sample is identical to the orginal sample 
+#' analysis the size of the bootstrap sample is identical to the original sample 
 #' size. Multiscale bootstrap varies the bootstrap sample size in order to infer
 #' a correction formula for the biased p-value on the basis of the variation of 
 #' the results for the different sample sizes (Suzuki & Shimodaira, 2006).
@@ -1365,10 +1401,7 @@ align <- function(x, along = 0, dmethod = "euclidean",
 #'                \code{\link{set.seed}}). Usually not needed.
 #' @param ...     Arguments to pass on to \code{\link{pvclust}}.
 #' @return        A pvclust object as returned by the function \code{\link{pvclust}}
-#'  
-#' @author        Mark Heckmann
 #' @export
-#'
 #' @examples \dontrun{
 #'
 #'  # pvclust must be loaded
@@ -1459,11 +1492,8 @@ clusterBoot <- function(x, along=1, align=TRUE, dmethod = "euclidean",
 #'                    to normalize by standard deviations. \code{0 = none, 1= rows, 2 = columns}
 #'                    (default is \code{0}).
 #' @param ...         Not evaluated.
-#' @return            Not yet definde TODO!
-#'
-#' @author        Mark Heckmann
+#' @return            Not yet defined TODO!
 #' @export
-#'
 #' @examples \dontrun{
 #'
 #'  x <- matrix(sample(1:5, 20, rep=T), 4)
@@ -1501,10 +1531,7 @@ normalize <- function(x, normalize=0, ...){
 #'        applied simultaneously.
 #'        TODO: After centering the standard representation mode does not work any more as 
 #'         it remains unclear what color values to attach to the centered values.
-#'
-#' @author        Mark Heckmann
 #' @export
-#'
 #' @examples \dontrun{
 #'
 #'  center(bell2010)						      # no centering
@@ -1548,7 +1575,7 @@ center <- function(x, center=1, ...){
 #' @param along             Numeric. Table of sum-of-squares (SSQ) for 1=constructs, 
 #'                          2=elements (default). 
 #'                          Note that currently these calculations only make sense
-#'                          for biplot reperesentations with \code{g=1} and \code{h=1}
+#'                          for biplot representations with \code{g=1} and \code{h=1}
 #'                          respectively.
 #' @param  center		        Numeric. The type of centering to be performed. 
 #'                          0= no centering, 1= row mean centering (construct), 
@@ -1565,7 +1592,7 @@ center <- function(x, center=1, ...){
 #' @param col.active        Columns (elements) that are no supplementary points, i.e. they are used
 #'                          in the SVD to find principal components. default is to use all elements.
 #' @param col.passive       Columns (elements) that are supplementary points, i.e. they are NOT used
-#'                          in the SVD but projecte into the component space afterwards. They do not 
+#'                          in the SVD but projected into the component space afterwards. They do not 
 #'                          determine the solution. Default is \code{NA}, i.e. no elements are set 
 #'                          supplementary.
 #' @return                  A list containing three wo elements \cr
@@ -1578,9 +1605,7 @@ center <- function(x, center=1, ...){
 #'                          
 #' @note                    TODO: if g or h is not equal to 1 the SSQ does not measure
 #'                          accuracy of representation as currently the ssq of each point
-#'                          are set in constrast with the pre-transformed matrix.
-#'
-#' @author        Mark Heckmann
+#'                          are set in contrast with the pre-transformed matrix.
 #' @keywords      internal
 #' @export
 #' @examples
@@ -1618,8 +1643,8 @@ ssq <- function(x, along=2, center=1, normalize=0,
   C <- x@calcs$biplot$con
   X <- x@calcs$biplot$X
   
-  enames <- getElementNames(x)
-  cnames <- getConstructNames(x)$rightpole
+  enames <- elements(x)
+  cnames <- constructs(x)$rightpole
   
   ssq.c <- diag(X %*% t(X))         # SSQ for each row (constructs)
   ssq.e <- diag(t(X) %*% X)         # SSQ for each column(element)
@@ -1676,13 +1701,12 @@ ssq <- function(x, along=2, center=1, normalize=0,
 #'                          dimensions.
 #' @param cumulated         Logical (default is \code{TRUE}). 
 #'                          Print a cumulated table of sum-of-squares?
-#'                          If \code{FALSE} the uncumulated sum-of-squares are printed.                         
+#'                          If \code{FALSE} the non-cumulated sum-of-squares are printed.                         
 #'                          (default is \code{TRUE}).
 #' @param ...               Not evaluated.
 #' @export
 #' @method            print ssq
 #' @keywords          internal
-#'
 #'
 print.ssq <- function(x, digits=2, dim=5, cumulated=TRUE, ...)
 {

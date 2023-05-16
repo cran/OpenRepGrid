@@ -1,7 +1,9 @@
 
-###############################################################################
-###  							        BERTIN DISPLAYS 				                          ###
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
+#
+#    							     BERTIN DISPLAYS a.k.a. HEATMAPS				                          
+#
+#//////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -222,14 +224,13 @@ bertin2PlusLegend <- function(x, ratings=TRUE, top=unit(40, "mm"),
 #' @param trim      Vector (default \code{trim=c(F,F)}).If a number the string
 #'                  is trimmed to the given number of characters. If set 
 #'                  to TRUE the labels are trimmed to the available space
-#' @param add       Logical. Wether to add bertin to existent plot (default is 
+#' @param add       Logical. Whether to add bertin to existent plot (default is 
 #'                  \code{FALSE}). If \code{TRUE, plot.new()} will not be called
 #'                  \code{par(new=TRUE)}.
 #' @return \code{NULL} just for printing.
 #'
 #' @export
 #' @keywords internal
-#' @author Mark Heckmann
 #' 
 bertinBase <- function(nrow, ncol, labels="", labels.elements="", 
                        labels.left="", labels.right="", 
@@ -456,7 +457,7 @@ bertinBase <- function(nrow, ncol, labels="", labels.elements="",
 #' One of the most popular ways of displaying grid data has been adopted 
 #' from Bertin's (1974) graphical proposals, which have had an immense 
 #' influence onto data visualization. One of the most appealing 
-#' ideas presented by Bertin is the concept of the reordable matrix. 
+#' ideas presented by Bertin is the concept of the reorderable matrix. 
 #' It is comprised of graphical displays for each cell, allowing to 
 #' identify structures by eye-balling reordered versions of the data matrix 
 #' (see Bertin, 1974). In the context of repertory grids, 
@@ -466,9 +467,9 @@ bertinBase <- function(nrow, ncol, labels="", labels.elements="",
 #' e.g. Dick (2000) and Raeithel (1998).
 #'
 #' @param x               \code{repgrid} object.
-#' @param colors          Vector. Two or more colors defininig the color ramp for 
+#' @param colors          Vector. Two or more colors defining the color ramp for 
 #'                        the bertin (default \code{c("white", "black")}).
-#' @param showvalues      Logical. Wether scores are shown in bertin
+#' @param showvalues      Logical. Whether scores are shown in bertin
 #' @param xlim            Vector. Left and right limits inner bertin (default 
 #'                        \code{c(.2, .8)}).
 #' @param ylim            Vector. Lower and upper limits of inner bertin
@@ -483,10 +484,10 @@ bertinBase <- function(nrow, ncol, labels="", labels.elements="",
 #'                        the color of the text is chosen according to the 
 #'                        background color. If the background ist bright the text 
 #'                        will be black and vice versa. When a color is specified
-#'                        the color is set independetn of background.
+#'                        the color is set independent of background.
 #' @param border          Border color of the bertin cells (default \code{white}).
 #' @param lheight         Line height for constructs.
-#' @param id              Logical. Wheteher to print id number for constructs and elements
+#' @param id              Logical. Whether to print id number for constructs and elements
 #'                        respectively (default \code{c(T,T)}).
 #' @param cc              Numeric. Current column to mark.
 #' @param cr              Numeric. Current row to mark.
@@ -545,9 +546,9 @@ bertin <- function(x, colors=c("white", "black"), showvalues=TRUE,
   col.fill <- colorFun(scores.standardized)
   if (!showvalues)
     scores <- recycle("", nc * ne)
-  bertinBase(nrow=nc, ncol=ne, labels=scores, labels.elements=getElementNames(x),
-             labels.left=getConstructNames(x)$leftpole, 
-             labels.right=getConstructNames(x)$rightpole,
+  bertinBase(nrow=nc, ncol=ne, labels=scores, labels.elements=elements(x),
+             labels.left=constructs(x)$leftpole, 
+             labels.right=constructs(x)$rightpole,
              col.fill=col.fill,
              xlim=xlim, ylim=ylim, margins=margins,
              cex.elements=cex.elements, cex.constructs=cex.elements,
@@ -564,7 +565,7 @@ bertin <- function(x, colors=c("white", "black"), showvalues=TRUE,
 
 
 
-#' Bertin display with corresponding cluster anaylsis. 
+#' Bertin display with corresponding cluster analysis. 
 #'
 #' Element columns and 
 #' constructs rows are ordered according to cluster criterion. Various 
@@ -628,8 +629,6 @@ bertin <- function(x, colors=c("white", "black"), showvalues=TRUE,
 #'
 #' @return            A list of two \code{\link{hclust}} object, for elements and constructs
 #'                    respectively.
-#'
-#' @author        Mark Heckmann
 #' @export
 #' @seealso  \code{\link{cluster}}
 #'
@@ -754,7 +753,7 @@ bertinCluster <- function(x, dmethod=c("euclidean", "euclidean"),
     ymax.el <- attr(dend.el, "height")
     plot(dend.el, horiz=F, xlab="", xaxs="i", yaxs="i", yaxt="n",
           nodePar=list(cex=0, lab.cex=cex.dend), ylim=c(ymax.el,0), type=type)
-    if (draw.axis)              # wether to draw axis
+    if (draw.axis)              # whether to draw axis
       axis(2, las=1, cex.axis=cex.axis, col=col.axis, col.axis=col.axis)
   }
   
@@ -765,7 +764,7 @@ bertinCluster <- function(x, dmethod=c("euclidean", "euclidean"),
     xmax.con <- attr(dend.con, "height")
     plot(dend.con, horiz=T, xlab="", xaxs="i", yaxs="i", yaxt="n",
           nodePar=list(cex=0, lab.cex=cex.dend), xlim=c(0,xmax.con), type=type)
-    if (draw.axis)              # wether to draw axis
+    if (draw.axis)              # whether to draw axis
       axis(1, las=1, cex.axis=cex.axis, col=col.axis, col.axis= col.axis)
   }
   # return hclust objects for elements and constructs

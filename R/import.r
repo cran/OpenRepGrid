@@ -125,7 +125,7 @@ convertImportObjectToRepGridObject <- function(import){
 #'                for minimum rating value in grid.
 #' @param max	    optional argument (\code{numeric}, default \code{NULL})
 #'                for maximum rating value in grid.
-#' @return        a list with imported paraemeters
+#' @return        a list with imported parameters
 #'
 #' @note          Note that the gridstat data format does not contain explicit 
 #'                information about the range of the rating scale (minimum and 
@@ -138,11 +138,11 @@ convertImportObjectToRepGridObject <- function(import){
 #'                not set explicitly when using the importing function.
 #'                
 #'                The function only reads data from the latest GridStat version.
-#'                The latest version allows the seperation of the left and right pole
-#'                by using on of the following symbols \code{/:-} (hyphene, colon and dash). Older versions may not
-#'                seperate the left and right pole. This will cause all labels to be assigned to 
+#'                The latest version allows the separation of the left and right pole
+#'                by using on of the following symbols \code{/:-} (hyphen, colon and dash). Older versions may not
+#'                separate                              the left and right pole. This will cause all labels to be assigned to 
 #'                the left pole only when importing. You may fix this by simply entering
-#'                one of the construct seperator symbols into the GridStat file between each
+#'                one of the construct separator symbols into the GridStat file between each
 #'                left and right construct pole.
 #'
 #'                The third line of a GridStat file may contain a no labels statement (i.e. a
@@ -163,9 +163,7 @@ convertImportObjectToRepGridObject <- function(import){
 #'
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
-#'
-#' @references    Bell, R. C. (1998)  GRIDSTAT: A program for analysing the data of a 
+#' @references    Bell, R. C. (1998)  GRIDSTAT: A program for analyzing the data of a 
 #'                repertory grid. Melbourne: Author.
 #' @examples \dontrun{
 #' 
@@ -180,9 +178,6 @@ convertImportObjectToRepGridObject <- function(import){
 #' # using a full path (example)
 #' imp <- importGridstatInternal("/Users/markheckmann/data/gridstat.dat")
 #' 
-#' # load gridstat data from URL
-#' imp <- importGridstatInternal("http://www.openrepgrid.uni-bremen.de/data/gridstat.dat")
-#'
 #' # setting rating scale range
 #' imp <- importGridstatInternal(file, dir, min=1, max=6)
 #' }
@@ -222,9 +217,9 @@ importGridstatInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   		tmp <- scan(file = file, what = "character", 
   		            skip=2+i-1, nlines=1, quiet = TRUE)               # read construct line by line
   		l$constructs[[i]] <- joinString(tmp)											    # make one string
-  		poles <- strsplit(l$constructs[[i]], "[/:-]")									# separate emergent and constrast pole by splitting at hyphene, colon or slash (see email from Richard)
+  		poles <- strsplit(l$constructs[[i]], "[/:-]")									# separate emergent and contrast pole by splitting at hyphen, colon or slash (see email from Richard)
   		l$emergentPoles[[i]] <- trimBlanksInString(poles[[1]][1])			# save emergent pole
-  		l$contrastPoles[[i]] <- trimBlanksInString(poles[[1]][2])			# save constrast pole
+  		l$contrastPoles[[i]] <- trimBlanksInString(poles[[1]][2])			# save contrast pole
   	}
   } else {                          # make default constructs if no labels statement given
     constructs.left <- paste("construct left", seq_len(l$noConstructs))
@@ -294,7 +289,7 @@ importGridstatInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #' The format for a multigrid file resembles the single Gridstat data file. The
 #' lines of the single files are simply placed below each other without any
 #' blank lines in between. The function reads in a file and tests if it is a
-#' multigrid file. Multigrid files are seperated into single Gridstat temp
+#' multigrid file. Multigrid files are separated into single Gridstat temp
 #' files. The file path for the temp files is returned. If the file is a single
 #' grid files the path is left unaltered.
 #' 
@@ -306,7 +301,7 @@ importGridstatInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 multigridFileToSinglegridFiles <- function(file) 
 {
   l <- readLines(file)
-  r <- grepl("^[ \t]*[0-9]+[ \t]+[0-9]+ *$", l)   # lines with number of c and e, i.e. two digits seperated by space
+  r <- grepl("^[ \t]*[0-9]+[ \t]+[0-9]+ *$", l)   # lines with number of c and e, i.e. two digits separated by space
   is.multigrid.file <- sum(r) > 1                 # check if it is a multi-grid file
   if (is.multigrid.file) {
     pos <- which(r) -1                              # subtract 1 as it is preceeded by an info line, i.e. where the grid starts
@@ -332,8 +327,7 @@ multigridFileToSinglegridFiles <- function(file)
 #'
 #' @param file	  Filename including path if file is not in current working 
 #'                directory. File can also be a complete URL. The fileformat
-#'                is \code{.dat}. If no file is supplied a selection pop up menu 
-#'                is opened to select the files.
+#'                is \code{.dat}.
 #' @param dir	    Alternative way to supply the directory where the file is located 
 #'                (default \code{NULL}).
 #' @param min	    Optional argument (\code{numeric}, default \code{NULL})
@@ -353,11 +347,11 @@ multigridFileToSinglegridFiles <- function(file)
 #'                not set explicitly when using the importing function.
 #'                
 #'                The function only reads data from the latest GridStat version.
-#'                The latest version allows the seperation of the left and right pole
-#'                by using on of the following symbols \code{/:-} (hyphene, colon and dash). Older versions may not
-#'                seperate the left and right pole. This will cause all labels to be assigned to 
+#'                The latest version allows the separation of the left and right pole
+#'                by using on of the following symbols \code{/:-} (hyphen, colon and dash). Older versions may not
+#'                separate                              the left and right pole. This will cause all labels to be assigned to 
 #'                the left pole only when importing. You may fix this by simply entering
-#'                one of the construct seperator symbols into the GridStat file between each
+#'                one of the construct separator symbols into the GridStat file between each
 #'                left and right construct pole.
 #'
 #'                The third line of a GridStat file may contain a no labels statement (i.e. a
@@ -366,10 +360,8 @@ multigridFileToSinglegridFiles <- function(file)
 #'                names are assigned to elements and constructs.
 #'
 #' @export
-#' @references    Bell, R. C. (1998)  GRIDSTAT: A program for analysing the data of a 
+#' @references    Bell, R. C. (1998)  GRIDSTAT: A program for analyzing the data of a 
 #'                repertory grid. Melbourne: Author.
-#'
-#' @author  Mark Heckmann
 #'
 #' @seealso       \code{\link{importGridcor}},
 #'                \code{\link{importGridstat}},
@@ -380,9 +372,6 @@ multigridFileToSinglegridFiles <- function(file)
 #'
 #' @examples \dontrun{
 #' 
-#' # using the pop-up selection menu
-#' rg <- importGridstat()
-#'
 #' # supposing that the data file gridstat.dat is in the current working directory
 #' file <- "gridstat.dat"
 #' rg <- importGridstat(file)
@@ -394,20 +383,12 @@ multigridFileToSinglegridFiles <- function(file)
 #' # using a full path (example)
 #' rg <- importGridstat("/Users/markheckmann/data/gridstat.dat")
 #' 
-#' # load gridstat data from URL
-#' rg <- importGridstat("http://www.openrepgrid.uni-bremen.de/data/gridstat.dat")
-#'
 #' # setting rating scale range
 #' rg <- importGridstat(file, dir, min=1, max=6)
 #' }
 #'
 importGridstat <- function(file, dir=NULL, min=NULL, max=NULL)
 {
-  if (missing(file)) {                                         # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("Gridstat files", ".dat"),
-                      ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filters = Filters, multi=TRUE)     # returns complete path                    
-  }  
   tmp.files <- unlist(lapply(as.list(file),                    # convert multigrid files to single grid files
                              multigridFileToSinglegridFiles))  
   imps <- lapply(as.list(tmp.files), importGridstatInternal,   # make import objects for each .txt file
@@ -420,10 +401,6 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL)
   }
 }
 
-# file <- "/Users/unimitarbeiter/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/gridstat.dat"
-# file <- "/Users/markheckmann/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/gridstat.dat"
-# tmp <- importGridstat(file)
-# str(tmp)
 
 
 ############################# GRIDCOR #########################################
@@ -508,12 +485,10 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL)
 #'                (default \code{NULL}).
 #' @note          Note that the GRIDCOR data sets the minimum ratings scale range to 1.
 #'                The maximum value can differ and is defined in the data file. 
-#' @references    \url{http://www.terapiacognitiva.net/record/gridcor.htm}
+#' @references    \url{https://www.ub.edu/terdep/gridcor.html}
 #'
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
-#'
 #' @examples \dontrun{
 #' 
 #' # supposing that the data file gridcor.dat is in the current directory
@@ -527,8 +502,6 @@ importGridstat <- function(file, dir=NULL, min=NULL, max=NULL)
 #' # using a full path
 #' imp <- importGridcorInternal("/Users/markheckmann/data/gridcor.dat")
 #' 
-#' # load GRIDCOR data from URL
-#' imp <- importGridcorInternal("http://www.openrepgrid.uni-bremen.de/data/gridcor.dat")
 #' }
 #'
 #'
@@ -581,8 +554,6 @@ importGridcorInternal <- function(file, dir=NULL) {
   l$ratings <- lapply(l$ratings, function(x) as.numeric(unlist(x)))
   l
 }
-#file <- "/Users/markheckmann/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/gridcor.dat"
-#file <- "/Users/unimitarbeiter/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/gridcor.dat"
 
 
 #' Import GRIDCOR data files.
@@ -601,13 +572,11 @@ importGridcorInternal <- function(file, dir=NULL) {
 #'                The maximum value can differ and is defined in the data file. 
 #'
 #'                Also note that both Gridcor and Gridstat data files do have the same
-#'                suffix \code{.dat}. Make sure not to mix themn up.
+#'                suffix \code{.dat}. Make sure not to mix them up.
 #' @export
-#' @author  Mark Heckmann
-#'
 #' @references    Feixas, G., & Cornejo, J. M. (2002). GRIDCOR: Correspondence Analysis 
 #'                for Grid Data (version 4.0). Barcelona: Centro de Terapia Cognitiva. 
-#'                Retrieved from \url{http://www.terapiacognitiva.net/record/gridcor.htm}.
+#'                Retrieved from \url{https://www.ub.edu/terdep/pag/index.html}.
 #'
 #' @seealso       \code{\link{importGridcor}},
 #'                \code{\link{importGridstat}},
@@ -618,9 +587,6 @@ importGridcorInternal <- function(file, dir=NULL) {
 #'
 #' @examples \dontrun{
 #' 
-#' # using the pop-up selection menu
-#' rg <- importGridcor()
-#'
 #' # supposing that the data file gridcor.dat is in the current directory
 #' file <- "gridcor.dat"
 #' rg <- importGridcor(file)
@@ -632,17 +598,10 @@ importGridcorInternal <- function(file, dir=NULL) {
 #' # using a full path
 #' rg <- importGridcor("/Users/markheckmann/data/gridcor.dat")
 #' 
-#' # load GRIDCOR data from URL
-#' rg <- importGridcor("http://www.openrepgrid.uni-bremen.de/data/gridcor.dat")
 #' }
 #'
 #'
 importGridcor <- function(file, dir=NULL){
-  if (missing(file)){                                       # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("Gridcor files", ".dat"),
-                      ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filters = Filters, multi=TRUE)  # returns complete path                    
-  }
   imps <- lapply(as.list(file), importGridcorInternal,      # make import objects for each .txt file
                  dir=dir)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)   # make repgrid object from import object
@@ -687,8 +646,6 @@ importGridcor <- function(file, dir=NULL){
 #'                will cause false assignments.
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
-#'
 #' @examples \dontrun{
 #' 
 #' # supposing that the data file gridsuite.xml is in the current directory
@@ -702,8 +659,6 @@ importGridcor <- function(file, dir=NULL){
 #' # using a full path
 #' imp <- importGridsuite("/Users/markheckmann/data/gridsuite.xml")
 #' 
-#' # load Gridsuite data from URL
-#' imp <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
 #' }
 #'
 #'
@@ -790,8 +745,6 @@ importGridsuiteInternal <- function(file, dir=NULL){
 #'                if the output should be in different order the current mechanism 
 #'                will cause false assignments.
 #' @export
-#' @author  Mark Heckmann
-#'
 #' @seealso       \code{\link{importGridcor}},
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
@@ -801,9 +754,6 @@ importGridsuiteInternal <- function(file, dir=NULL){
 #'
 #' @examples \dontrun{
 #' 
-#' # using the pop-up selection menu
-#' rg <- importGridsuite()
-#'
 #' # supposing that the data file gridsuite.xml is in the current directory
 #' file <- "gridsuite.xml"
 #' rg <- importGridsuite(file)
@@ -815,17 +765,10 @@ importGridsuiteInternal <- function(file, dir=NULL){
 #' # using a full path
 #' rg <- importGridsuite("/Users/markheckmann/data/gridsuite.xml")
 #' 
-#' # load Gridsuite data from URL
-#' rg <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
 #' }
 #'
 #'
 importGridsuite <- function(file, dir=NULL){
-  if (missing(file)){                                         # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("Gridsuite files", ".xml"),
-                      ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
-  }
   imps <- lapply(as.list(file), importGridsuiteInternal,      # make import objects for each .txt file
                  dir=dir)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
@@ -894,16 +837,16 @@ importGridsuite <- function(file, dir=NULL){
 #'                (default \code{NULL}).
 #' @return        a list with extracted parameters.
 #'
-#' @note          Sci:Vesco offers the options to rate the construct poles seperately or using
-#'                a bipolar scale. The seperated rating is done using the "tetralemma" field.
+#' @note          Sci:Vesco offers the options to rate the construct poles separately or using
+#'                a bipolar scale. The separated rating is done using the "tetralemma" field.
 #'                The field is a bivariate plane on which each of the four (tetra) corners  
 #'                has a different meaning in terms of rating. Using this approach also allows ratings
 #'                like: "both poles apply", "none of the poles apply" and all intermediate ratings
 #'                can be chosen. This relaxes the bipolarity assumption often assumed in grid theory and
 #'                allows for deviation from a strict bipolar rating if the constructs are not applied
 #'                in a bipolar way. Using the tetralemma field for rating requires to analyze
-#'                each construct seperately though. This means we get a double entry grid where the 
-#'                emergent and constrast pole ratings might not simply be a reflection of on another.
+#'                each construct separately though. This means we get a double entry grid where the 
+#'                emergent and contrast pole ratings might not simply be a reflection of on another.
 #'                If a tetralemma field has been used for rating, \code{OpenRepGrid} offers the option 
 #'                to transform the scores into "normal" grid ratings (i.e. restricted to bipolarity)
 #'                by projecting the ratings from the bivariate tetralemma field onto the diagonal 
@@ -914,8 +857,6 @@ importGridsuite <- function(file, dir=NULL){
 #'
 #' @export
 #' @keywords internal
-#' @author  Mark Heckmann
-#'
 #' @examples \dontrun{
 #' 
 #' # supposing that the data file scivesco.scires is in the current directory
@@ -929,8 +870,6 @@ importGridsuite <- function(file, dir=NULL){
 #' # using a full path
 #' imp <- importScivescoInternal("/Users/markheckmann/data/scivesco.scires")
 #' 
-#' # load Sci:Vesco data from URL
-#' imp <- importScivescoInternal("http://www.openrepgrid.uni-bremen.de/data/scivesco.scires")
 #' }
 #'
 #'
@@ -1055,8 +994,6 @@ importScivescoInternal <- function(file, dir=NULL){
 #' @return  \code{repgrid} object.
 #' @keywords internal
 #' @export
-#' @author  Mark Heckmann
-#'
 convertScivescoImportObjectToRepGridObject <- function(import){
   # structure of import object:
   # List of 16
@@ -1112,18 +1049,18 @@ convertScivescoImportObjectToRepGridObject <- function(import){
 #'                (default \code{NULL}).
 #' @return        A single \code{repgrid} object in case one file and
 #'                a list of \code{repgrid} objects in case multiple files are imported.
-#' @note          Sci:Vesco offers the options to rate the construct poles seperately or using
-#'                a bipolar scale. The seperated rating is done using the "tetralemma" field.
+#' @note          Sci:Vesco offers the options to rate the construct poles separately or using
+#'                a bipolar scale. The separated rating is done using the "tetralemma" field.
 #'                The field is a bivariate plane on which each of the four (tetra) corners  
 #'                has a different meaning in terms of rating. Using this approach also allows ratings
 #'                like: "both poles apply", "none of the poles apply" and all intermediate ratings
 #'                can be chosen. This relaxes the bipolarity assumption often assumed in grid theory and
 #'                allows for deviation from a strict bipolar rating if the constructs are not applied
 #'                in a bipolar way. Using the tetralemma field for rating requires to analyze
-#'                each construct seperately though. This means we get a double entry grid where the 
-#'                emergent and constrast pole ratings might not simply be a reflection of on another.
+#'                each construct separately though. This means we get a double entry grid where the 
+#'                emergent and contrast pole ratings might not simply be a reflection of on another.
 #'                The tetralemma field is not yet supported and importing will fail. Currently only bipolar
-#'                ratings are suppoerted.
+#'                ratings are supported.
 #'
 #'                If a tetralemma field has been used for rating, \code{OpenRepGrid} will offer the option 
 #'                to transform the scores into "normal" grid ratings (i.e. restricted to bipolarity)
@@ -1136,8 +1073,6 @@ convertScivescoImportObjectToRepGridObject <- function(import){
 #'                This might cause wrong assignments.
 #'
 #' @export
-#' @author        Mark Heckmann
-#' 
 #' @references    Menzel, F., Rosenberger, M., Buve, J. (2007). Emotionale, intuitive und 
 #'                rationale Konstrukte verstehen. \emph{Personalfuehrung, 4}(7), 91-99.
 #'
@@ -1161,17 +1096,10 @@ convertScivescoImportObjectToRepGridObject <- function(import){
 #' # using a full path
 #' rg <- importScivesco("/Users/markheckmann/data/scivesco.scires")
 #' 
-#' # load Gridsuite data from URL
-#' rg <- importScivesco("http://www.openrepgrid.uni-bremen.de/data/scivesco.scires")
 #' }
 #'
 #'
 importScivesco <- function(file, dir=NULL){
-  if (missing(file)){                                         # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("Sci:Vesco files", ".scires"),
-                        ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
-  }
   imps <- lapply(as.list(file), importScivescoInternal,       # make import objects for each .txt file
                  dir=dir)
   rgs <- lapply(imps, convertScivescoImportObjectToRepGridObject)     # make repgrid object from import object
@@ -1183,11 +1111,6 @@ importScivesco <- function(file, dir=NULL){
   }
 }
 
-# file <- "/Users/unimitarbeiter/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/sample.txt"
-# file <- "/Users/markheckmann/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/sample.txt"
-# tmp <- importTxt(file)
-# str(tmp)
-
 
 ############################# IMPORT .TXT #######################################
 
@@ -1198,7 +1121,7 @@ importScivesco <- function(file, dir=NULL){
 #' with a predefined tag in uppercase letters. The first block starts with \code{ELEMENTS} 
 #' and ends with \code{END ELEMENTS} and contains one element in each line.
 #' The other mandatory blocks contain the constructs and ratings (see below). In the 
-#' block containing the constructs the left and right pole are seperated by a 
+#' block containing the constructs the left and right pole are separated by a 
 #' colon (:). To define missing values use \code{NA} like in the example below.
 #' One optional block contains the range of the rating scale used defined by two numbers.
 #' The order of the blocks is arbitrary. All text not contained within the blocks
@@ -1255,8 +1178,6 @@ importScivesco <- function(file, dir=NULL){
 #'
 #' @export
 #' @keywords internal
-#' @author        Mark Heckmann
-#'
 #' @examples \dontrun{
 #' 
 #' # supposing that the data file sample.txt is in the current directory
@@ -1270,11 +1191,10 @@ importScivesco <- function(file, dir=NULL){
 #' # using a full path
 #' imp <- importTxtInternal("/Users/markheckmann/data/sample.txt")
 #' 
-#' # load Gridsuite data from URL
-#' imp <- importTxtInternal("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
 #' }
 #'
-importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
+importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL)
+{
   if (!is.null(dir)) 
     file <- paste(dir, file, sep="/", collapse="")
 
@@ -1282,15 +1202,16 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   data <- gsub("\t", " ", data)         # replace tabulators by simple blank
   data <- data[str_trim(data) != ""]    # remove all empty lines
   
-  line.elements <- which(data == "ELEMENTS")
-  line.elements.end <- which(data == "END ELEMENTS")
-  line.constructs <- which(data == "CONSTRUCTS")
-  line.constructs.end <- which(data == "END CONSTRUCTS")
-  line.ratings <- which(data == "RATINGS") 
-  line.ratings.end <- which(data == "END RATINGS")
-  line.range <- which(data == "RANGE")
-  line.bipolar.implications <- which(data == "BIPOLAR IMPLICATIONS") 
-  line.bipolar.implications.end <- which(data == "END BIPOLAR IMPLICATIONS")
+  d <- str_trim(data)                   # remove blanks for better matching
+  line.elements <- which(d == "ELEMENTS")
+  line.elements.end <- which(d == "END ELEMENTS")
+  line.constructs <- which(d == "CONSTRUCTS")
+  line.constructs.end <- which(d == "END CONSTRUCTS")
+  line.ratings <- which(d == "RATINGS") 
+  line.ratings.end <- which(d == "END RATINGS")
+  line.range <- which(d == "RANGE")
+  line.bipolar.implications <- which(d == "BIPOLAR IMPLICATIONS") 
+  line.bipolar.implications.end <- which(d == "END BIPOLAR IMPLICATIONS")
   
   l <- list()
   
@@ -1302,7 +1223,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
   l$constructs <- as.list(data[(line.constructs + 1):(line.constructs.end-1)])
   l$constructs <- lapply(l$constructs, function(x) trimBlanksInString(x) )
   tmp <- lapply(l$constructs, function(x) {
-    strsplit(x, ":")[[1]]              # separate emergent and constrast pole by splitting at hyphene, colon or slash (see email from Richard)
+    strsplit(x, ":")[[1]]              # separate emergent and contrast pole by splitting at hyphen, colon or slash (see email from Richard)
   })
   l$emergentPoles <- lapply(tmp, function(x) trimBlanksInString(x[1]) )
   l$contrastPoles <- lapply(tmp, function(x) trimBlanksInString(x[2]) ) 
@@ -1366,7 +1287,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #' with a predefined tag in uppercase letters. The first block starts with \code{ELEMENTS} 
 #' and ends with \code{END ELEMENTS} and contains one element in each line.
 #' The other mandatory blocks contain the constructs and ratings (see below). In the 
-#' block containing the constructs the left and right pole are seperated by a 
+#' block containing the constructs the left and right pole are separated by a 
 #' colon (:). To define missing values use \code{NA} like in the example below.
 #' One optional block contains the range of the rating scale used defined by two numbers.
 #' The order of the blocks is arbitrary. All text not contained within the blocks
@@ -1412,8 +1333,7 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #'
 #' @param file	  A vector of filenames including the full path if file is not in current working 
 #'                directory. File can also be a complete URL. The file suffix
-#'                has to be \code{.txt}. If no file is supplied a selection pop up menu is opened to select
-#'                the files.
+#'                has to be \code{.txt}.
 #' @param dir	    Alternative way to supply the directory where the file is located 
 #'                (default \code{NULL}).
 #' @param min	    Optional argument (\code{numeric}, default \code{NULL})
@@ -1423,8 +1343,6 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #' @return        A single \code{repgrid} object in case one file and
 #'                a list of \code{repgrid} objects in case multiple files are imported.
 #' @export
-#' @author        Mark Heckmann
-#'
 #' @seealso       \code{\link{importGridcor}},
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
@@ -1433,9 +1351,6 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #'                \code{\link{importExcel}}
 #'
 #' @examples \dontrun{
-#' 
-#' # using the pop-up selection menu
-#' rg <- importTxt()   
 #'
 #' # supposing that the data file sample.txt is in the current directory
 #' file <- "sample.txt"
@@ -1448,21 +1363,12 @@ importTxtInternal <- function(file, dir=NULL, min=NULL, max=NULL){
 #' # using a full path
 #' rg <- importTxt("/Users/markheckmann/data/sample.txt")
 #' 
-#' # load .txt data from URL
-#' rg <- importTxt("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
-#'
 #' # importing more than one .txt file via R code
 #' files <- c("sample.txt", "sample_2.txt")
 #' rg <- importTxt(files)
 #' }
 #'
 importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
-  if (missing(file)){                                         # open file selection menu if no file argument is supplied
-    Filters <- matrix(c("text files", ".txt",
-                        "text files", ".TXT"),
-                        ncol=2, byrow = TRUE)
-    file <- tk_choose.files(filters = Filters, multi=TRUE)    # returns complete path                    
-  }
   imps <- lapply(as.list(file), importTxtInternal,            # make import objects for each .txt file
                  dir=dir, min=min, max=max)
   rgs <- lapply(imps, convertImportObjectToRepGridObject)     # make repgrid object from import object
@@ -1473,23 +1379,16 @@ importTxt <- function(file, dir=NULL, min=NULL, max=NULL){
   }
 }
 
-# file <- "/Users/unimitarbeiter/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/sample.txt"
-# file <- "/Users/markheckmann/Documents/Magic Briefcase/DA openRepgrid/openrepgrid/basic/data/foreign/sample.txt"
-# tmp <- importTxt(file)
-# str(tmp)
-
 
 
 ############################# IMPORT EXCEL ####################################
 
 
-#' workhiorse function (parser) for importExcel.
+#' workhorse function (parser) for importExcel.
 #' 
 #' @inheritParams importExcel
 #' @export
 #' @keywords      internal
-#' @author        Mark Heckmann
-#'
 importExcelInternal <- function(file, dir=NULL, sheetIndex=1, 
                                 min=NULL, max=NULL)
 {
@@ -1585,8 +1484,6 @@ importExcelInternal <- function(file, dir=NULL, sheetIndex=1,
 #' @return        A single \code{repgrid} object in case one file and
 #'                a list of \code{repgrid} objects in case multiple files are imported.
 #' @export
-#' @author        Mark Heckmann
-#'
 #' @seealso       \code{\link{importGridcor}},
 #'                \code{\link{importGridstat}},
 #'                \code{\link{importScivesco}},
@@ -1624,29 +1521,7 @@ importExcel <- function(file, dir=NULL, sheetIndex=1, min=NULL, max=NULL)
 
 
 
-############################# IMPORTING GUI ###################################
-
-#' Load repertory grid file using a GUI
-#'
-#' OpenRepGrid will try to guess what data type you are trying to load
-#' by using the data format. Some formats are unique and are clearly 
-#' attributable to a certain grid program (.scires, .grd) while others
-#' are not.
-#'
-#' @export
-#' @keywords internal
-#'
-loadgrid <- function(){
-  Filters <- matrix(c("All files", "*",
-                      "OpenRepGrid", ".org", 
-                      "Sci:Vesco", ".scires",
-                      "gridstat", ".dat",
-                      "gridsuite", ".xml",
-                      "idiogrid", ".grd"),
-                      ncol=2, byrow = TRUE)
-  #choose.files(filters = Filters[c("dat", "scires", "All"),])
-  tk_choose.files(filters = Filters)
-}
+############################# IMPORTING ###################################
 
 
 guessDataSource <- function(file){
@@ -1666,4 +1541,3 @@ guessDataSource <- function(file){
 }
 
 #d <- guessDataSource(loadgrid())
-

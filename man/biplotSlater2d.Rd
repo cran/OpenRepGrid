@@ -35,7 +35,7 @@ To see all the parameters that can be changed see \code{\link{biplot2d}}.
 }
 \examples{
 \dontrun{
-   # See examples in \\code{\\link{biplot2d}} as the same arguments
+   # See examples in \code{\link{biplot2d}} as the same arguments
    # can used for this function.
 }
 
@@ -56,7 +56,4 @@ Unsophisticated biplot: \code{\link{biplotSimple}}; \cr
            \code{\link{biplotSlater3d}};\cr
            Function to set view in 3D:
            \code{\link{home}}.
-}
-\author{
-Mark Heckmann
 }

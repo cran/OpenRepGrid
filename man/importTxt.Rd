@@ -9,8 +9,7 @@ importTxt(file, dir = NULL, min = NULL, max = NULL)
 \arguments{
 \item{file}{A vector of filenames including the full path if file is not in current working 
 directory. File can also be a complete URL. The file suffix
-has to be \code{.txt}. If no file is supplied a selection pop up menu is opened to select
-the files.}
+has to be \code{.txt}.}
 
 \item{dir}{Alternative way to supply the directory where the file is located 
 (default \code{NULL}).}
@@ -32,7 +31,7 @@ The \code{.txt} file has to be in a fixed format. There are three mandatory bloc
 with a predefined tag in uppercase letters. The first block starts with \code{ELEMENTS} 
 and ends with \code{END ELEMENTS} and contains one element in each line.
 The other mandatory blocks contain the constructs and ratings (see below). In the 
-block containing the constructs the left and right pole are seperated by a 
+block containing the constructs the left and right pole are separated by a 
 colon (:). To define missing values use \code{NA} like in the example below.
 One optional block contains the range of the rating scale used defined by two numbers.
 The order of the blocks is arbitrary. All text not contained within the blocks
@@ -68,6 +67,7 @@ is discarded and can thus be used for comments.
 \code{---------------- end of file ----------------} \cr
 }
 
+
 Note that the maximum and minimum value has to be defined using the \code{min} and
 \code{max} arguments if no \code{RANGE} block is contained in the data file.
 Otherwise the scaling range is inferred from the available data and a warning 
@@ -77,9 +77,6 @@ set the scale range correctly.
 }
 \examples{
 \dontrun{
-
-# using the pop-up selection menu
-rg <- importTxt()   
 
 # supposing that the data file sample.txt is in the current directory
 file <- "sample.txt"
@@ -91,9 +88,6 @@ rg <- importTxt(file, dir)
 
 # using a full path
 rg <- importTxt("/Users/markheckmann/data/sample.txt")
-
-# load .txt data from URL
-rg <- importTxt("http://www.openrepgrid.uni-bremen.de/data/sample.txt")
 
 # importing more than one .txt file via R code
 files <- c("sample.txt", "sample_2.txt")
@@ -108,7 +102,4 @@ rg <- importTxt(files)
                \code{\link{importGridsuite}},
                \code{\link{importTxt}},
                \code{\link{importExcel}}
-}
-\author{
-Mark Heckmann
 }

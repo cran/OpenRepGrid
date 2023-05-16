@@ -2,13 +2,25 @@
 % Please edit documentation in R/bertin.r
 \name{bertinCluster}
 \alias{bertinCluster}
-\title{Bertin display with corresponding cluster anaylsis.}
+\title{Bertin display with corresponding cluster analysis.}
 \usage{
-bertinCluster(x, dmethod = c("euclidean", "euclidean"), cmethod = c("ward",
-  "ward"), p = c(2, 2), align = TRUE, trim = NA, type = c("triangle"),
-  xsegs = c(0, 0.2, 0.7, 0.9, 1), ysegs = c(0, 0.1, 0.7, 1), x.off = 0.01,
-  y.off = 0.01, cex.axis = 0.6, col.axis = grey(0.4), draw.axis = TRUE,
-  ...)
+bertinCluster(
+  x,
+  dmethod = c("euclidean", "euclidean"),
+  cmethod = c("ward", "ward"),
+  p = c(2, 2),
+  align = TRUE,
+  trim = NA,
+  type = c("triangle"),
+  xsegs = c(0, 0.2, 0.7, 0.9, 1),
+  ysegs = c(0, 0.1, 0.7, 1),
+  x.off = 0.01,
+  y.off = 0.01,
+  cex.axis = 0.6,
+  col.axis = grey(0.4),
+  draw.axis = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{\code{repgrid} object.}
@@ -143,7 +155,4 @@ distance measures as well as cluster methods are supported.
 }
 \seealso{
 \code{\link{cluster}}
-}
-\author{
-Mark Heckmann
 }

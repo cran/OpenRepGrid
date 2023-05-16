@@ -156,7 +156,7 @@ modifyListNA <- function (x, val) {
 #modifyListNA(l2, l1)
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 #' bring vector values into ring form
 #'
 #' the values of a vector that are outside of a given range are remapped
@@ -183,7 +183,7 @@ ring <-  function(x, upper){
 }
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 #' map a value onto others
 #' 
 #' @param x      vector
@@ -204,7 +204,7 @@ map <- function(x, each){
 }
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 #' order one vector by another
 #'
 #' small wrapper to order one vector by another, hardly worth a function
@@ -217,7 +217,7 @@ map <- function(x, each){
 orderBy <- function(x,y) y[order(x)]
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 #' make ascending and descending vector
 #'
 #' along a given length n make ascending indices until reaching
@@ -338,7 +338,6 @@ insertAt <- function(index.base, index.insert, side="pre"){
 #' @param ...       see ?apply
 #' @return          see ?apply
 #' @seealso         \code{\link{apply}}
-#' @author          Mark Heckmann
 #' @export
 #' @keywords        internal
 #' @examples \dontrun{
@@ -393,7 +392,6 @@ apply_pb <- function(X, MARGIN, FUN, ...)
 #' @param ...         see ?lapply 
 #' @return list       see ?lapply
 #' @seealso           \code{\link{lapply}}
-#' @author            Mark Heckmann
 #' @export
 #' @keywords          internal
 #' @examples \dontrun{
@@ -429,7 +427,7 @@ lapply_pb <- function(X, FUN, ...)
 
 #' sapply with a progress bar
 #'
-#' Can be used like standard base:::sapply. The ionly thing 
+#' Can be used like standard base:::sapply. The only thing 
 #' it does is create an additional progress bar.
 #'
 #' @param X           see ?sapply for parameter explanation
@@ -437,7 +435,6 @@ lapply_pb <- function(X, FUN, ...)
 #' @param ...         see ?sapply 
 #' @return list       see ?sapply
 #' @seealso           \code{\link{sapply}}
-#' @author            Mark Heckmann
 #' @export
 #' @keywords          internal
 #' @examples \dontrun{
@@ -478,8 +475,6 @@ sapply_pb <- function(X, FUN, ...)
 #'
 #' @param x   a string or a vector of strings
 #' @return vector  a string or vector of strings with reversed chars
-#' @references
-#'    \url{http://www.mail-archive.com/r-help@@r-project.org/msg102759.html}
 #' @export
 #' @keywords internal
 #' @examples
@@ -492,15 +487,15 @@ strReverse <- function(x) {
 
 #' trim vector to lower or upper value 
 #'
-#' the range a value may take is resticted to by an upper and 
-#' lower boundary. If it excedd the boundary the value is replaced
+#' the range a value may take is restricted to by an upper and 
+#' lower boundary. If it exceeds the boundary the value is replaced
 #' by the boundary value or alternatively by NA
 #'
 #' @param x         numeric vector
 #' @param minmax    minimal and maximal possible value (default c(-Inf, Inf) 
 #'                  i.e. no trimming occurs)
 #' @param na        Use NAs for replacing values that are out of range
-#' @return vector   vector whose elemenets that are out of range are replaced
+#' @return vector   vector whose elements that are out of range are replaced
 #' @export
 #' @keywords internal
 #' @examples
@@ -821,13 +816,13 @@ angle <- function (x, y)
 }
 
 
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 ###                           FORMATTING                                   ####
-###############################################################################
+#//////////////////////////////////////////////////////////////////////////////
 
 #' Format a matrix and add index column.
 #'
-#' @param x         A matrix onbject.
+#' @param x         A matrix object.
 #' @param rnames    Row names.
 #' @param cnames    Column names.
 #' @param pre.index Whether to make index prefix for rows and column names.
@@ -835,8 +830,6 @@ angle <- function (x, y)
 #' @param diag      Whether to show diagonal.
 #' @param mode      Whether to show upper (mode=1), lower (mode=2) 
 #'                  or both triangles (mode=0) of the matrix.
-#'
-#' @author          Mark Heckmann
 #' @keywords        internal
 #' @export
 #'
@@ -872,11 +865,11 @@ addNamesToMatrix <- function(x, m, trim=7, along=1){
   if (!inherits(x, "repgrid")) 							    # check if x is repgrid object
   	stop("Object x must be of class 'repgrid'")
   if (along == 1){
-    cnamesl <- getConstructNames(x)[ ,1]
-    cnamesr <- getConstructNames(x)[ ,2]
+    cnamesl <- constructs(x)$leftpole
+    cnamesr <- constructs(x)$rightpole
     new.names <- paste(cnamesl, cnamesr, sep = " - ")
   } else {
-    new.names <- getElementNames(x)
+    new.names <- elements(x)
   }
   if (!is.na(trim))                               # trim constructs if prompted
     new.names <- substr(new.names, 1, trim)
@@ -926,14 +919,13 @@ addIndexColumnToMatrix <- function(x){
 #' Make a histogram with steps instead of bars. Densities are used
 #' for the heights.
 #'
-#' @title           Density histogram withs steps instead of bars
+#' @title           Density histogram with steps instead of bars
 #'
 #' @param vals      Numeric values to display.
 #' @param breaks    Passed on to \code{hist}. 
 #'                  See ?hist parameter \code{breaks} for more information.
 #' @param add       Whether to add the steps to an existing plot (\code{FALSE})
 #'                  or to create a new plot (default \code{add=TRUE}).  
-#' @author          Mark Heckmann
 #' @export
 #' @keywords        internal  
 #' @examples \dontrun{

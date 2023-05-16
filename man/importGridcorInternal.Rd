@@ -35,16 +35,11 @@ imp <- importGridcorInternal(file, dir)
 # using a full path
 imp <- importGridcorInternal("/Users/markheckmann/data/gridcor.dat")
 
-# load GRIDCOR data from URL
-imp <- importGridcorInternal("http://www.openrepgrid.uni-bremen.de/data/gridcor.dat")
 }
 
 
 }
 \references{
-\url{http://www.terapiacognitiva.net/record/gridcor.htm}
-}
-\author{
-Mark Heckmann
+\url{https://www.ub.edu/terdep/gridcor.html}
 }
 \keyword{internal}

@@ -4,11 +4,10 @@
 \alias{print.indexConflict3}
 \title{print method for class indexConflict3}
 \usage{
-\method{print}{indexConflict3}(x, digits = 2, output = 1,
-  discrepancies = TRUE, ...)
+\method{print}{indexConflict3}(x, digits = 2, output = 1, discrepancies = TRUE, ...)
 }
 \arguments{
-\item{x}{Output from funtion indexConflict3}
+\item{x}{Output from function indexConflict3}
 
 \item{digits}{Numeric. Number of digits to round to (default is 
 \code{2}).}

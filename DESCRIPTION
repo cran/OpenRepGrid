@@ -4,33 +4,37 @@ Title: Tools to Analyze Repertory Grid Data
 LazyData: yes
 Type: Package
 LazyLoad: yes
-Authors@R: person("Mark", "Heckmann", email = "heckmann.mark@gmail.com",
-    role = c("aut", "cre"))
+Authors@R: c(
+    person(given = "Mark", family = "Heckmann", email = "heckmann.mark@gmail.com", 
+           role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-0736-7417")),
+    person(given = "Alejandro", family = "García Gutiérrez", role = "ctb"),
+    person(given = "Diego", family = "Vitali", role = "ctb")
+    )
 Description: Analyze repertory grids, a qualitative-quantitative 
     data collection technique devised by George A. Kelly in the 1950s. Today, grids are used across 
     various domains ranging from clinical psychology to marketing. The package contains
-    functions to quantitatively analyze and visualize repertory grid data 
-    (see e.g. Bell, 2005, <doi:10.1002/0470013370.ch9>; 
-    Fransella, Bell, & Bannister, 2004, ISBN: 978-0-470-09080-0).
-Version: 0.1.12
-Date: 2018-05-31
+    functions to quantitatively analyze and visualize repertory grid data.
+Version: 0.1.14
+Date: 2023-05-16
 Encoding: UTF-8
-URL: http://openrepgrid.org,
-        https://github.com/markheckmann/OpenRepGrid
-Imports: methods, graphics, grid, utils, stats, grDevices, plyr,
-        stringr, abind, rgl, colorspace, GPArotation, psych, XML,
-        tcltk, pvclust, openxlsx
+URL: https://github.com/markheckmann/OpenRepGrid
+Imports: methods, graphics, grid, utils, stats, grDevices, crayon,
+        plyr, stringr, abind, rgl, colorspace, psych, XML, pvclust,
+        openxlsx, tidyr, dplyr, scales, igraph
 Collate: 'bertin.r' 'calc.r' 'data-openrepgrid.r' 'dev-functions.r'
-        'distance.R' 'double-entry.R' 'export.r' 'gmMain.r' 'import.r'
-        'measures.r' 'onair.r' 'openrepgrid.r' 'repgrid.r'
-        'repgrid-basicops.r' 'repgrid-constructs.r'
-        'repgrid-elements.r' 'repgrid-output.r' 'repgrid-plots.r'
-        'repgrid-ratings.r' 'rgl-3d.r' 'settings.r' 'utils-import.r'
-        'utils.r' 'zzz.r'
-RoxygenNote: 6.0.1
+        'distance.R' 'double-entry.R' 'export.r' 'globals.R' 'gmMain.r'
+        'gridlist.R' 'import.r' 'measures.r' 'onair.r' 'openrepgrid.r'
+        'perturbate.R' 'repgrid.r' 'repgrid-basicops.r'
+        'repgrid-constructs.r' 'repgrid-elements.r' 'repgrid-output.r'
+        'repgrid-plots.r' 'repgrid-ratings.r' 'resampling.R' 'rgl-3d.r'
+        'settings.r' 'utils-import.r' 'utils.r' 'zzz.r'
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Author: Mark Heckmann [aut, cre]
+Suggests: testthat (>= 2.1.0), covr
+Packaged: 2023-05-16 13:47:30 UTC; MarkHeckmann
+Author: Mark Heckmann [aut, cre, cph] (<https://orcid.org/0000-0002-0736-7417>),
+  Alejandro García Gutiérrez [ctb],
+  Diego Vitali [ctb]
 Maintainer: Mark Heckmann <heckmann.mark@gmail.com>
-Packaged: 2018-05-31 22:06:52 UTC; heckm
 Repository: CRAN
-Date/Publication: 2018-05-31 22:52:29 UTC
+Date/Publication: 2023-05-16 15:00:11 UTC

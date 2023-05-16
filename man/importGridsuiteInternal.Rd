@@ -41,8 +41,6 @@ imp <- importGridsuite(file, dir)
 # using a full path
 imp <- importGridsuite("/Users/markheckmann/data/gridsuite.xml")
 
-# load Gridsuite data from URL
-imp <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml")
 }
 
 
@@ -54,8 +52,5 @@ imp <- importGridsuite("http://www.openrepgrid.uni-bremen.de/data/gridsuite.xml"
                for a common data exchange format for repertory grid data. 
                \emph{Journal of Constructivist Psychology, 17}(3), 247. 
                doi:10.1080/10720530490447167
-}
-\author{
-Mark Heckmann
 }
 \keyword{internal}

@@ -8,14 +8,10 @@
 #' in format used by \pkg{OpenRepGrid}. This file format can also 
 #' easily be edited by hand (see \code{\link{importTxt}} for a 
 #' description).
-#' The funtion will open an interactive dialog box to let the user 
-#' enter a filename if no \code{file} argument is supplied
-#' in the function call. 
 #'
 #' @param x     \code{repgrid} object.
 #' @param file  Filename to save the grid to. The name should have 
-#'              the suffix .txt. If the function is called without
-#'              specifying this argumnet a dialog box is opened.
+#'              the suffix \code{.txt}.
 #' @return      Invisibly returns the name of the file.
 #'
 #' @note
@@ -52,11 +48,8 @@
 #' }
 #' \code{---------------- end of file ----------------}
 #'
-#' @author    Mark Heckmann
 #' @export
-#'
 #' @seealso     \code{\link{importTxt}}
-#'
 #' @examples \dontrun{
 #' 
 #'  x <- randomGrid()
@@ -64,15 +57,10 @@
 #'
 #' }
 #'
-saveAsTxt <- function(x, file=NA){  
-	if (is.na(file)){
-	  #require(tcltk)
-  	fileName <- tclvalue(tkgetSaveFile())     # open filename dialog  
-	} else 
-	  fileName <- file
-	
-	enames <- getElementNames(x)
-	cnames <- getConstructNames(x)
+saveAsTxt <- function(x, file = NA) {  
+  fileName <- file
+	enames <- elements(x)
+	cnames <- constructs(x)
 	scores <- getRatingLayer(x)
 	# write txt file
 	con <- file(fileName, "w")                # open an output file connection
@@ -191,11 +179,8 @@ saveAsTxt <- function(x, file=NA){
 #'              the suffix \code{.xlsx}.
 #' @param sheet Index of the sheet to write to.
 #' @return      Invisibly returns the name of the file.
-#' @author    Mark Heckmann
 #' @export
-#'
 #' @seealso     \code{\link{importExcel}}
-#'
 #' @examples \dontrun{
 #' 
 #'  x <- randomGrid(options=0)
@@ -211,9 +196,9 @@ saveAsExcel <- function(x, file, sheet=1)
     stop("The file extension must be '.xlsx' but you have '.", ext, "'", call. = FALSE)
   
   # build matrix to write to Excel
-  enames <- getElementNames(x)
-  cnames <- getConstructNames(x)
-  scores <- getRatingLayer(x, names=FALSE)
+  enames <- elements(x)
+  cnames <- constructs(x)
+  scores <- ratings(x, names=FALSE)
   mm <- getScale(x)  # min, max
   
   part1 <- c(mm[1], enames, mm[2])
