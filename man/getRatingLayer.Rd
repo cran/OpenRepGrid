@@ -13,7 +13,7 @@ getRatingLayer(x, layer = 1, names = TRUE, trim = 10)
 
 \item{names}{extract row and columns names (constructs and elements).}
 
-\item{trim}{the number of characters a row or column name is trimmed to 
+\item{trim}{the number of characters a row or column name is trimmed to
 (default is \code{10}). If \code{NA} no trimming is done. Trimming
 simply saves space when displaying the output.}
 }
@@ -26,7 +26,7 @@ get rating layer
 \examples{
 \dontrun{
 
-     getRatingLayer(bell2010)
+getRatingLayer(bell2010)
 }
 
 }

@@ -17,23 +17,22 @@ sapply_pb(X, FUN, ...)
 list       see ?sapply
 }
 \description{
-Can be used like standard base:::sapply. The only thing 
+Can be used like standard base:::sapply. The only thing
 it does is create an additional progress bar.
 }
 \examples{
 \dontrun{
 
-   l <- sapply(1:20000, function(x) list(rnorm(1000)))
-   head(sapply_pb(l, mean))
+l <- sapply(1:20000, function(x) list(rnorm(1000)))
+head(sapply_pb(l, mean))
 
-   # performance comparison
-   l <- sapply(1:20000, function(x) list(rnorm(1000)))
-   system.time(sapply(l, mean))
-   system.time(sapply_pb(l, mean))
-
+# performance comparison
+l <- sapply(1:20000, function(x) list(rnorm(1000)))
+system.time(sapply(l, mean))
+system.time(sapply_pb(l, mean))
 }
 }
 \seealso{
-\code{\link{sapply}}
+\code{\link[=sapply]{sapply()}}
 }
 \keyword{internal}

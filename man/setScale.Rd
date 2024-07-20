@@ -21,18 +21,18 @@ setScale(x, min, max, step, ...)
 \code{repgrid} object
 }
 \description{
-The scale must be known for certain 
+The scale must be known for certain
 operations, e.g. to swap the construct poles. If the user construes
 a grid he should make sure that the scale range is set correctly.
 }
 \examples{
 \dontrun{
 
-   x <- bell2010
-   x <- setScale(x, 0, 8)   # not set correctly
-   x
-   x <- setScale(x, 1, 7)   # set correctly
-   x
+x <- bell2010
+x <- setScale(x, 0, 8) # not set correctly
+x
+x <- setScale(x, 1, 7) # set correctly
+x
 }
 
 }

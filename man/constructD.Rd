@@ -7,58 +7,58 @@
 constructD(x, dependent = "columns", trim = 30, index = TRUE)
 }
 \arguments{
-\item{x}{\code{repgrid} object}
+\item{x}{\code{repgrid} object.}
 
-\item{dependent}{A string denoting the direction of dependency in the output 
+\item{dependent}{A string denoting the direction of dependency in the output
 table (as d is asymmetrical). Possible values are \code{"columns"}
-(the default) for setting the columns as dependent, \code{"rows"} 
-for setting the rows as the dependent variable and 
-\code{"symmetric"} for the 
-symmetrical Somers' d measure (the mean of the two directional 
-values for code{"columns"} and \code{"rows"}).}
+(the default) for setting the columns as dependent, \code{"rows"}
+for setting the rows as the dependent variable and
+\code{"symmetric"} for the
+symmetrical Somers' d measure (the mean of the two directional
+values for \code{"columns"} and \code{"rows"}).}
 
 \item{trim}{The number of characters a construct is trimmed to (default is
 \code{30}). If \code{NA} no trimming occurs. Trimming
 simply saves space when displaying correlation of constructs
 with long names.}
 
-\item{index}{Whether to print the number of the construct 
+\item{index}{Whether to print the number of the construct
 (default is \code{TRUE}).}
 }
 \value{
 \code{matrix} of construct correlations.
 }
 \description{
-Somer's d is an  asymmetric association measure as it depends on which 
+Somer's d is an  asymmetric association measure as it depends on which
 variable is set as dependent and independent.
 The direction of dependency needs to be specified.
 }
 \note{
-Thanks to Marc Schwartz for supplying the code to calculate
-                   Somers' d.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{         Thanks to Marc Schwartz for supplying the code to calculate
+               Somers' d.
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontrun{
 
-   constructD(fbb2003)       # columns as dependent (default)
-   constructD(fbb2003, "c")  # row as dependent
-   constructD(fbb2003, "s")  # symmetrical index
- 
-   # suppress printing
-   d <- constructD(fbb2003, out=0, trim=5)
-   d
-   
-   # more digits
-   constructD(fbb2003, dig=3)
+constructD(fbb2003) # columns as dependent (default)
+constructD(fbb2003, "c") # row as dependent
+constructD(fbb2003, "s") # symmetrical index
 
-   # add index column, no trimming
-   constructD(fbb2003, col.index=TRUE, index=F, trim=NA)  
+# suppress printing
+d <- constructD(fbb2003, out = 0, trim = 5)
+d
 
+# more digits
+constructD(fbb2003, dig = 3)
+
+# add index column, no trimming
+constructD(fbb2003, col.index = TRUE, index = F, trim = NA)
 }
 
 }
 \references{
 Somers, R. H. (1962). A New Asymmetric Measure of Association
-                   for Ordinal Variables. \emph{American Sociological Review, 27}(6),
-                   799-811.
+for Ordinal Variables. \emph{American Sociological Review, 27}(6),
+799-811.
 }

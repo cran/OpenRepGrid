@@ -14,7 +14,7 @@ This may be sensible for a larger number of elements.}
 }
 \value{
 A list of \code{repgrid} objects with all possible permutations
-                   of the grid.
+of the grid.
 }
 \description{
 Generate a list with all possible construct reflections of a grid.
@@ -22,9 +22,8 @@ Generate a list with all possible construct reflections of a grid.
 \examples{
 \dontrun{
 
-  l <- permuteConstructs(mackay1992)
-  l
-
+l <- permuteConstructs(mackay1992)
+l
 }
 
 }

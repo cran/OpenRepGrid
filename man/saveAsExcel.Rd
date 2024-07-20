@@ -9,7 +9,7 @@ saveAsExcel(x, file, sheet = 1)
 \arguments{
 \item{x}{A \code{repgrid} object.}
 
-\item{file}{Filename to save the grid to. The name should have 
+\item{file}{Filename to save the grid to. The name should have
 the suffix \code{.xlsx}.}
 
 \item{sheet}{Index of the sheet to write to.}
@@ -18,18 +18,17 @@ the suffix \code{.xlsx}.}
 Invisibly returns the name of the file.
 }
 \description{
-\code{saveAsExcel} will save the grid as a Microsoft Excel file 
+\code{saveAsExcel} will save the grid as a Microsoft Excel file
 (\code{.xlsx}).
 }
 \examples{
 \dontrun{
 
- x <- randomGrid(options=0)
- saveAsExcel(x, "grid.xlsx")
-
+x <- randomGrid(options = 0)
+saveAsExcel(x, "grid.xlsx")
 }
 
 }
 \seealso{
-\code{\link{importExcel}}
+\code{\link[=importExcel]{importExcel()}}
 }

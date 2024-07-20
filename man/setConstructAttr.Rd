@@ -41,12 +41,15 @@ Set the attributes of a construct i.e. name, abbreviation, status etc.
 \examples{
 \dontrun{
 
-   x <- setConstructAttr(bell2010, 1, 
-                 "new left pole", "new right pole")
-   x
+x <- setConstructAttr(
+  bell2010, 1,
+  "new left pole", "new right pole"
+)
+x
 }
 
 }
 \seealso{
-\code{\link{setElementAttr}}
+\code{\link[=setElementAttr]{setElementAttr()}}
 }
+\keyword{internal}

@@ -13,10 +13,10 @@ randomWords(n)
 a string with n words (if length is not constrained)
 }
 \description{
-randomWords generates a vector of random words taken from a small 
+randomWords generates a vector of random words taken from a small
 set of words
 }
 \examples{
-randomWords(10)  # 10 random words
+randomWords(10) # 10 random words
 }
 \keyword{internal}

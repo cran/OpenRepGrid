@@ -19,27 +19,26 @@ apply_pb(X, MARGIN, FUN, ...)
 see ?apply
 }
 \description{
-Can be used like standard base:::apply. The only thing 
+Can be used like standard base:::apply. The only thing
 it does is create an additional progress bar.
 }
 \examples{
 \dontrun{
 
-   apply_pb(anscombe, 2, sd, na.rm=TRUE)
+apply_pb(anscombe, 2, sd, na.rm = TRUE)
 
-   # larger dataset
-   df <- data.frame(rnorm(30000), rnorm(30000))
-   head(apply_pb(df, 1, sd))
+# larger dataset
+df <- data.frame(rnorm(30000), rnorm(30000))
+head(apply_pb(df, 1, sd))
 
-   # performance comparison
-   df <- data.frame(rnorm(90000), rnorm(90000))
-   system.time(apply(df, 1, sd))
-   system.time(apply_pb(df, 1, sd))
-
+# performance comparison
+df <- data.frame(rnorm(90000), rnorm(90000))
+system.time(apply(df, 1, sd))
+system.time(apply_pb(df, 1, sd))
 }
 
 }
 \seealso{
-\code{\link{apply}}
+\code{\link[=apply]{apply()}}
 }
 \keyword{internal}

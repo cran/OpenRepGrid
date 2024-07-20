@@ -11,7 +11,7 @@ getElementNames2(x, trim = 20, index = F, pre = "(", post = ") ")
 
 \item{trim}{Number of characters to trim the construct names to
 (default \code{NA}). \code{NA} will suppress trimming.
-The length of \code{index} is not included in the 
+The length of \code{index} is not included in the
 trimming.}
 
 \item{index}{Logical. Whether to add a index number before the construct
@@ -19,7 +19,7 @@ names (default \code{TRUE}).}
 
 \item{pre}{String before index number (default \code{(}).}
 
-\item{post}{String after index number (default \code{) }).}
+\item{post}{String after index number (default \verb{) }).}
 }
 \value{
 Vector with (trimmed) element names.
@@ -33,12 +33,11 @@ allow to return the kind of format that is needed.
 }
 \examples{
 \dontrun{
- 
- getElementNames2(bell2010)
- getElementNames2(bell2010, mode=2)
- getElementNames2(bell2010, index=T)
- getElementNames2(bell2010, index=T, trim=30)
 
+getElementNames2(bell2010)
+getElementNames2(bell2010, mode = 2)
+getElementNames2(bell2010, index = T)
+getElementNames2(bell2010, index = T, trim = 30)
 }
 
 }

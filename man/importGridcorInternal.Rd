@@ -7,19 +7,20 @@
 importGridcorInternal(file, dir = NULL)
 }
 \arguments{
-\item{file}{filename including path if file is not in current working 
+\item{file}{filename including path if file is not in current working
 directory. File can also be a complete URL. The fileformat
 is .dat.}
 
-\item{dir}{alternative way to supply the directory where the file is located 
+\item{dir}{alternative way to supply the directory where the file is located
 (default \code{NULL}).}
 }
 \description{
 Parse the file format that is used by the grid program GRIDCOR (Feixas & Cornejo).
 }
 \note{
-Note that the GRIDCOR data sets the minimum ratings scale range to 1.
-               The maximum value can differ and is defined in the data file.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     Note that the GRIDCOR data sets the minimum ratings scale range to 1.
+           The maximum value can differ and is defined in the data file.
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontrun{
@@ -34,12 +35,10 @@ imp <- importGridcorInternal(file, dir)
 
 # using a full path
 imp <- importGridcorInternal("/Users/markheckmann/data/gridcor.dat")
-
 }
-
 
 }
 \references{
-\url{https://www.ub.edu/terdep/gridcor.html}
+\url{https://repertorygrid.net/en/}
 }
 \keyword{internal}

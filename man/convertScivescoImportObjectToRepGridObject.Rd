@@ -2,19 +2,16 @@
 % Please edit documentation in R/import.r
 \name{convertScivescoImportObjectToRepGridObject}
 \alias{convertScivescoImportObjectToRepGridObject}
-\title{Convert the returned object from the sci:vesco import function into a \code{repgrid} 
+\title{Convert the returned object from the sci:vesco import function into a \code{repgrid}
 object.}
 \usage{
 convertScivescoImportObjectToRepGridObject(import)
 }
 \arguments{
-\item{x}{object returned from an import function.}
-}
-\value{
-\code{repgrid} object.
+\item{import}{List with relevant entries.}
 }
 \description{
-Convert the returned object from the sci:vesco import function into a \code{repgrid} 
+Convert the returned object from the sci:vesco import function into a \code{repgrid}
 object.
 }
 \keyword{internal}

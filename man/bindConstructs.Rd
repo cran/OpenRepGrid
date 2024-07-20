@@ -11,7 +11,7 @@ bindConstructs(..., index = FALSE)
 \code{repgrid} object.}
 
 \item{index}{TODO. Logical (default \code{TRUE}). Whether to add an index at the end
-of each construct name so it remains clear from which grid each 
+of each construct name so it remains clear from which grid each
 construct came.}
 }
 \value{
@@ -19,7 +19,7 @@ construct came.}
 }
 \description{
 I.e. the constructs are combined to form one long grid.
-The girds must have the same set of elements and an identical 
+The girds must have the same set of elements and an identical
 scale range. The order of the elements may differ.
 }
 \details{
@@ -28,17 +28,18 @@ as one 'big grid' (eg. Slater, 1977, chap. 11).
 }
 \examples{
 
- a <- randomGrid()
- b <- randomGrid()
- b@elements <- rev(a@elements)   # reverse elements
- bindConstructs(a, b)
- bindConstructs(a, b, a)
- 
- # using lists of repgrid objects 
- bindConstructs(a, list(a, b))
+a <- randomGrid()
+b <- randomGrid()
+elements(b) <- rev(elements(a)) # reverse elements
+bindConstructs(a, b)
+bindConstructs(a, b, a)
+
+# using lists of repgrid objects
+bindConstructs(a, list(a, b))
 
 }
 \references{
-Slater, P. (1977). \emph{The measurement of intrapersonal space 
-             by grid technique}. London: Wiley.
+Slater, P. (1977). \emph{The measurement of intrapersonal space
+by grid technique}. London: Wiley.
 }
+\keyword{internal}

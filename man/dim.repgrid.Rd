@@ -10,8 +10,8 @@
 \item{x}{\code{repgrid} object.}
 }
 \value{
-Numeric vector of length two with the number of 
-             constructs and elements.
+Numeric vector of length two with the number of
+constructs and elements.
 }
 \description{
 \code{dim} returns a numeric vector of length
@@ -20,12 +20,11 @@ two containing the number of constructs and elements.
 \examples{
 \dontrun{
 
-     dim(bell2010)
-
+dim(bell2010)
 }
 
 }
 \seealso{
-\code{\link{getNoOfConstructs}};   \code{\link{getNoOfElements}}
+\code{\link[=getNoOfConstructs]{getNoOfConstructs()}};   \code{\link[=getNoOfElements]{getNoOfElements()}}
 }
 \keyword{internal}

@@ -17,7 +17,7 @@ are reordered to match the element order of the first grid 'x'
 if the element order is not identical in both grids.}
 
 \item{index}{TODO. Logical (default \code{TRUE}). Whether to add an index at the end
-of each construct name so it remains clear from which grid each 
+of each construct name so it remains clear from which grid each
 construct came.}
 }
 \value{
@@ -31,17 +31,17 @@ as one 'big grid' (eg. Slater, 1977, chap. 11).
 \examples{
 \dontrun{
 
-   a <- randomGrid()
-   b <- randomGrid()
-   b@elements <- rev(a@elements)   # reverse elements
-   bindConstructs(a, b)
- 
-   bindConstructs(a, b, m=F)       # no binding
+a <- randomGrid()
+b <- randomGrid()
+elements(b) <- rev(elements(a)) # reverse elements
+bindConstructs(a, b)
+
+bindConstructs(a, b, m = F) # no binding
 }
 
 }
 \references{
-Slater, P. (1977). \emph{The measurement of intrapersonal space 
-             by grid technique}. London: Wiley.
+Slater, P. (1977). \emph{The measurement of intrapersonal space
+by grid technique}. London: Wiley.
 }
 \keyword{internal}

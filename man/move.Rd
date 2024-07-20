@@ -18,7 +18,7 @@ down(x, pos = 0)
 \arguments{
 \item{x}{\code{repgrid} object.}
 
-\item{pos}{Row (column) number of construct (element) to be moved 
+\item{pos}{Row (column) number of construct (element) to be moved
 leftwards, rightwards, upwards or downwards.
 The default is \code{0}. For indexes outside the range of
 the grid no moving is done.}
@@ -37,10 +37,11 @@ Move element in grid to the right.
 }
 \examples{
 \dontrun{
-   x <- randomGrid()
-   left(x, 2)    # 2nd element to the left
-   right(x, 1)   # 1st element to the right
-   up(x, 2)      # 2nd construct upwards
-   down(x, 1)    # 1st construct downwards
+x <- randomGrid()
+left(x, 2) # 2nd element to the left
+right(x, 1) # 1st element to the right
+up(x, 2) # 2nd construct upwards
+down(x, 1) # 1st construct downwards
 }
 }
+\keyword{internal}

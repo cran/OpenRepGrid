@@ -9,8 +9,8 @@ recycle(vec, length, na.fill = FALSE)
 \arguments{
 \item{vec}{vector to be recycled}
 
-\item{length}{integer or vector. integer determines length of 
-recycling. If a vector is provided the length of the 
+\item{length}{integer or vector. integer determines length of
+recycling. If a vector is provided the length of the
 vector is used.}
 
 \item{na.fill}{Use NAs for filling up to given length (default=FALSE)}
@@ -23,18 +23,18 @@ recycle vector to given length
 }
 \note{
 If 2nd argument is a vector, the first argument is recycled
-to the length of the second vector. Instead of recycling the vector can 
-also be added extra NAs if the length argument is smaller than the 
-number of elements from vec, vec is cut off to make it usable for 
+to the length of the second vector. Instead of recycling the vector can
+also be added extra NAs if the length argument is smaller than the
+number of elements from vec, vec is cut off to make it usable for
 many purposes.
 }
 \examples{
-recycle(c(1,2,3), 7)
-recycle(c(1,2,3), letters[1:7])
-recycle(c(1,2,3), 7, na.fill=TRUE)
-recycle(1, letters[1:3], na.fill=TRUE)
+recycle(c(1, 2, 3), 7)
+recycle(c(1, 2, 3), letters[1:7])
+recycle(c(1, 2, 3), 7, na.fill = TRUE)
+recycle(1, letters[1:3], na.fill = TRUE)
 recycle(letters[1:3], 7)
-recycle(letters[1:3],  letters[1:7])
-recycle(letters[1:40],  letters[1:7])		# vec is cut off
+recycle(letters[1:3], letters[1:7])
+recycle(letters[1:40], letters[1:7]) # vec is cut off
 }
 \keyword{internal}

@@ -17,7 +17,7 @@ elements(x, position) <- value
 \item{value}{Character vector of element names.}
 }
 \description{
-Allows to get and set element names. 
+Allows to get and set element names.
 Replaces the older functions \code{getElementNames}, \code{getElementNames2},
 and \code{eNames} which are deprecated.
 }
@@ -31,10 +31,10 @@ e <- elements(x)
 e
 
 ## replace element names
-elements(x) <- rev(e)       # reverse all element names
-elements(x)[1] <- "Hannes"  # replace name of first element
+elements(x) <- rev(e) # reverse all element names
+elements(x)[1] <- "Hannes" # replace name of first element
 
 # replace names of elements 1 and 3
-elements(x)[c(1,3)] <- c("element 1", "element 3")   
- 
+elements(x)[c(1, 3)] <- c("element 1", "element 3")
+
 }

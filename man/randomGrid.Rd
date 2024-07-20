@@ -25,11 +25,11 @@ randomGrid(
 
 \item{range}{Minimal and maximal scale value (default \code{c(1, 5)}).}
 
-\item{prob}{The probability of each rating value to occur. 
+\item{prob}{The probability of each rating value to occur.
 If \code{NULL} (default) the distribution is uniform.}
 
-\item{options}{Use random sentences as constructs and elements (1) or 
-not (0). If not, the elements and constructs are given 
+\item{options}{Use random sentences as constructs and elements (1) or
+not (0). If not, the elements and constructs are given
 default names and are numbered.}
 }
 \value{
@@ -42,12 +42,12 @@ exploring distributions of indexes etc.
 \examples{
 \dontrun{
 
-     x <- randomGrid()
-     x
-     x <- randomGrid(10, 25)
-     x
-     x <- randomGrid(10, 25, options=0)
-     x
+x <- randomGrid()
+x
+x <- randomGrid(10, 25)
+x
+x <- randomGrid(10, 25, options = 0)
+x
 }
 
 }

@@ -9,7 +9,7 @@ setElementAttr(x, pos, name, abb, status)
 \arguments{
 \item{x}{\code{repgrid} object.}
 
-\item{pos}{Column number of element in the grid whose attributes 
+\item{pos}{Column number of element in the grid whose attributes
 are changed.}
 
 \item{name}{New element name (optional).}
@@ -25,17 +25,19 @@ are changed.}
 Set the attributes of an element i.e. name, abbreviation, status etc.
 }
 \note{
-Currently the main purpose is to change element names. 
-                 Future implementations will allow to set further attributes.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{       Currently the main purpose is to change element names.
+             Future implementations will allow to set further attributes.
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontrun{
-   
-   x <- setElementAttr(boeker, 1, "new name")   # change name of first element
-   x
+
+x <- setElementAttr(boeker, 1, "new name") # change name of first element
+x
 }
 
 }
 \seealso{
-\code{\link{setConstructAttr}}
+\code{\link[=setConstructAttr]{setConstructAttr()}}
 }
+\keyword{internal}

@@ -7,30 +7,27 @@
 angleOrderIndexes2d(x, dim = c(1, 2), clockwise = TRUE)
 }
 \arguments{
-\item{x}{\code{repgrid} object that has been submitted to
-\code{\link{calcBiplotCoords}}.}
+\item{x}{A \code{repgrid} object that has been submitted to \code{\link[=calcBiplotCoords]{calcBiplotCoords()}}.}
 
 \item{dim}{Dimensions used to calculate angles for reordering grid.}
 
-\item{clockwise}{Logical. Positive angles are clockwise with x axis as 
-basis.}
+\item{clockwise}{Logical. Positive angles are clockwise with x axis as basis.}
 }
 \value{
-A list containing the indexes to reorder the grid. The 
-         first list element for the constructs, the second for the elements indexes.
+A list containing the indexes to reorder the grid. The first list element for the constructs, the second
+for the elements indexes.
 }
 \description{
-Reorder indexes for constructs and elements are calculated 
-using the coordinates of the given dimensions.
+Reorder indexes for constructs and elements are calculated using the coordinates of the given dimensions.
 }
 \examples{
 \dontrun{
 
-   x <- randomGrid(15,30)      # make random grid
-   i <- angleOrderIndexes2d(x) # make indexes for ordering
-   x <- x[i[[1]], i[[2]]]      # reorder constructs and elements
-   x                           # print grid
+x <- randomGrid(15, 30) # make random grid
+i <- angleOrderIndexes2d(x) # make indexes for ordering
+x <- x[i[[1]], i[[2]]] # reorder constructs and elements
+x # print grid
 }
-                 
+
 }
 \keyword{internal}

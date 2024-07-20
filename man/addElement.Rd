@@ -40,12 +40,12 @@ Add an element to an existing grid.
 \examples{
 \dontrun{
 
-   bell2010      
-   addElement(bell2010, "new element", c(1,2,5,4,3,6,5,2,7))
-
+bell2010
+addElement(bell2010, "new element", c(1, 2, 5, 4, 3, 6, 5, 2, 7))
 }
 
 }
 \seealso{
-\code{\link{addConstruct}}
+\code{\link[=addConstruct]{addConstruct()}}
 }
+\keyword{internal}
