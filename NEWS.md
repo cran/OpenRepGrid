@@ -1,4 +1,8 @@
-# OpenRepGrid 0.1.15 (dev version)
+# OpenRepGrid 0.1.16
+
+* Improved documentation as required during [JOSS](https://github.com/openjournals/joss-reviews/issues/6918) review.
+
+# OpenRepGrid 0.1.15
 
 * add `LICENSE.md` file
 * `rgl` installation is now optional (close #41)

@@ -1,9 +1,9 @@
-20c1e11526e3ef4b1b29114b945f36ff *DESCRIPTION
+bc1bda9afc31af33c04b499afbdcbc4b *DESCRIPTION
 66a8c86ba656a6f59914bc17b5958f32 *NAMESPACE
-3f706014291b6fe75ff0d06a90604f42 *NEWS.md
+f03dc32870c1c1b9adc1fd387969a09a *NEWS.md
 61ab33d2a5b61f083ada625413a8a1bf *R/bertin.r
 b89e77c2ddb6ec872a5038a75b249443 *R/calc.r
-74824476c29a3ae589542d99f9f065c1 *R/data-openrepgrid.r
+e8f834069719ffcbffee5f764a7c7ac6 *R/data-openrepgrid.r
 5f2f8c7a8fc067dc8983df62e259ad45 *R/dev-functions.r
 28ecabf865cbb7ddc089ca49454dec13 *R/distance.R
 a37b8eb3e4338eba71d029e46f20e54f *R/double-entry.R
@@ -11,7 +11,7 @@ e34ee0517aec6b3822c4be823d325dbd *R/export.r
 37c441a5f747f59a82e07faf5362730c *R/globals.R
 fde12c08849e0ee483ab195068fc39f9 *R/gmMain.r
 ca4ece062ea98f86f4547267a1fe4c07 *R/gridlist.R
-56ec26b1e584b42e07a78e9bfa50bae4 *R/import.r
+8b63e597f52d3c8597b4fcb669a7a019 *R/import.r
 059805e7e917322c6907a02bdc8f4c76 *R/measures.r
 101e27a568dd783ed48cdb535a95b6fe *R/onair.r
 1ea2c9ae86e36c8e646a244b9314f490 *R/openrepgrid.r
@@ -54,10 +54,13 @@ f8b107cba0c3c2b47481698a5e7d6d0d *inst/examples/example-indexDilemmatic.R
 9e49bc59faad8283bbf460a335631d24 *inst/examples/example-matches.R
 87f151eb902886df16f846d5818b0a5e *inst/examples/example-perturbate.R
 bfcd11ca6483d6c4b36bd1b9c1b23280 *inst/examples/example-resampling.R
+dd5c265b0acfdf8606c49b78a1bb91b6 *inst/extdata/boeker.xlsx
 a80c785f5afce801e7190404e3d854c5 *inst/extdata/dep_grid_bell_2001.xlsx
 82f79ec3a9295ec440c43aa78e7d80e5 *inst/extdata/dep_grid_walker_1988_1.xlsx
 a4c9edbc9b9b15ea2f4a2090b590fbce *inst/extdata/dep_grid_walker_1988_2.xlsx
+eff7c36cee1d9f921d1c18d3a90580f5 *inst/extdata/grid_01.txt
 a7b001286365073843d7837c2769ae55 *inst/extdata/grid_01.xlsx
+00728bf9002adbc88f580c373904f5c1 *inst/extdata/grid_02.txt
 90dbb89309137c1634fc9168ffb50ed4 *inst/extdata/grid_02.xlsx
 652a772f8960e5ab7ceef9cadf48ef9a *man/OpenRepGrid-overview.Rd
 52e2721390c01bed4ba2f424cd2ea5ba *man/OpenRepGrid.Rd
@@ -103,8 +106,8 @@ da76cf7c2940c3b5bce328b421a94452 *man/constructRmsCor.Rd
 e1fe928e581328fd0283c2c3658ac769 *man/convertImportObjectToRepGridObject.Rd
 ab681b3b653025a88ed4287cd8a7b26b *man/convertScivescoImportObjectToRepGridObject.Rd
 bfc234fcb78146bca5f5e88072422571 *man/data-bell2010.Rd
-6fc3981a8d0c08e63abee7d9a3ed584d *man/data-bellmcgorry1992.Rd
-78965a327a8379720ac1bbfb4fd28a65 *man/data-boeker.Rd
+ca26fe5b095f4d36110bd2f77706ea15 *man/data-bellmcgorry1992.Rd
+305453de448fafeb5fa12c902531887b *man/data-boeker.Rd
 bf54a84c340bb44e2f1ec766342bc8eb *man/data-fbb2003.Rd
 b89164edf021ec24930ac498cd74c819 *man/data-feixas2004.Rd
 6c028c2d88080c8976a59b8513cc9335 *man/data-leach2001.Rd
@@ -150,8 +153,8 @@ e130878fb5b5f04461b81b93b7ee33c1 *man/importGridstatInternal.Rd
 c4b16547a461754b9fe1551258178cd4 *man/importGridsuiteInternal.Rd
 534da07a25e5e0aabe41f0941edeb9ca *man/importScivesco.Rd
 ed0916d742f4007cf2d01c9005496f0a *man/importScivescoInternal.Rd
-9ff4813024f1278898c64e2d773ffc19 *man/importTxt.Rd
-0b4b9e64ffd5a291638e068a7ccb7e7f *man/importTxtInternal.Rd
+29afbc13425352921bdcca508550fb6c *man/importTxt.Rd
+4d0bfd0d729eae7bed1c703e596e6eb4 *man/importTxtInternal.Rd
 d5a35039541e3cb16f61102ed8fb9e00 *man/indexBias.Rd
 f76b0c33045bc8756a6fb8a4bd6f57a6 *man/indexBieri.Rd
 1719791bd7f88ac42945ca905e2bf998 *man/indexConflict1.Rd
