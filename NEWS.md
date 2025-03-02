@@ -1,3 +1,14 @@
+# OpenRepGrid 0.1.17
+
+* `clusterBoot` gains `trim` arg. Construct labels in dendrogram are no longer trimmed by default (#58).
+* `biplot2d`: improved color options for elements and constructs. New args `c.label.col.left`, `c.label.col.right`.
+  Args `e.label.col`, `c.label.col`, and `e.point.col` now vectorized.
+* `bertin` gains the arguments `col.c.left`, `col.c.right`, `col.e` and `col.e.lines` to set the color of the construct
+  poles, elements and element lines (#51).
+* `names` now returns element names as alternative to `elements()`.
+* subsetting columns using elements names (`boeker[, c("self", "ideal self")]`) (#48)
+* `cbind` and `/` to bind elements by combining the columns of the grids (#46)
+
 # OpenRepGrid 0.1.16
 
 * Improved documentation as required during [JOSS](https://github.com/openjournals/joss-reviews/issues/6918) review.
